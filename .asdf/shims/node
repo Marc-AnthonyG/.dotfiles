@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# asdf-plugin: nodejs 20.2.0
+exec /opt/asdf-vm/bin/asdf exec "node" "$@" # asdf_allow: ' asdf '

@@ -1,0 +1,18 @@
+ln -s ./.zshrc ~/.zshrc
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+
+source ~/zshrc
+
+sudo yay -S neovim
+sudo yay -S nvim-packer-git
+ln -s ./nvim ~/.config/nvim
+
+source ~/zshrc
+
+git clone https://aur.archlinux.org/asdf-vm.git && cd asdf-vm && makepkg -si
+ln -s ./.asdf ~/.asdf
+ln -s ./.tool-versions ~/.tool-versions
+
+source ~/zshrc
+
+ln -s ./.i3 ~/.i3
