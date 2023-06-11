@@ -19,8 +19,6 @@ export ARCHFLAGS="-arch x86_64"
 alias termSource="~/.zshrc"
 alias vim=nvim
 
-xrdb < .Xresources
-
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/github
 clear
