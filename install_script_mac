@@ -1,3 +1,6 @@
 ln -s ~/.dotfiles/nvim ~/.config
 ln -s ~/.dotfiles/alacritty ~/.config
-ln- s ~/.dotfiles/tmux ~/.config
+ln -s ~/.dotfiles/tmux ~/.config
+ln -s ~/.dotfiles/skhd ~/.config
+ln -s ~/.dotfiles/yabai ~/.config
+ln -s ~/.dotfiles/spacebar ~/.config
