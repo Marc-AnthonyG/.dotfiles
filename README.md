@@ -6,6 +6,9 @@ Nvim: https://github.com/neovim/neovim/wiki/Installing-Neovim
 Oh-my-zsh: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 asdf: https://asdf-vm.com/guide/getting-started.html
 i3: https://i3wm.org/
+tmux: https://github.com/tmux/tmux/wiki
+alacrity: https://github.com/alacritty/alacritty 
 
 On some system for alacritty to display background you need to install compton: 
 https://www.reddit.com/r/i3wm/comments/7949vk/how_to_setup_compton_for_i3/
+
