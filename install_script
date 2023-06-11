@@ -1,5 +1,6 @@
 ln -s ~/.dotfile/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/nvim ~/.config/nvim
 ln -s ~/.dotfiles/.tool-versions ~/.tool-versions
-ln -s ~/.dotfiles/.i3 ~/.config/.i3
+ln -s ~/.dotfiles/i3 ~/.config/i3
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/alacritty ~/.config/alacritty
