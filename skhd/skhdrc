@@ -103,7 +103,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 alt + shift - f : yabai -m window --toggle native-fullscreen
 
 # open terminal
-alt - return : osascript -e 'tell application "iTerm2" to create window with default profile command ""' || open -na iTerm
+alt - return : open -na Alacritty 
  
 alt - f2: osascript -e  'tell application "System Events" to set isRunning to (count (every process whose name is "Arc")) > 0' -e 'if isRunning then tell application "Arc" to make window' -e 'if not isRunning then tell application "Arc" to activate' 
 
