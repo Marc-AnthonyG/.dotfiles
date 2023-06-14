@@ -14,10 +14,11 @@ plugins=(git asdf)
 source $ZSH/oh-my-zsh.sh
 export ARCHFLAGS="-arch x86_64"
 
-. /opt/asdf-vm/asdf.sh
-
 alias termSource="~/.zshrc"
 alias vim=nvim
+alias canoeF="~/repository/canoe/frontend"
+alias canoeB="~/repository/canoe/backend"
+alias i3config="~/.dotfiles/i3/config"
 
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/github
