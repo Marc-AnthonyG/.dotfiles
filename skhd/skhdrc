@@ -71,7 +71,7 @@ alt - 9 : yabai -m space --focus 9
 
 # change layout of desktop
 alt - e : yabai -m space --layout bsp
-alt - l : yabai -m space --layout float
+alt - f : yabai -m space --layout float
 alt - s : yabai -m space --layout stack
 
 # cycle through stack windows
@@ -94,10 +94,6 @@ alt - n : yabai -m query --spaces --space \
 
 # close focused window
 alt - w : yabai -m window --close
-
-
-# enter fullscreen mode for the focused container
-alt - f : yabai -m window --toggle zoom-fullscreen
 
 # toggle window native fullscreen
 alt + shift - f : yabai -m window --toggle native-fullscreen
