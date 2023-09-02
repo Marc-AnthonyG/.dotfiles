@@ -73,7 +73,6 @@ sketchybar --add item volume right --set volume icon=󰕿 \
 sketchybar --add item battery right --set battery script="$PLUGIN_DIR/battery.sh"\
             update_freq=120 --subscribe battery system_woke power_source_change
 
-
 #### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to
 # force all scripts to run the first time, it should never be run in an item script.
