@@ -9,7 +9,7 @@ sudo yabai --load-sa
 #
 #
 # spacebar padding on bottom screen
-yabai -m config external_bar all:0:24
+#yabai -m config external_bar all:0:24
 
 # global settings:w
 yabai -m config mouse_follows_focus          off
