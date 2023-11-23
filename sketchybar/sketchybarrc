@@ -7,13 +7,14 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar height=32        \
+sketchybar --bar height=32\
                  blur_radius=30   \
-                 position=top     \
+                 position=top\
                  sticky=off       \
                  padding_left=10  \
                  padding_right=10 \
-                 color=0x15ffffff
+                 color=0x15ffffff \
+                 #topmost=true
 
 ##### Changing Defaults #####
 # We now change some default values that are applied to all further items
@@ -62,14 +63,14 @@ done
 sketchybar --add item clock right --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh"
 
 #Wifi indicator 
-sketchybar --add item wifi right --set wifi script="$PLUGIN_DIR/wifi.sh" icon=󰕾\
+sketchybar --add item wifi right --set wifi icon=󰖪 script="$PLUGIN_DIR/wifi.sh"\
             --subscribe wifi wifi_change
 
 #Volume indicator
-sketchybar --add item volume right --set volume icon=󰕿 \
+sketchybar --add item volume right --set volume\
             script="$PLUGIN_DIR/volume.sh" --subscribe volume volume_change 
 
-#Volume battery
+#Battery indicator
 sketchybar --add item battery right --set battery script="$PLUGIN_DIR/battery.sh"\
             update_freq=120 --subscribe battery system_woke power_source_change
 
