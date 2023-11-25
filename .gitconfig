@@ -1,3 +1,7 @@
 [user]
 	email = marcanthony.girard.pro@gmail.com
 	name = Marc-Anthony Girard
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
