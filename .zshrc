@@ -23,3 +23,11 @@ alias i3config="~/.dotfiles/i3/config"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/github
 clear
+
+# pnpm
+export PNPM_HOME="/home/marc/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

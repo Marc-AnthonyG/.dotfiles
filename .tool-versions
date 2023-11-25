@@ -1,4 +1,7 @@
+maven 3.5.0
 nodejs 20.2.0
 lua 5.4.4
 python 3.11.4
 yarn 1.22.19
+golang 1.20.6
+java openjdk-18
