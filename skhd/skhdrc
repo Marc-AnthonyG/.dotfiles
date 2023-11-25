@@ -31,13 +31,6 @@ alt + ctrl - down  : yabai -m window --insert south
 alt + ctrl - up    : yabai -m window --insert north
 alt + ctrl - right : yabai -m window --insert east
 
-# go back to previous workspace (kind of like back_and_forth in i3)
-alt - b : yabai -m space --focus recent
-
-# move focused window to previous workspace
-alt + shift - b : yabai -m window --space recent; \
-                  yabai -m space --focus recent
-
 # move focused window to next/prev workspace
 alt + shift - 1 : yabai -m window --space 1
 alt + shift - 2 : yabai -m window --space 2
@@ -71,7 +64,7 @@ alt - 9 : yabai -m space --focus 9
 
 # change layout of desktop
 alt - e : yabai -m space --layout bsp
-alt - l : yabai -m space --layout float
+alt - f : yabai -m space --layout float
 alt - s : yabai -m space --layout stack
 
 # cycle through stack windows
@@ -95,15 +88,11 @@ alt - n : yabai -m query --spaces --space \
 # close focused window
 alt - w : yabai -m window --close
 
-
-# enter fullscreen mode for the focused container
-alt - f : yabai -m window --toggle zoom-fullscreen
-
 # toggle window native fullscreen
 alt + shift - f : yabai -m window --toggle native-fullscreen
 
 # open terminal
-alt - return : open -na Alacritty 
+#alt - return : open -na Alacritty 
  
 alt - f2: osascript -e  'tell application "System Events" to set isRunning to (count (every process whose name is "Arc")) > 0' -e 'if isRunning then tell application "Arc" to make window' -e 'if not isRunning then tell application "Arc" to activate' 
 
