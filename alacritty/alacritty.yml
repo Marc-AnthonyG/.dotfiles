@@ -34,11 +34,17 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
+    family: JetBrainsMono NF
     style: Regular
 
   # Bold font face
   bold:
+    family: JetBrainsMono NF
     style: Bold
+
+  italic:
+    family: JetBrainsMono NF
+    style: Italic 
 
   # Point size
   size: 18.0
