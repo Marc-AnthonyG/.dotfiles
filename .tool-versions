@@ -3,5 +3,5 @@ lua 5.4.4
 python 3.11.5
 yarn 1.22.19
 java openjdk-18
-golang 1.21.1
+golang 1.21.4
 maven 3.5.0
