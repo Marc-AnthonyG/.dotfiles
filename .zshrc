@@ -19,6 +19,7 @@ alias vim=nvim
 alias canoeF="~/repository/canoe/frontend"
 alias canoeB="~/repository/canoe/backend"
 alias i3config="~/.dotfiles/i3/config"
+export OBSIDIAN_REST_API_KEY="b86584e0ada566a3f80e9df70af618fb58da31c54469190a2b0d62bed23d497a"
 
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/github
