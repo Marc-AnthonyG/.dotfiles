@@ -234,7 +234,7 @@ bar {
 bindsym $mod+m bar mode toggle
 
 exec --no-startup-id /usr/lib/gsd-xsettings
-exec --no-startup-id feh --bg-fill ~/.dotfiles/background.png
+exec --no-startup-id feh --bg-fill ~/.dotfiles/background.jpg
 exec --no-startup-id compton
 
 # move focused workspace between monitors
