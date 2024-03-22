@@ -36,7 +36,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # start a browser
-bindsym $mod+F2 exec firefox
+bindsym $mod+F2 exec google-chrome
 
 # start a terminal
 bindsym $mod+Return exec alacritty 
