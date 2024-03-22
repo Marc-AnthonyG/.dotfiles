@@ -244,4 +244,4 @@ bindsym $mod+Ctrl+less move workspace to output left
 
 
 bindsym $mod+F12 exec setxkbmap us
-bindsym $mod+F11 exec setxkbmap ca -variant fr
+bindsym $mod+F11 exec setxkbmap ca multix
