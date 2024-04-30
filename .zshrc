@@ -16,8 +16,7 @@ export ARCHFLAGS="-arch x86_64"
 
 alias termSource="~/.zshrc"
 alias vim=nvim
-alias canoeF="~/repository/canoe/frontend"
-alias canoeB="~/repository/canoe/backend"
+alias note="~/repository/knowledgeBase/programming"
 alias i3config="~/.dotfiles/i3/config"
 export OBSIDIAN_REST_API_KEY="2693a5d64454a8fc6f5a9b64d9b87a9b03a286b03d6c81855f4111d8804687c2"
 export PATH="$HOME/.local/bin:$PATH"

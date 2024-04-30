@@ -1,7 +1,11 @@
 [user]
 	email = marcanthony.girard.pro@gmail.com
-	name = Marc-Anthony Girard
+	name = Marc-AnthonyG
 [init]
 	defaultBranch = main
 [push]
 	autoSetupRemote = true
+[core]
+	editor = nvim
+[pager]
+	branch = false

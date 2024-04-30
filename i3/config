@@ -36,7 +36,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # start a browser
-bindsym $mod+F2 exec firefox
+bindsym $mod+F2 exec google-chrome
 
 # start a terminal
 bindsym $mod+Return exec alacritty 
@@ -234,7 +234,7 @@ bar {
 bindsym $mod+m bar mode toggle
 
 exec --no-startup-id /usr/lib/gsd-xsettings
-exec --no-startup-id feh --bg-fill ~/.dotfiles/background.png
+exec --no-startup-id feh --bg-fill ~/.dotfiles/background.jpg
 exec --no-startup-id compton
 
 # move focused workspace between monitors
@@ -244,4 +244,4 @@ bindsym $mod+Ctrl+less move workspace to output left
 
 
 bindsym $mod+F12 exec setxkbmap us
-bindsym $mod+F11 exec setxkbmap ca -variant fr
+bindsym $mod+F11 exec setxkbmap ca multix
