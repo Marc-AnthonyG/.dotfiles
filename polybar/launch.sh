@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-polybar-msg cmd quit
-#killall -q polybar to nuke
+#polybar-msg cmd quit
+killall -q polybar
 
 
 # Launch bar1 and bar2

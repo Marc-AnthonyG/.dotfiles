@@ -196,7 +196,7 @@ exec --no-startup-id compton
 bindsym $mod+Ctrl+greater move workspace to output right
 bindsym $mod+Ctrl+less move workspace to output left
 
-exec --no-startup-id "setxkbmap -layout us,ca -variant ,multix"
+exec_always --no-startup-id "setxkbmap -layout us,ca -variant ,multix"
 
 # Enable dark mode for applications that used Gnome settings
 exec --no-startup-id /usr/libexec/gsd-xsettings
