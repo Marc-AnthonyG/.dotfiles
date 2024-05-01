@@ -1,43 +1,43 @@
 #!/usr/bin/env sh
-## for this to work you must configure sudo such that
-# it will be able to run the command without password
-
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
-# see this wiki page for information:
-#  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
-#
-#
-# spacebar padding on bottom screen
-yabai -m config external_bar all:32:0
 
-# global settings:w
-yabai -m config mouse_follows_focus          off
-yabai -m config focus_follows_mouse          off #autofocus
+yabai_config=(
+	# Layout
+	external_bar all:40:0
+	layout float
+	bottom_padding 10
+	left_padding 10
+	right_padding 10
+	window_gap 10
 
-yabai -m config window_placement             second_child
-yabai -m config window_topmost               off
+	# Mouse
+	mouse_follows_focus on
+	focus_follows_mouse on
+	mouse_modifier               alt
+	mouse_action1                move
+	mouse_action2                resize
 
-yabai -m config window_opacity               off
-yabai -m config window_opacity_duration      0.0
-yabai -m config window_shadow                on
+	# window
+	window_placement second_child
+	window_topmost off
+	window_opacity off
+	window_opacity_duration 0.0
+	window_shadow on
+	window_animation_duration 0.5
+	active_window_opacity 1.0
+	normal_window_opacity 0.90
+	split_ratio 0.50
+)
 
-yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        0.90
-yabai -m config split_ratio                  0.50
-yabai -m config auto_balance                 off
+yabai -m config "${yabai_config[@]}"
 
-# Mouse support
-yabai -m config mouse_modifier               alt
-yabai -m config mouse_action1                move
-yabai -m config mouse_action2                resize
+yabai -m config layout bsp
 
-# general space settings
-yabai -m config layout                       float
-yabai -m config bottom_padding               0
-yabai -m config left_padding                 0
-yabai -m config right_padding                0
-yabai -m config window_gap                   0
+# Exclude problematic apps from being managed:
+yabai -m rule --add app="^(Calculator|Software Update|Dictionary|System Preferences|System Settings|zoom.us|App Store|Activity Monitor)$" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 
 echo "yabai configuration loaded.."
 

@@ -1,43 +1,43 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 ##### Bar Appearance #####
-# Configuring the general appearance of the bar, these are only some of the
-# options available. For all options see:
 # https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+bar=(
+            height=32
+            y_offset=4
+            position=top
+            blur_radius=0
+            sticky=off
+            padding_left=10
+            padding_right=10
+            color=0x80292e42
+            margin=5
+            corner_radius=16
+)
 
-sketchybar --bar height=32\
-                 blur_radius=30   \
-                 position=top\
-                 sticky=off       \
-                 padding_left=10  \
-                 padding_right=10 \
-                 color=0x15ffffff \
-                 #topmost=true
-
+sketchybar --bar "${bar[@]}"
+#
 ##### Changing Defaults #####
-# We now change some default values that are applied to all further items
-# For a full list of all available item properties see:
 # https://felixkratz.github.io/SketchyBar/config/items
 
-sketchybar --default icon.font="Hack Nerd Font:Bold:17.0"  \
-                     icon.color=0xffffffff                 \
-                     label.font="Hack Nerd Font:Bold:14.0" \
-                     label.color=0xffffffff                \
-                     padding_left=5                        \
-                     padding_right=5                       \
-                     label.padding_left=4                  \
-                     label.padding_right=4                 \
-                     icon.padding_left=4                   \
-                     icon.padding_right=4
+default=(
+            icon.font="Hack Nerd Font:Bold:17.0"
+            icon.color=0xffffffff
+            label.font="Hack Nerd Font:Bold:14.0"
+            label.color=0xffffffff
+            padding_left=5
+            padding_right=5
+            label.padding_left=4
+            label.padding_right=4
+            icon.padding_left=4
+            icon.padding_right=4
+)
+
+sketchybar --default "${default[@]}"
 
 ##### Adding Mission Control Space Indicators #####
-# Now we add some mission control spaces:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-# to indicate active and available mission control spaces
 
-SPACE_ICONS=("1:Arc" "2:Term" "3" "4" "5:Spotify" "6" "7" "8" "9" "10")
+SPACE_ICONS=("1:󰈹" "2:" "3:" "4:" "5:󰒱" "6:")
 
 for i in "${!SPACE_ICONS[@]}"
 do
@@ -62,10 +62,6 @@ done
 #Clock indicator
 sketchybar --add item clock right --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh"
 
-#Wifi indicator 
-sketchybar --add item wifi right --set wifi icon=󰖪 script="$PLUGIN_DIR/wifi.sh"\
-            --subscribe wifi wifi_change
-
 #Volume indicator
 sketchybar --add item volume right --set volume\
             script="$PLUGIN_DIR/volume.sh" --subscribe volume volume_change 
@@ -75,7 +71,4 @@ sketchybar --add item battery right --set battery script="$PLUGIN_DIR/battery.sh
             update_freq=120 --subscribe battery system_woke power_source_change
 
 #### Finalizing Setup #####
-# The below command is only needed at the end of the initial configuration to
-# force all scripts to run the first time, it should never be run in an item script.
-
 sketchybar --update
