@@ -17,7 +17,7 @@ window:
   # Values for `decorations`:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
-  decorations: Full 
+  decorations: full 
 
   # Window title
   title: Alacritty
@@ -41,22 +41,19 @@ font:
   bold:
     family: JetBrainsMono NF
     style: Bold
-
+  
   italic:
     family: JetBrainsMono NF
-    style: Italic 
+    style: Italic
 
   # Point size
   size: 14.0
-
-# If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: true
 
 import:
     - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
 
 key_bindings:
-  - { key: V,         mods: Control|Shift, action: Paste                       }
+  - { key: V,         mods: Control,       action: Paste                       }
   - { key: C,         mods: Control|Shift, action: Copy                        }
   - { key: Insert,    mods: Shift,         action: PasteSelection              }
   - { key: Key0,      mods: Control,       action: ResetFontSize               }
