@@ -11,7 +11,7 @@ bar=(
             padding_left=10
             padding_right=10
             color=0x80292e42
-            margin=5
+            margin=8
             corner_radius=16
 )
 
@@ -53,11 +53,6 @@ do
                               script="$PLUGIN_DIR/space.sh"              \
                               click_script="yabai -m space --focus $sid"
 done
-
-##### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
 
 #Clock indicator
 sketchybar --add item clock right --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh"
