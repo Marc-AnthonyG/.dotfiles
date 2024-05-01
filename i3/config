@@ -109,14 +109,14 @@ bindsym $mod+Ctrl+Left workspace prev
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:Term"
-set $ws2 "2:Browser"
-set $ws3 "3:Discord"
-set $ws4 "4:Slack"
-set $ws5 "5:Spotify"
-set $ws6 "6:Other"
-set $ws7 "7"
-set $ws8 "8"
+set $ws1 "1:"
+set $ws2 "2:󰊯"
+set $ws3 "3:󰬷"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6 "6:󰓇"
+set $ws6 "7"
+set $ws6 "8"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -158,11 +158,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow width 10 px or 10 ppt
         bindsym h resize grow height 10 px or 10 ppt
@@ -189,7 +184,7 @@ exec --no-startup-id terminal
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 exec --no-startup-id /usr/lib/gsd-xsettings
-exec --no-startup-id feh --bg-fill ~/.dotfiles/background.jpg
+exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/tokyonight.png
 exec --no-startup-id compton
 
 # move focused workspace between monitors
@@ -200,3 +195,8 @@ exec_always --no-startup-id "setxkbmap -layout us,ca -variant ,multix"
 
 # Enable dark mode for applications that used Gnome settings
 exec --no-startup-id /usr/libexec/gsd-xsettings
+
+# gaps
+for_window [class=".*"] border pixel 2
+gaps inner 2
+gaps outer 2
