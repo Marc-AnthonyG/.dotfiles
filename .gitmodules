@@ -1,3 +1,15 @@
+[submodule "alacritty/alacritty/catppuccin"]
+	path = alacritty/alacritty/catppuccin
+	url = git@github.com:catppuccin/alacritty.git
+[submodule "alacritty/catppuccin"]
+	path = alacritty/catppuccin
+	url = git@github.com:catppuccin/alacritty.git
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git
+[submodule "tmux/tmux/plugins/tmp"]
+	path = tmux/tmux/plugins/tmp
+	url = https://github.com/tmux-plugins/tpm
 [submodule "nvim/pack/github/start/copilot.vim"]
 	path = nvim/pack/github/start/copilot.vim
 	url = https://github.com/github/copilot.vim.git
