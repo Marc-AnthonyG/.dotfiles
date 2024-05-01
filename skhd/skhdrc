@@ -86,8 +86,6 @@ alt - w : yabai -m window --close
 # toggle window native fullscreen
 alt + shift - f : yabai -m window --toggle native-fullscreen
 
-# open terminal
-alt - return : open -na Alacritty 
- 
+# open Arc
 alt - f2: osascript -e  'tell application "System Events" to set isRunning to (count (every process whose name is "Arc")) > 0' -e 'if isRunning then tell application "Arc" to make window' -e 'if not isRunning then tell application "Arc" to activate' 
 
