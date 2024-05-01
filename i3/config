@@ -112,11 +112,11 @@ bindsym $mod+Ctrl+Left workspace prev
 set $ws1 "1:"
 set $ws2 "2:󰊯"
 set $ws3 "3:󰬷"
-set $ws4 "4:"
+set $ws4 "4:󰙯"
 set $ws5 "5:"
 set $ws6 "6:󰓇"
-set $ws6 "7"
-set $ws6 "8"
+set $ws7 "7"
+set $ws8 "8"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -184,7 +184,7 @@ exec --no-startup-id terminal
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 exec --no-startup-id /usr/lib/gsd-xsettings
-exec_always --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/tokyonight.png
+exec --no-startup-id feh --bg-fill ~/.dotfiles/wallpaper/tokyonight.png
 exec --no-startup-id compton
 
 # move focused workspace between monitors
@@ -197,6 +197,5 @@ exec_always --no-startup-id "setxkbmap -layout us,ca -variant ,multix"
 exec --no-startup-id /usr/libexec/gsd-xsettings
 
 # gaps
-for_window [class=".*"] border pixel 2
 gaps inner 2
 gaps outer 2
