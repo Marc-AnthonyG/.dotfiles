@@ -23,7 +23,7 @@ yabai_config=(
 	window_opacity off
 	window_opacity_duration 0.0
 	window_shadow on
-	window_animation_duration 0.5
+	window_animation_duration 0.2
 	active_window_opacity 1.0
 	normal_window_opacity 0.90
 	split_ratio 0.50
@@ -34,12 +34,11 @@ yabai -m config "${yabai_config[@]}"
 yabai -m config layout bsp
 
 # Exclude problematic apps from being managed:
-yabai -m rule --add app="^(Calculator|Software Update|Dictionary|System Preferences|System Settings|zoom.us|App Store|Activity Monitor)$" manage=off
+yabai -m rule --add app="^(Stickies|Calculator|Software Update|Dictionary|System Preferences|System Settings|zoom.us|App Store|Activity Monitor)$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 
-JB_Apps='^(WebStorm|PyCharm|IntelliJ.*|GoLand)$'
-yabai -m rule --add app="${JB_Apps}" manage=off
-yabai -m rule --add app="${JB_Apps}" title=".*\[.*\].*"  manage=on
+JB_Apps='^(WebStorm|PyCharm.*|IntelliJ.*|GoLand)$'
+yabai -m rule --add app="${JB_Apps}" title!=".*\[.*\].*"  manage=off
 echo "yabai configuration loaded.."
 
