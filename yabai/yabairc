@@ -40,5 +40,6 @@ yabai -m rule --add label="About This Mac" app="System Information" title="About
 
 JB_Apps='^(WebStorm|PyCharm.*|IntelliJ.*|GoLand)$'
 yabai -m rule --add app="${JB_Apps}" title!=".*\[.*\].*"  manage=off
+
 echo "yabai configuration loaded.."
 
