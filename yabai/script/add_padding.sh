@@ -11,5 +11,5 @@ if [[ ! "$1" =~ ^[0-9]+$ ]]; then
 fi
 
 yabai -m query --displays --display "$1" | jq '.spaces[]' | while read space; do
-   yabai -m config --space "$space" bottom_padding 220
+   yabai -m config --space "$space" bottom_padding 180
 done
