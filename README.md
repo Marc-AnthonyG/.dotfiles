@@ -1,6 +1,14 @@
-This repository is my config. All the config files are listed here. Doing sh install_script will put the config files in the right place of the system.
+https://github.com/FelixKratz/SketchyBar/discussions/12?sort=top#discussioncomment-697425
+https://github.com/FelixKratz/SketchyBar/discussions/12?sort=top#discussioncomment-1843975
+https://github.com/FelixKratz/SketchyBar/discussions/12?sort=top#discussioncomment-7308140
+https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-2025720
 
-# Todo 
-- [ ] Beatify polybar
-- [ ] Beatify rofi
-- [ ] Take a look at Dunst for notification
+Un plugins for todoist serait sick mêm chose pour le calendrier google
+
+https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-2979651
+
+https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-4454272
+https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-4715904
+https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-5730038
+https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-6974137
+
