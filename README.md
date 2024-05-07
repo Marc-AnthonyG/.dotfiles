@@ -12,3 +12,4 @@ https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-471590
 https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-5730038
 https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-6974137
 
+Test
