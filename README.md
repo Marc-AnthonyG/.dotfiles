@@ -5,8 +5,5 @@ I will implement this [clipboard](https://github.com/FelixKratz/SketchyBar/discu
 ## Notification center
 Todois + Google calendar plugin
 [apple_calendar](https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-4715904)
-
 [notification from another task app](https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-6974137)
-
-[git notification](https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-2025720)
 

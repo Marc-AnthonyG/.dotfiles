@@ -98,6 +98,12 @@ sketchybar --add item keyboard right\
            --add event keyboard_change "AppleSelectedInputSourcesChangedNotification" \
            --subscribe keyboard keyboard_change
 
+#Git notifications
+sketchybar --add item github.bell left \
+           --set github.bell update_freq=180 icon=􀋙 label=$LOADING \
+                 script="$PLUGIN_DIR/gitNotifications.sh" \
+                 click_script="sketchybar --set \$NAME popup.drawing=toggle"
+
 #### Finalizing Setup #####
 sketchybar --hotload true
 sketchybar --update
