@@ -43,7 +43,7 @@ do
                         ;;
                         esac' \
                click_script="open $URL;
-                             sketchybar --set github.bell popup.drawing=off"
+                             sketchybar --set github.bell popup.drawing=toggle"
 --subscribe github.notification.$COUNT mouse.entered mouse.exited)
 
 done <<< "$(echo "$NOTIFICATIONS" | jq -r '.[] | [.repository.name, .subject.latest_comment_url, .subject.type, .subject.title] | @sh')"
