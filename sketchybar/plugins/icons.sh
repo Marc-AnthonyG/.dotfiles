@@ -79,6 +79,9 @@ case "$1" in
   "Code")
     echo 
     ;;
+  "Finder")
+    echo 󰉋
+    ;;
   *)
     echo 
     ;;

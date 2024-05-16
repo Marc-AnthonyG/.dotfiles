@@ -9,14 +9,9 @@ else
   args+=(--set $NAME icon=􀝗 label="$COUNT")
 fi
 
-# For sound to play around with:
-#afplay /System/Library/Sounds/Morse.aiff
-
 args+=(--remove '/github.notification\.*/')
 
 COUNT=0
-COLOR=0xffe1e3e4
-args+=(--set github.bell icon.color=$COLOR)
 
 while read -r repo url type title 
 do
@@ -33,36 +28,24 @@ do
     ;;
   esac
   
-  if [ "$IMPORTANT" != "" ]; then
-    COLOR=0xffff6578
-    ICON=􀁞
-    args+=(--set github.bell icon.color=$COLOR)
-  fi
-  args+=(--add item github.notification.$COUNT popup.github.bell                                      \
-         --set github.notification.$COUNT background.padding_left=7                                   \
-                                          background.padding_right=7                                  \
-                                          background.color=0x22e1e3e4                                 \
-                                          background.drawing=off                                      \
-                                          icon.background.height=1                                    \
-                                          icon.background.y_offset=-12                                \
-                                          icon.background.color=$COLOR                                \
-                                          icon.padding_left="$PADDING"                                \
-                                          icon.color=$COLOR                                           \
-                                          icon.background.shadow.color=0xff2a2f38                     \
-                                          icon.background.shadow.angle=25                             \
-                                          icon.background.shadow.distance=2                           \
-                                          icon.background.shadow.drawing=on                           \
-                                          icon="$ICON $(echo "$repo" | sed -e "s/^'//" -e "s/'$//"):" \
-                                          label="$(echo "$title" | sed -e "s/^'//" -e "s/'$//")"      \
-                                          script='case "$SENDER" in
-                                                    "mouse.entered") sketchybar --set $NAME background.drawing=on
-                                                    ;;
-                                                    "mouse.exited") sketchybar --set $NAME background.drawing=off
-                                                    ;;
-                                                  esac' \
-                                          click_script="open $URL;
-                                                        sketchybar --set github.bell popup.drawing=off"
-        --subscribe github.notification.$COUNT mouse.entered mouse.exited)
+  args+=(
+         --add item github.notification.$COUNT popup.github.bell                                      \
+         --set github.notification.$COUNT background.padding_left=7  background.padding_right=7       \
+               background.color=0xff3b4261 icon.background.height=1 icon.background.y_offset=-12      \
+               background.drawing=on label.font.size="10.0" icon.font.size="10.0"                     \
+               icon.background.color=$COLOR icon.padding_left="$PADDING"  icon.color=$COLOR           \
+               icon="$ICON $(echo "$repo" | sed -e "s/^'//" -e "s/'$//"):"                            \
+               label="$(echo "$title" | sed -e "s/^'//" -e "s/'$//")"                                 \
+               script='case "$SENDER" in
+                        "mouse.entered") sketchybar --set $NAME background.color=0xff24283b
+                        ;;
+                        "mouse.exited") sketchybar --set $NAME background.color=0xff3b4261
+                        ;;
+                        esac' \
+               click_script="open $URL;
+                             sketchybar --set github.bell popup.drawing=off"
+--subscribe github.notification.$COUNT mouse.entered mouse.exited)
+
 done <<< "$(echo "$NOTIFICATIONS" | jq -r '.[] | [.repository.name, .subject.latest_comment_url, .subject.type, .subject.title] | @sh')"
 
 sketchybar -m "${args[@]}" 
