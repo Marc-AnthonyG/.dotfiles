@@ -34,6 +34,10 @@ yabai -m config "${yabai_config[@]}"
 
 yabai -m config layout bsp
 
+#Custom event for sketchybar
+yabai -m signal --add event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
+yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
+
 # Exclude problematic apps from being managed:
 yabai -m rule --add app="^(Harvest|Stickies|Calculator|Software Update|Dictionary|System Preferences|System Settings|zoom.us|App Store|Activity Monitor)$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off

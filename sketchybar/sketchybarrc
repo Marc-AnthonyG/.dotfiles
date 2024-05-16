@@ -1,4 +1,6 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
+source "$PLUGIN_DIR/icons.sh"
+
 
 ##### Bar Appearance #####
 # https://felixkratz.github.io/SketchyBar/config/bar
@@ -38,8 +40,11 @@ sketchybar --bar notch_width=200
 
 
 ##### Adding Mission Control Space Indicators #####
+# Register custom event trigger by yabai
+sketchybar --add event window_change
 
-SPACE_ICONS=("1:󰈹" "2:" "3:" "4:" "5:󰒱" "6:")
+
+SPACE_ICONS=("1:" "2:" "3:" "4:" "5:" "6:")
 
 for i in "${!SPACE_ICONS[@]}"
 do
@@ -51,9 +56,10 @@ do
                               background.corner_radius=5                 \
                               background.height=20                       \
                               background.drawing=off                     \
-                              label.drawing=off                          \
+                              label="_"                                  \
                               script="$PLUGIN_DIR/space.sh"              \
-                              click_script="yabai -m space --focus $sid"
+                              click_script="yabai -m space --focus $sid" \
+             --subscribe space.$sid window_change
 done
 
 #Spotify current song 
