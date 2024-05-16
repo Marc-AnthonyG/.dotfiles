@@ -22,7 +22,7 @@ case "$1" in
   "Discord")
     echo 󰙯
     ;;
-  "Docker")
+  "Docker Desktop")
     echo 󰡨
     ;;
   "Figma")
