@@ -75,9 +75,10 @@ sketchybar --add event lock   "com.apple.screenIsLocked"   \
            --subscribe        animator lock unlock
 
 #Spotify current song 
-sketchybar --add item media center \
+sketchybar --add item media center \
            --set media icon="" script="$PLUGIN_DIR/spotify.sh" updates=on \
            --subscribe media media_change 
+
 
 #Clock indicator
 sketchybar --add item clock right \
@@ -90,6 +91,12 @@ sketchybar --add item volume right --set volume \
 #Battery indicator
 sketchybar --add item battery right --set battery script="$PLUGIN_DIR/battery.sh"\
             update_freq=120 --subscribe battery system_woke power_source_change
+
+#Show current keyboard layout
+sketchybar --add item keyboard right\
+           --set keyboard icon="" script="$PLUGIN_DIR/keyboard.sh" \
+           --add event keyboard_change "AppleSelectedInputSourcesChangedNotification" \
+           --subscribe keyboard keyboard_change
 
 #### Finalizing Setup #####
 sketchybar --hotload true
