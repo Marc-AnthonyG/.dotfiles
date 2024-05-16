@@ -12,7 +12,6 @@ if [[ $SENDER == "window_change" || $SENDER == "space_change" ]]; then
  for sid in {1..6}
  do
    LABEL=""
- 
    QUERY=$(yabai -m query --windows --space $sid)
    APPS=$(echo $QUERY | jq '.[].app')
    TITLES=$(echo $QUERY | jq '.[].title')
