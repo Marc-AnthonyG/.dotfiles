@@ -7,7 +7,7 @@ source "$PLUGIN_DIR/icons.sh"
 bar=(
             height=32
             y_offset=4
-            position=top
+            position=to200
             blur_radius=0
             sticky=off
             padding_left=10
@@ -15,6 +15,7 @@ bar=(
             color=0x80292e42
             margin=8
             corner_radius=16
+            notch_width=200
 )
 
 sketchybar --bar "${bar[@]}"
@@ -33,10 +34,10 @@ default=(
             label.padding_right=4
             icon.padding_left=4
             icon.padding_right=4
+            notch_width=200
 )
 
 sketchybar --default "${default[@]}"
-sketchybar --bar notch_width=200
 
 
 ##### Adding Mission Control Space Indicators #####
@@ -63,16 +64,27 @@ do
              --subscribe space.$sid window_change
 done
 
+# Unlock animation 
+sketchybar --add event lock   "com.apple.screenIsLocked"   \
+           --add event unlock "com.apple.screenIsUnlocked" \
+                                                           \
+           --add item         animator left                \
+           --set animator     drawing=off                  \
+                              updates=on                   \
+                              script="$PLUGIN_DIR/wake.sh" \
+           --subscribe        animator lock unlock
+
 #Spotify current song 
-MUSIC_EVENT="com.spotify.client.PlaybackStateChanged"
-sketchybar --add event music_change $MUSIC_EVENT
-sketchybar --add item spotify center --set spotify icon="" script="$PLUGIN_DIR/spotify.sh" updates=on  --subscribe spotify music_change
+sketchybar --add item media center \
+           --set media icon="" script="$PLUGIN_DIR/spotify.sh" updates=on \
+           --subscribe media media_change 
 
 #Clock indicator
-sketchybar --add item clock right --set clock update_freq=10 icon=""  script="$PLUGIN_DIR/clock.sh"
+sketchybar --add item clock right \
+           --set clock update_freq=10 icon="" script="$PLUGIN_DIR/clock.sh"
 
 #Volume indicator
-sketchybar --add item volume right --set volume\
+sketchybar --add item volume right --set volume \
             script="$PLUGIN_DIR/volume.sh" --subscribe volume volume_change 
 
 #Battery indicator
