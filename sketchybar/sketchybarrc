@@ -57,6 +57,7 @@ do
                               background.height=20                       \
                               background.drawing=off                     \
                               label="_"                                  \
+                              label.font.size="18.0"                      \
                               script="$PLUGIN_DIR/space.sh"              \
                               click_script="yabai -m space --focus $sid" \
              --subscribe space.$sid window_change

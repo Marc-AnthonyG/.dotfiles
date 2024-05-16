@@ -33,12 +33,12 @@ alt + ctrl - up    : yabai -m window --insert north
 alt + ctrl - right : yabai -m window --insert east
 
 # move focused window to next/prev workspace
-alt + shift - 1 : yabai -m window --space 1
-alt + shift - 2 : yabai -m window --space 2
-alt + shift - 3 : yabai -m window --space 3
-alt + shift - 4 : yabai -m window --space 4
-alt + shift - 5 : yabai -m window --space 5
-alt + shift - 6 : yabai -m window --space 6
+alt + shift - 1 : yabai -m window --space 1 && sketchybar -m --trigger window_change &> /dev/null
+alt + shift - 2 : yabai -m window --space 2 && sketchybar -m --trigger window_change &> /dev/null
+alt + shift - 3 : yabai -m window --space 3 && sketchybar -m --trigger window_change &> /dev/null
+alt + shift - 4 : yabai -m window --space 4 && sketchybar -m --trigger window_change &> /dev/null
+alt + shift - 5 : yabai -m window --space 5 && sketchybar -m --trigger window_change &> /dev/null
+alt + shift - 6 : yabai -m window --space 6 && sketchybar -m --trigger window_change &> /dev/null
 
 # # mirror tree y-axis
 alt + shift - y : yabai -m space --mirror y-axis

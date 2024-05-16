@@ -8,6 +8,7 @@ source "$HOME/.config/sketchybar/plugins/icons.sh"
 
 sketchybar --set $NAME background.drawing=$SELECTED 
 
+echo $SENDER
 if [[ $SENDER == "window_change" || $SENDER == "space_change" ]]; then
  for sid in {1..6}
  do
