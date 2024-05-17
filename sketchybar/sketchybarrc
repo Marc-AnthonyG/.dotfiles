@@ -103,9 +103,6 @@ sketchybar --add item github.bell left \
            --set github.bell update_freq=180 icon=􀋙 label=$LOADING \
                  script="$PLUGIN_DIR/gitNotifications.sh" \
                  click_script="sketchybar --set \$NAME popup.drawing=toggle" \
-		 popup.background.border_width=2                                \
-                 popup.background.corner_radius=3                                \
-                 popup.background.border_color=0xff9dd274
 
 #### Finalizing Setup #####
 sketchybar --hotload true

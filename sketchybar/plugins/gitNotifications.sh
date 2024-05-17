@@ -3,15 +3,17 @@
 NOTIFICATIONS="$(gh api notifications)"
 COUNT="$(echo "$NOTIFICATIONS" | jq 'length')"
 args=()
-if [ "$NOTIFICATIONS" = "[]" ]; then
+if [ "$COUNT" = "0" ]; then
   args+=(--set $NAME icon=􀋚 label="0")
 else
   args+=(--set $NAME icon=􀝗 label="$COUNT")
 fi
 
-args+=(--remove '/github.notification\.*/')
+#args+=(--remove '/github.notification\.*/')
 
 COUNT=0
+COLOR=0xffe1e3e4
+args+=(--set github.bell icon.color=$COLOR)
 
 while read -r repo url type title 
 do
@@ -20,11 +22,25 @@ do
   COLOR=0xff72cce8
   PADDING=0
   case "${type}" in
-    "'Issue'") COLOR=0xff9dd274; ICON=􀍷; PADDING=0; URL="$(gh api "$(echo "${url}" | sed -e "s/^'//" -e "s/'$//")" | jq .html_url)"
+    "'Issue'") 
+      COLOR=0xff9dd274; 
+      ICON=􀍷; 
+      PADDING=0;
+      URL="$(gh api "$(echo "${url}" | sed -e "s/^'//" -e "s/'$//")" | jq .html_url)"
+      echo $URL
     ;;
-    "'Discussion'") COLOR=0xffe1e3e4; ICON=􀒤; PADDING=0; URL="https://www.github.com/notifications"
+    "'Discussion'") 
+      COLOR=0xffe1e3e4; 
+      ICON=􀒤; 
+      PADDING=0; 
+      URL="https://www.github.com/notifications"
     ;;
-    "'PullRequest'") COLOR=0xffba9cf3; ICON="􀙡"; PADDING=4; URL="$(gh api "$(echo "${url}" | sed -e "s/^'//" -e "s/'$//")" | jq .html_url)"
+    "'PullRequest'") 
+      COLOR=0xffba9cf3; 
+      ICON="􀙡"; 
+      PADDING=4;
+      URL="$(gh api "$(echo "${url}" | sed -e "s/^'//" -e "s/'$//")" | jq .html_url)"
+      echo $URL
     ;;
   esac
   
@@ -43,7 +59,8 @@ do
                         ;;
                         esac' \
                click_script="open $URL;
-                             sketchybar --set github.bell popup.drawing=toggle"
+                             sketchybar --set github.bell popup.drawing=toggle
+                             "
 --subscribe github.notification.$COUNT mouse.entered mouse.exited)
 
 done <<< "$(echo "$NOTIFICATIONS" | jq -r '.[] | [.repository.name, .subject.latest_comment_url, .subject.type, .subject.title] | @sh')"
