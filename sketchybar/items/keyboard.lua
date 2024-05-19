@@ -1,29 +1,29 @@
 local keyboard = sbar.add("item", {
   position = "right",
   icon = "",
-  update_freq = 10,
 })
 
---[[
-local keyboard_event = sbar.add(
+sbar.add(
   "event",
   "keyboard_change",
   "AppleSelectedInputSourcesChangedNotification"
 )
---]]
 
 local function getKeyboardLayout()
   sbar.exec(
-    "defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSelectedInputSources | grep 'KeyboardLayout Name' | cut -c 33- | rev | cut -c 2- | rev",
+    "defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSelectedInputSources | grep 'KeyboardLayout Name'",
     function(result)
-      if result == "Canadian" then
-        keyboard.set({ label = 'CA' })
-      elseif result == "Canadian - CSA" then
-        keyboard.set({ label = 'CSA' })
+      local layout = result:match('= (.-);'):gsub('^%s*(.-)%s*$', '%1')
+      if layout == "Canadian" then
+        keyboard:set({ label = 'CA' })
+      elseif layout == "\"Canadian - CSA\"" then
+        keyboard:set({ label = 'CSA' })
       else
-        keyboard.set({ drawing = false })
+        keyboard:set({ label = 'Unresolve' })
       end
     end)
 end
 
-keyboard:subscribe("routine", getKeyboardLayout)
+keyboard:subscribe("keyboard_change", getKeyboardLayout)
+
+getKeyboardLayout()
