@@ -1,4 +1,7 @@
 require("items.spotify")
-require("items.battery")
 require("items.clock")
+require("items.battery")
+require("items.volume")
 require("items.keyboard")
+require("items.wake")
+require("items.githubNotification")

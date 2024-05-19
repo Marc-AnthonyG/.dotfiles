@@ -18,6 +18,7 @@ sbar.begin_config()
 require("init")
 sbar.hotload(true)
 sbar.end_config()
+print("config done")
 
 -- Run the event loop of the sketchybar module (without this there will be no
 -- callback functions executed in the lua module)
