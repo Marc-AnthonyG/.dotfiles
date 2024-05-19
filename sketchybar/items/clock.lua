@@ -5,7 +5,7 @@ local clock = sbar.add("item", {
 })
 
 local function set_time()
-  local time = os.date("%d/%m %H:%M")
+  local time = os.date("%d/%m %h:%m")
   clock:set({ label = time })
 end
 
