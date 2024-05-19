@@ -40,5 +40,7 @@ return {
     light = 0xff757f,
     dark = 0xc53b53,
     flash = 0xff007c,
-  }
+  },
+
+  hover_color = TO_FULL_COLORS(0xff9e64e, 100),
 }

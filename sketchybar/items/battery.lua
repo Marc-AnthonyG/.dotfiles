@@ -1,14 +1,16 @@
-local battery = sbar.add("item", {
+local battery = SBAR.add("item", {
   position = "right",
   update_freq = 120,
 })
 
 local function battery_update()
-  sbar.exec("pmset -g batt", function(batt_info)
+  SBAR.exec("pmset -g batt", function(batt_info)
     local icon = "!"
     local label = ""
+    local drawLabel = "on"
 
     if (string.find(batt_info, 'AC Power')) then
+      drawLabel = "off"
       icon = ""
     else
       local found, _, charge = batt_info:find("(%d+)%%")
@@ -30,9 +32,9 @@ local function battery_update()
       end
     end
 
-    battery:set({ icon = icon, label = label})
+    battery:set({ icon = icon, label = { string = label, drawing = drawLabel } })
   end)
 end
 
 
-battery:subscribe({"routine", "power_source_change", "system_woke"}, battery_update)
+battery:subscribe({ "routine", "power_source_change", "system_woke" }, battery_update)

@@ -1,69 +1,87 @@
-local popup_toggle = "sketchybar --set $NAME popup.drawing=toggle"
+local colors = require("colors")
 
-local github = sbar.add("item", {
-  position = "left",
-  icon = "􀋙",
-  update_freq = 180,
-  click_script = popup_toggle,
-  label = "Loading...",
-})
-
-local function set_icon(notifications)
-  local count = 0
-  for _ in pairs(notifications) do count = count + 1 end
-
-  if count == 0 then
-    github:set({ icon = "􀋚", label = count })
-  else
-    github:set({ icon = "􀝗", label = count })
-  end
-end
-
-local function custom_config_with_type(notif, item)
-  local type = notif.subject.type
-  local color, icon, padding, finalUrl = " 0xff9dd274", "􀍷", 0, "https://www.github.com/notifications"
+local function custom_config_with_type(notifInfo, notifItem)
+  local type = notifInfo.subject.type
+  local defaultUrl = "https://www.github.com/notifications"
+  local click_script_text = "open %s && sketchybar -m --trigger git_notif_click &> /dev/null"
 
   if type == "Issue" then
-    color = "0xff9dd274"
-    icon = "􀍷"
-    padding = 0
+    SBAR.exec("gh api " .. notifInfo.subject.url .. "| jq .html_url",
+      function(result)
+        notifItem:set({
+          icon = {
+            string = "􀍷",
+            padding_left = 0,
+            color = TO_FULL_COLORS(colors.extra.orange, 100)
+          },
+          click_script = string.format(
+            click_script_text,
+            result
+          ),
+        })
+      end)
   elseif type == "Discussion" then
-    color = "0xffe1e3e4"
-    icon = "􀒤"
-    padding = 0
+    notifItem:set({
+      icon = {
+        string = "􀒤",
+        padding_left = 0,
+        color = TO_FULL_COLORS(colors.blue.sky, 100)
+      },
+      click_script = string.format(
+        click_script_text,
+        defaultUrl
+      ),
+    })
   elseif type == "PullRequest" then
-    color = "0xffba9cf3"
-    icon = "􀙡"
-    padding = 4
+    SBAR.exec("gh api " .. notifInfo.subject.url .. "| jq .html_url",
+      function(result)
+        notifItem:set({
+          icon = {
+            string = "􀙡",
+            padding_left = 4,
+            color = TO_FULL_COLORS(colors.extra.green, 100)
+          },
+          click_script = string.format(
+            click_script_text,
+            result
+          ),
+        })
+      end)
   elseif type == "CheckSuite" then
-    color = "0xffba9cf3"
-    icon = "􀙡"
-    padding = 4
+    notifItem:set({
+      icon = {
+        string = "􀙡",
+        padding_left = 4,
+        color = TO_FULL_COLORS(colors.red.light, 100)
+      },
+      click_script = string.format(
+        click_script_text,
+        defaultUrl
+      ),
+    })
   end
-
-  item:set({
-    icon = {
-      string = icon,
-      padding_left = padding,
-      color = color,
-    },
-    click_script = string.format("open %s; sketchybar --set %s popup.drawing=toggle",
-      finalUrl, github.name
-    ),
-  })
 end
 
-local function create_notif(notif, count)
+local function create(notif, count, parentItem)
+  local parentName = parentItem.name
   local title = notif.subject.title
+  local item_name = "github.notifications." .. count
 
-  local item = sbar.add("item", "github.notifications." .. count, {
-    position = "popup." .. github.name,
-    padding_left = 7,
-    padding_right = 7,
-    background = {
-      color = 0xff3b4261,
-      drawing = "on",
-    },
+  if #title >= 95 then
+    local truncated = title:sub(1, 95)
+    local last_space = truncated:match(".*[%s%-_]()")
+
+    if last_space then
+      truncated = title:sub(1, last_space - 1)
+    end
+
+    title = truncated .. "..."
+  end
+
+
+
+  local item = SBAR.add("item", item_name, {
+    position = "popup." .. parentName,
     label = {
       string = title,
       font = {
@@ -72,26 +90,30 @@ local function create_notif(notif, count)
     },
     icon = {
       font = {
-        size = 10
+        size = 18
       },
     },
+    width = 600,
     update_freq = 180,
   })
 
   custom_config_with_type(notif, item)
+
+  local function on_hover(env)
+    if env.SENDER == "mouse.entered" then
+      item:set({
+        background = { color = TO_FULL_COLORS(colors.night.light, 100), drawing = "on" },
+      })
+    elseif env.SENDER == "mouse.exited" then
+      item:set({
+        background = { drawing = "off" },
+      })
+    end
+  end
+  item:subscribe("mouse.entered", on_hover)
+  item:subscribe("mouse.exited", on_hover)
 end
 
-local function update_github_notification()
-  github:set({ label = "Updating..." })
-  sbar.exec("gh api notifications",
-    function(result)
-      set_icon(result)
-      for count, value in pairs(result) do
-        create_notif(value, count)
-      end
-    end)
-end
-
-
-github:subscribe("routine", update_github_notification)
-update_github_notification()
+return {
+  create = create
+}

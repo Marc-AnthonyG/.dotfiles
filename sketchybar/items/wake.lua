@@ -1,25 +1,25 @@
 local colors = require("colors")
 
-sbar.add(
+SBAR.add(
   "event",
   "lock",
   "com.apple.screenIsLocked"
 )
 
-sbar.add(
+SBAR.add(
   "event",
   "unlock",
   "com.apple.screenIsUnlocked"
 )
 
-local animator = sbar.add("item", {
+local animator = SBAR.add("item", {
   position = "left",
   drawing = "off",
   updates = "on",
 })
 
 local function lock()
-  sbar.bar({
+  SBAR.bar({
     y_offset = -32,
     margin = -200,
     notch_width = 0,
@@ -28,8 +28,8 @@ local function lock()
 end
 
 local function unlock()
-  sbar.animate("sin", 30, function()
-    sbar.bar({
+  SBAR.animate("sin", 30, function()
+    SBAR.bar({
       y_offset = 4,
       margin = 8,
       notch_width = 200,
