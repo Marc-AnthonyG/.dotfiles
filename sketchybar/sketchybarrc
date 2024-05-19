@@ -16,7 +16,6 @@ sbar = require("sketchybar")
 -- config calls to see the difference -- yeah..
 sbar.begin_config()
 require("init")
-sbar.hotload(true)
 sbar.end_config()
 print("config done")
 
