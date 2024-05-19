@@ -1,0 +1,8 @@
+require("items.spotify")
+require("items.clock")
+require("items.battery")
+require("items.volume")
+require("items.keyboard")
+require("items.wake")
+require("items.spaces")
+require("items.githubNotification")
