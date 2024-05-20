@@ -1,4 +1,4 @@
-#!/usr/bin/env lua
+#!/usr/local/bin/lua
 
 -- This is only needed once to install the sketchybar module
 -- (or for an update of the module)
@@ -16,6 +16,7 @@ sbar = require("sketchybar")
 -- config calls to see the difference -- yeah..
 sbar.begin_config()
 require("init")
+sbar.hotload(true)
 sbar.end_config()
 print("config done")
 
