@@ -8,7 +8,6 @@ local github = SBAR.add("item", {
   click_script = "sketchybar --set $NAME popup.drawing=toggle",
   label = "Loading...",
   background = {
-    color = TO_FULL_COLORS(colors.night.lighter, 80),
     drawing = "off",
   },
   popup = {
@@ -50,7 +49,10 @@ local function on_hover(env)
     github:set({
       icon = { color = colors.hover_color },
       label = { color = colors.hover_color },
-      background = { drawing = "on" },
+      background = {
+        color = TO_FULL_COLORS(colors.night.lighter, 80),
+        drawing = "on"
+      },
     })
   elseif env.SENDER == "mouse.exited" then
     github:set({
