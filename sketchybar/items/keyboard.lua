@@ -1,3 +1,5 @@
+local colors = require("colors")
+
 local keyboard = sbar.add("item", {
   position = "right",
   icon = "",
@@ -25,5 +27,4 @@ local function getKeyboardLayout()
 end
 
 keyboard:subscribe("keyboard_change", getKeyboardLayout)
-
 getKeyboardLayout()
