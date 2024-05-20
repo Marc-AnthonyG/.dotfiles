@@ -1,14 +1,14 @@
 local colors = require("colors")
 local get_icon = require("icons")
 
-sbar.add("event", "window_change")
+SBAR.add("event", "window_change")
 
 local spaces = {}
 local white = TO_FULL_COLORS(colors.white, 100)
 local selected_color = TO_FULL_COLORS(colors.blue.sky, 100)
 
 local function set_label_as_app_icon(item, SID)
-  sbar.exec("yabai -m query --windows --space " .. SID .. "| jq '.[].app'", function(apps)
+  SBAR.exec("yabai -m query --windows --space " .. SID .. "| jq '.[].app'", function(apps)
     local label = ""
 
     if apps and apps ~= "" then
@@ -78,7 +78,7 @@ end
 
 
 for sid = 1, 8, 1 do
-  local space = sbar.add("space", "space." .. sid, {
+  local space = SBAR.add("space", "space." .. sid, {
     associated_space = sid,
     background = {
       color = TO_FULL_COLORS(colors.white, 26),

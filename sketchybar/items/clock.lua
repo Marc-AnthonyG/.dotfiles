@@ -1,4 +1,4 @@
-local clock = sbar.add("item", {
+local clock = SBAR.add("item", {
   position = "right",
   update_freq = 10,
   icon = ""

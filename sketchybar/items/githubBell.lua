@@ -1,7 +1,7 @@
 local colors = require("colors")
 local notif = require("items.githubNotification")
 
-local github = sbar.add("item", {
+local github = SBAR.add("item", {
   position = "left",
   icon = "􀋙",
   update_freq = 180,
@@ -35,7 +35,7 @@ end
 
 local function update_github_notification()
   github:set({ label = "Updating..." })
-  sbar.exec("gh api notifications",
+  SBAR.exec("gh api notifications",
     function(result)
       set_icon(result)
       for count, value in pairs(result) do

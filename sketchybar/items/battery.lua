@@ -1,10 +1,10 @@
-local battery = sbar.add("item", {
+local battery = SBAR.add("item", {
   position = "right",
   update_freq = 120,
 })
 
 local function battery_update()
-  sbar.exec("pmset -g batt", function(batt_info)
+  SBAR.exec("pmset -g batt", function(batt_info)
     local icon = "!"
     local label = ""
 

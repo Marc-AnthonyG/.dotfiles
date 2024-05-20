@@ -45,7 +45,7 @@ local function create(notif, count, parentItem)
   local parentName = parentItem.name
   local title = notif.subject.title
 
-  local item = sbar.add("item", "github.notifications." .. count, {
+  local item = SBAR.add("item", "github.notifications." .. count, {
     position = "popup." .. parentName,
     label = {
       string = title,

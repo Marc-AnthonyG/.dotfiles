@@ -1,6 +1,6 @@
 local colors = require("colors")
 
-sbar.bar({
+SBAR.bar({
   height = 32,
   y_offset = 4,
   position = 'top',

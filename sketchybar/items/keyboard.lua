@@ -1,18 +1,18 @@
 local colors = require("colors")
 
-local keyboard = sbar.add("item", {
+local keyboard = SBAR.add("item", {
   position = "right",
   icon = "",
 })
 
-sbar.add(
+SBAR.add(
   "event",
   "keyboard_change",
   "AppleSelectedInputSourcesChangedNotification"
 )
 
 local function getKeyboardLayout()
-  sbar.exec(
+  SBAR.exec(
     "defaults read ~/Library/Preferences/com.apple.HIToolbox.plist AppleSelectedInputSources | grep 'KeyboardLayout Name'",
     function(result)
       local layout = result:match('= (.-);'):gsub('^%s*(.-)%s*$', '%1')

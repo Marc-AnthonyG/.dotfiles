@@ -1,4 +1,4 @@
-local volume = sbar.add("item", {
+local volume = SBAR.add("item", {
   position = "right",
 })
 
