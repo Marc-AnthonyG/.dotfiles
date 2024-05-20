@@ -1,8 +1,9 @@
 local colors = require("colors")
 
-local function custom_config_with_type(notifInfo, notifItem, parentName)
+local function custom_config_with_type(notifInfo, notifItem)
   local type = notifInfo.subject.type
   local defaultUrl = "https://www.github.com/notifications"
+  local click_script_text = "open %s && sketchybar -m --trigger git_notif_click &> /dev/null"
 
   if type == "Issue" then
     SBAR.exec("gh api " .. notifInfo.subject.url .. "| jq .html_url",
@@ -14,9 +15,8 @@ local function custom_config_with_type(notifInfo, notifItem, parentName)
             color = TO_FULL_COLORS(colors.extra.orange, 100)
           },
           click_script = string.format(
-            "open %s; sketchybar --set %s popup.drawing=toggle",
-            result,
-            parentName
+            click_script_text,
+            result
           ),
         })
       end)
@@ -28,9 +28,8 @@ local function custom_config_with_type(notifInfo, notifItem, parentName)
         color = TO_FULL_COLORS(colors.blue.sky, 100)
       },
       click_script = string.format(
-        "open %s; sketchybar --set %s popup.drawing=toggle",
-        defaultUrl,
-        parentName
+        click_script_text,
+        defaultUrl
       ),
     })
   elseif type == "PullRequest" then
@@ -43,9 +42,8 @@ local function custom_config_with_type(notifInfo, notifItem, parentName)
             color = TO_FULL_COLORS(colors.extra.green, 100)
           },
           click_script = string.format(
-            "open %s; sketchybar --set %s popup.drawing=toggle",
-            result,
-            parentName
+            click_script_text,
+            result
           ),
         })
       end)
@@ -57,9 +55,8 @@ local function custom_config_with_type(notifInfo, notifItem, parentName)
         color = TO_FULL_COLORS(colors.red.light, 100)
       },
       click_script = string.format(
-        "open %s; sketchybar --set %s popup.drawing=toggle",
-        defaultUrl,
-        parentName
+        click_script_text,
+        defaultUrl
       ),
     })
   end
@@ -68,6 +65,7 @@ end
 local function create(notif, count, parentItem)
   local parentName = parentItem.name
   local title = notif.subject.title
+  local item_name = "github.notifications." .. count
 
   if #title >= 95 then
     local truncated = title:sub(1, 95)
@@ -82,7 +80,7 @@ local function create(notif, count, parentItem)
 
 
 
-  local item = SBAR.add("item", "github.notifications." .. count, {
+  local item = SBAR.add("item", item_name, {
     position = "popup." .. parentName,
     label = {
       string = title,
@@ -99,7 +97,8 @@ local function create(notif, count, parentItem)
     update_freq = 180,
   })
 
-  custom_config_with_type(notif, item, parentName)
+  custom_config_with_type(notif, item)
+
   local function on_hover(env)
     if env.SENDER == "mouse.entered" then
       item:set({

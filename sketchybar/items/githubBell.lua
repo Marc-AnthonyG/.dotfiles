@@ -63,7 +63,16 @@ local function on_hover(env)
   end
 end
 
+local function handle_click_notif()
+  github:set({ popup = { drawing = "toggle" } })
+
+  update_github_notification()
+end
+
+SBAR.add("event", "git_notif_click")
 github:subscribe("routine", update_github_notification)
+github:subscribe("git_notif_click", handle_click_notif)
+
 github:subscribe("mouse.entered", on_hover)
 github:subscribe("mouse.exited", on_hover)
 update_github_notification()
