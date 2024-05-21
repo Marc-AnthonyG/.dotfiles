@@ -4,7 +4,7 @@ local notif = require("items.githubNotification")
 local github = SBAR.add("item", {
   position = "left",
   icon = "􀋙",
-  update_freq = 180,
+  update_freq = 5,
   click_script = "sketchybar --set $NAME popup.drawing=toggle",
   label = "Loading...",
   background = {
@@ -33,12 +33,31 @@ local function set_icon(notifications)
 end
 
 local function update_github_notification()
-  github:set({ label = "Updating..." })
+  local bar_data = SBAR.query('bar').items
+  local existing_notifs = {}
+  local new_notifs = {}
+
+  for _, bar_item_name in ipairs(bar_data) do
+    if bar_item_name:match("github.notifications.") then
+      existing_notifs[bar_item_name] = true
+    end
+  end
+
   SBAR.exec("gh api notifications",
     function(result)
       set_icon(result)
-      for count, value in pairs(result) do
-        notif.create(value, count, github)
+      for _, value in pairs(result) do
+        local item_name = "github.notifications." .. value.id
+        new_notifs[item_name] = true
+        if not existing_notifs[item_name] then
+          notif.create(value, github, item_name)
+        end
+      end
+
+      for item_name in pairs(existing_notifs) do
+        if not new_notifs[item_name] then
+          SBAR.remove(item_name)
+        end
       end
     end)
 end

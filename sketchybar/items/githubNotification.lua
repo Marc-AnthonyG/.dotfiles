@@ -62,10 +62,9 @@ local function custom_config_with_type(notifInfo, notifItem)
   end
 end
 
-local function create(notif, count, parentItem)
+local function create(notif, parentItem, item_name)
   local parentName = parentItem.name
   local title = notif.subject.title
-  local item_name = "github.notifications." .. count
 
   if #title >= 95 then
     local truncated = title:sub(1, 95)
