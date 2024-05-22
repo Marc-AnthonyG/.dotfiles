@@ -12,8 +12,6 @@ yabai_config=(
 	window_gap 10
 
 	# Mouse
-	mouse_follows_focus on
-	focus_follows_mouse autofocus
 	mouse_modifier               alt
 	mouse_action1                move
 	mouse_action2                resize
@@ -46,7 +44,7 @@ yabai -m rule --add label="About This Mac" app="System Information" title="About
 yabai -m rule --add label="Arc video" app="Arc" title="" manage=off
 
 JB_Apps='^(WebStorm|PyCharm|IntelliJ.*|GoLand)$'
-JB_TITLE='(Run\/Debug.*|Settings|Rename|Conflicts|Copy|Merge Revisions.*|Delete)'
+JB_TITLE='(Run\/Debug.*|Settings|Rename|Conflicts|Copy|Merge Revisions.*|Delete|Move)'
 yabai -m rule --add app="${JB_Apps}" title="${JB_TITLE}" manage=off
 
 echo "yabai configuration loaded.."

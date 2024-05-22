@@ -23,9 +23,9 @@ local function battery_update()
         icon = ""
       elseif found and charge > 60 then
         icon = ""
-      elseif found and charge > 40 then
+      elseif found and charge > 35 then
         icon = ""
-      elseif found and charge > 20 then
+      elseif found and charge > 10 then
         icon = ""
       else
         icon = ""
