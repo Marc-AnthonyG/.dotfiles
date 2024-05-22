@@ -6,7 +6,7 @@ return function (icon)
     ["Chrome"] = "",
     ["Arc"] = "",
     ["Safari"] = "",
-    ["Bitwarden"] = "󰷡",
+    ["Bitwarden"] = "",
     ["Calendar"] = "󰃭",
     ["Todoist"] = "󰃭",
     ["Discord"] = "󰙯",
