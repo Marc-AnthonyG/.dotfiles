@@ -12,7 +12,6 @@ yabai_config=(
 	window_gap 10
 
 	# Mouse
-	focus_follows_mouse          autofocus
 	mouse_modifier               alt
 	mouse_action1                move
 	mouse_action2                resize
