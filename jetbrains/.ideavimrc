@@ -7,23 +7,26 @@ let mapleader=" "
 """ Common settings -------------------------
 set relativenumber
 
-" Set which-key
-set which-key
-set timeoutlen=5000
-
 " allow copied
 set clipboard=unnamedplus
 
-" Don't use Ex mode, use Q for formatting.
-map Q gq
-
 " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
-
 " Highlight copied text
 Plug 'machakann/vim-highlightedyank'
+set which-key
+set timeoutlen=5000
 
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-":map \r <Action>(ReformatCode)
+"" -- map ide actions to ideavim -- https://jb.gg/abva4t
+" equivalent to telescope
+"map <leader><leader> <Action>(gotodeclaration)
+nnoremap <leader>r :action renameelement<cr>
+"nnoremap <leader>/ :action find<cr>
+"nnoremap <leader>sg :action findinpath<cr>
 
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
+" equivalent to lsp config
+"nnoremap gd :action gotodeclaration<cr>
+"nnoremap gr :action findusages<cr>
+"nnoremap gi :action gotoimplementation<cr>
+"nnoremap <leader>d :action gototypedeclaration<cr>
+"nnoremap <leader>ds :action filestructurepopup<cr>
+"nnoremap <leader>f :action reformatcode<cr>
