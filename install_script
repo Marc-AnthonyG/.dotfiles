@@ -1,7 +1,0 @@
-ln -s ~/.dotfile/.zshrc ~/.zshrc
-ln -s ~/.dotfiles/nvim ~/.config
-ln -s ~/.dotfiles/.tool-versions ~/.tool-versions
-ln -s ~/.dotfiles/i3 ~/.config
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/alacritty ~/.config
-ln -s ~/.dotfiles/tmux ~/.config
