@@ -1,14 +1,19 @@
 # ZSH 
 ## OMZ
 export ZSH="$HOME/.oh-my-zsh"
+
 ZSH_THEME="muse"
-zstyle ':omz:update' mode reminder  
+
+source ~/.fzf.zsh
+
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-plugins=(git asdf zsh-autosuggestions)
-source $ZSH/oh-my-zsh.sh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh  
+plugins=(git asdf fzf-tab zsh-autosuggestions)
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+source $ZSH/oh-my-zsh.sh
+
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
 
 # KEYBINDINGS
 bindkey -e 
@@ -38,11 +43,12 @@ esac
 export ARCHFLAGS="-arch arm64"
 export PATH="/Users/marc-anthonygirard/.local/bin:$PATH"
 export PATH=$(asdf where lua)/bin:$PATH
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # SSH CLIENT
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/github
-clear
+#eval "$(ssh-agent -s)"
+#ssh-add ~/.ssh/github
+#clear
 
 #HISTORY
 HISTSIZE=5000
