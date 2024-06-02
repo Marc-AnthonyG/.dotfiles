@@ -45,11 +45,6 @@ export PATH="/Users/marc-anthonygirard/.local/bin:$PATH"
 export PATH=$(asdf where lua)/bin:$PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# SSH CLIENT
-#eval "$(ssh-agent -s)"
-#ssh-add ~/.ssh/github
-#clear
-
 #HISTORY
 HISTSIZE=5000
 HISTDUP=erase
