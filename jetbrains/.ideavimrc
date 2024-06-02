@@ -14,16 +14,23 @@ set timeoutlen=5000
 " allow copied
 set clipboard=unnamedplus
 
-" Don't use Ex mode, use Q for formatting.
-map Q gq
-
 " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
-
 " Highlight copied text
 Plug 'machakann/vim-highlightedyank'
+set which-key
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-":map \r <Action>(ReformatCode)
+" Equivalent to telescope
+nnoremap <leader><leader> :action GotoFile<CR>
+nnoremap <leader>r :action RenameElement<CR>
+nnoremap <leader>/ :action Find<CR>
+nnoremap <leader>sg :action FindInPath<CR>
 
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
+" Equivalent to lsp config
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gI :action GotoImplementation<CR>
+nnoremap <leader>D :action GotoTypeDeclaration<CR>
+nnoremap <leader>ds :action FileStructurePopup<CR>
+
+nnoremap <leader>f :action ReformatCode<CR>
