@@ -22,6 +22,9 @@ return {
                         ['<C-d>'] = false,
                     },
                 },
+                path_display = {
+                    'truncate',
+                },
             },
         }
         -- Enable telescope fzf native, if installed

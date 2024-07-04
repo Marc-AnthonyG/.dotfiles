@@ -1,16 +1,20 @@
--- [[
--- Add plugins that doesn't need configuration here
--- ]]
 return {
   'ThePrimeagen/vim-be-good',
 
   -- Git related plugins
   'tpope/vim-fugitive', -- Integration with git
-  'tpope/vim-rhubarb',  -- Allow completion from git information such as issue etc.
 
   'tpope/vim-sleuth',   -- Basicly copy indentation method of the current working directory
 
-  { 'folke/which-key.nvim',  opts = {} },
+  {
+    'folke/which-key.nvim',
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 500
+    end,
+    opts = {}
+  },
 
   { 'AndreM222/copilot-lualine' },
   -- the line you can see at the bottom with the indication of the mode
@@ -24,7 +28,7 @@ return {
         section_separators = '',
       },
       sections = {
-        lualine_x = {'copilot'},
+        lualine_x = { 'copilot' },
       },
     },
   },
@@ -32,12 +36,12 @@ return {
 
   'nvim-lua/plenary.nvim',
   --Add indentation to blank line See `:help ibl`
-  --{'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
+  {'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',    opts = {} },
 
-  {
+  --[[{
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
@@ -55,7 +59,7 @@ return {
           ["."] = false,
         },
         suggestion = {
-          enabled = true,
+          enabled = false,
           auto_trigger = true,
           debounce = 75,
           keymap = {
@@ -70,4 +74,5 @@ return {
       })
     end,
   }
+  ]]
 }

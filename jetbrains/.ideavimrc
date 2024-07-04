@@ -14,19 +14,20 @@ set clipboard=unnamedplus
 " Highlight copied text
 Plug 'machakann/vim-highlightedyank'
 set which-key
-set timeoutlen=5000
+set timeoutlen=3000
 
 "" -- map ide actions to ideavim -- https://jb.gg/abva4t
 " equivalent to telescope
-"map <leader><leader> <Action>(gotodeclaration)
-nnoremap <leader>r :action renameelement<cr>
-"nnoremap <leader>/ :action find<cr>
-"nnoremap <leader>sg :action findinpath<cr>
+map <leader><leader> <Action>(GotoFile)
+map <leader>r <Action>(RenameElement)
+map <leader>/ <Action>(Find)
+map <leader>sg <Action>(FindInPath)
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>aa <Action>(GotoAction)
 
-" equivalent to lsp config
-"nnoremap gd :action gotodeclaration<cr>
-"nnoremap gr :action findusages<cr>
-"nnoremap gi :action gotoimplementation<cr>
-"nnoremap <leader>d :action gototypedeclaration<cr>
-"nnoremap <leader>ds :action filestructurepopup<cr>
-"nnoremap <leader>f :action reformatcode<cr>
+"equivalent to lsp config
+map gd <Action>(GotoDeclarationOnly)
+map gr <Action>(GotoDeclarationOnly)
+map gi <Action>(GotoImplementation)
+map <leader>d <Action>(GotoTypeDeclaration)
+map <leader>f <Action>(ReformatCode)

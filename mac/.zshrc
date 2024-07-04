@@ -30,6 +30,7 @@ alias canoeF="~/repository/canoe/frontend"
 alias canoeB="~/repository/canoe/backend"
 alias i3config="~/.dotfiles/i3/config"
 alias connectLinux="ssh marc@10.0.0.74"
+alias gitDeleteMergeBranch="git branch --merged | grep -v \"^\*\\|main\" | xargs -n 1 git branch -d"
 
 # ASDF
 . ~/.asdf/plugins/golang/set-env.zsh
