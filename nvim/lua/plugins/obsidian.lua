@@ -1,4 +1,5 @@
--- return {
+return {
+}
 --   "Marc-AnthonyG/obsidian.nvim",
 --   version = "follow_new_note_in_current_folder",
 --   lazy = true,

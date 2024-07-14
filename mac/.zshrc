@@ -24,6 +24,7 @@ bindkey '^n' history-search-forward
 export ARCHFLAGS="-arch x86_64"
 
 # ALIAS
+alias aci-connect='eval "$(aws configure export-credentials --profile aci-dev --format env)" && yarn ba dev'
 alias termSource="~/.zshrc"
 alias vim=nvim
 alias canoeF="~/repository/canoe/frontend"
@@ -33,6 +34,7 @@ alias connectLinux="ssh marc@10.0.0.74"
 alias gitDeleteMergeBranch="git branch --merged | grep -v \"^\*\\|main\" | xargs -n 1 git branch -d"
 
 # ASDF
+export PATH="$HOME/.asdf/shims:$PATH"
 . ~/.asdf/plugins/golang/set-env.zsh
 export PNPM_HOME="/Users/marc-anthonygirard/Library/pnpm"
 case ":$PATH:" in

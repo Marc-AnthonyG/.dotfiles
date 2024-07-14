@@ -5,7 +5,7 @@
 let mapleader=" "
 
 """ Common settings -------------------------
-set relativenumber
+set number
 
 " allow copied
 set clipboard=unnamedplus
