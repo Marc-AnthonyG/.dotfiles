@@ -8,23 +8,24 @@ local white = TO_FULL_COLORS(colors.white, 100)
 local selected_color = TO_FULL_COLORS(colors.blue.sky, 100)
 
 local function set_label_as_app_icon(item, SID)
-  SBAR.exec("yabai -m query --windows --space " .. SID .. "|  jq '[.[] | .app]'", function(apps)
-    local label = "_"
-    if #apps > 0 then
-      label = ""
+  SBAR.exec("yabai -m query --windows --space " .. SID .. "| jq '[.[] | select(.subrole != \"AXSystemDialog\") | .app]'",
+    function(apps)
+      local label = "_"
+      if #apps > 0 then
+        label = ""
 
-      local length = #apps
-      for j, app_name in ipairs(apps) do
-        local icon = get_icon(app_name)
-        label = label .. icon
-        if j < length then
-          label = label .. " "
+        local length = #apps
+        for j, app_name in ipairs(apps) do
+          local icon = get_icon(app_name)
+          label = label .. icon
+          if j < length then
+            label = label .. " "
+          end
         end
       end
-    end
 
-    item:set({ label = label })
-  end)
+      item:set({ label = label })
+    end)
 end
 
 local function space_selection(env)
