@@ -1,7 +1,10 @@
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
+
+-- For Obsidiant https://github.com/epwalsh/obsidian.nvim/issues/286#issuecomment-1877391540
+vim.opt.conceallevel = 2
+
 
 vim.o.hlsearch = false -- Set highlight on search
 

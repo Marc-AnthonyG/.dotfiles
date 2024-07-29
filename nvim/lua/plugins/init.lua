@@ -40,7 +40,4 @@ return {
 
   --Muti cursor multi See `:help visual-multi`
   'mg979/vim-visual-multi',
-
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',               opts = {} },
 }
