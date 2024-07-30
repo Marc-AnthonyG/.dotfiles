@@ -41,7 +41,7 @@ Here is a list of plugins I want to better configure or install
 - [X] ts-comments.nvim
 - [ ] conform.nvim
 - [ ] nvim-lint
-- [ ] nvim-ts-autotag
+- [X] nvim-ts-autotag
 - [X] indent-blankline.nvim
 - [X] vim-visual-multi 
 - [X] which-key
