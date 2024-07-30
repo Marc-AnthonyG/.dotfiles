@@ -10,47 +10,49 @@ My project is to still used my Kickstart configuration and to find inspiration i
 Here is a list of plugins I want to better configure or install
 
 ### Snippet
--[ ] Friendly snippet 
--[ ] nvim-snippets
--[ ] nvim-cmp LuaSnip
+- [x] nvim-cmp 
+  - [ ] Check for formating with icon
+
+- [X] Friendly snippet 
+- [X] nvim-snippets
 
 ### LSP
--[ ] Mason
--[ ] cmp-buffer
--[ ] cmp-nvim-lsp
--[ ] nvim-lspconfig
--[ ] mason-lspconfig.nvim
--[ ] nvim-treesitter-textobjects
+- [ ] Mason
+- [ ] cmp-buffer
+- [ ] cmp-nvim-lsp
+- [ ] nvim-lspconfig
+- [ ] mason-lspconfig.nvim
+- [ ] nvim-treesitter-textobjects
 
 ### Navigation
--[ ] Neo-tree.nvim
--[ ] grug-far.nvim
--[ ] Trouble
--[ ] harpoon
--[ ] telescope.nvim
+- [ ] Neo-tree.nvim
+- [ ] grug-far.nvim
+- [ ] Trouble
+- [ ] harpoon
+- [ ] telescope.nvim
 
 ### Git
--[ ] Gitsigns (check keymaps)
--[ ] Fugitive
+- [ ] Gitsigns (check keymaps)
+- [ ] Fugitive
 
 ### Tool
--[ ] ts-comments.nvim
--[ ] conform.nvim
--[ ] nvim-lint
--[ ] nvim-ts-autotag
--[ ] indent-blankline.nvim
--[ ] vim-visual-multi 
--[ ] vim-sleuth
+- [ ] ts-comments.nvim
+- [ ] conform.nvim
+- [ ] nvim-lint
+- [ ] nvim-ts-autotag
+- [ ] indent-blankline.nvim
+- [ ] vim-visual-multi 
+- [ ] vim-sleuth
 
 
 ### UI
--[ ] lualine.nvim
--[ ] nvim-notify
--[ ] noice.nvim
--[ ] Mini.icon
--[ ] dashboard-nvim
--[ ] copilot-lualine
+- [ ] lualine.nvim
+- [ ] nvim-notify
+- [ ] noice.nvim
+- [ ] Mini.icon
+- [ ] dashboard-nvim
+- [ ] copilot-lualine
 
 ### Test
--[ ] neotest
--[ ] Dap
+- [ ] neotest
+- [ ] Dap
