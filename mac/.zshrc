@@ -31,7 +31,17 @@ alias canoeF="~/repository/canoe/frontend"
 alias canoeB="~/repository/canoe/backend"
 alias i3config="~/.dotfiles/i3/config"
 alias connectLinux="ssh marc@10.0.0.74"
-alias gitDeleteMergeBranch="git branch --merged | grep -v \"^\*\\|main\" | xargs -n 1 git branch -d"
+
+function gitDeleteMergeBranch() {
+  remote_branches=$(git ls-remote --heads origin | awk '{print $2}' | sed 's/refs\/heads\///')
+  git branch --format="%(refname:short)" | while read -r local_branch; do
+    if ! echo "$remote_branches" | grep -q "^$local_branch$"; then
+      echo "Deleting local branch $local_branch"
+      git branch -d "$local_branch"
+    fi
+  done
+}
+alias gitDeleteMergeBranch=gitDeleteMergeBranch
 
 # ASDF
 export PATH="$HOME/.asdf/shims:$PATH"
