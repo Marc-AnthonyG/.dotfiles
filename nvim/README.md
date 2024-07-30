@@ -54,7 +54,7 @@ Here is a list of plugins I want to better configure or install
 - [X] nvim-notify
 - [X] noice.nvim
 - [X] Mini.icon
-- [ ] dashboard-nvim
+- [X] dashboard-nvim
 
 ### Test
 - [X] neotest
