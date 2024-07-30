@@ -38,7 +38,7 @@ Here is a list of plugins I want to better configure or install
 - [X] Fugitive
 
 ### Tool
-- [ ] ts-comments.nvim
+- [X] ts-comments.nvim
 - [ ] conform.nvim
 - [ ] nvim-lint
 - [ ] nvim-ts-autotag
