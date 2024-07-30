@@ -11,7 +11,6 @@ Here is a list of plugins I want to better configure or install
 
 ### Snippet
 - [x] nvim-cmp 
-  - [ ] Check for formating with icon
 - [X] Friendly snippet 
 - [X] Lua-snip
 - [X] cmp-buffer
@@ -45,7 +44,7 @@ Here is a list of plugins I want to better configure or install
 - [X] indent-blankline.nvim
 - [X] vim-visual-multi 
 - [X] which-key
-   - [ ] Check for better input
+   - [ ] Check for better icon
 
 
 ### UI
@@ -58,4 +57,4 @@ Here is a list of plugins I want to better configure or install
 
 ### Test
 - [X] neotest
-- [ ] Dap
+- [X] Dap
