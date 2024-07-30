@@ -23,14 +23,14 @@ Here is a list of plugins I want to better configure or install
   - TODO: A shit ton to get to LazyVim level
 
 ### Treesitter
-- [ ] nvim-treesitter-textobjects
-- [ ] treesitter
+- [X] nvim-treesitter-textobjects
+- [X] treesitter
 
 ### Navigation
 - [ ] Neo-tree.nvim
 - [ ] grug-far.nvim
-- [ ] Trouble
-- [ ] harpoon
+- [X] Trouble
+- [X] harpoon
 - [ ] telescope.nvim
 
 ### Git
@@ -56,5 +56,5 @@ Here is a list of plugins I want to better configure or install
 - [ ] dashboard-nvim
 
 ### Test
-- [ ] neotest
+- [X] neotest
 - [ ] Dap
