@@ -40,7 +40,7 @@ Here is a list of plugins I want to better configure or install
 ### Tool
 - [X] ts-comments.nvim
 - [ ] conform.nvim
-- [ ] nvim-lint
+- [X] nvim-lint
 - [X] nvim-ts-autotag
 - [X] indent-blankline.nvim
 - [X] vim-visual-multi 
@@ -53,7 +53,7 @@ Here is a list of plugins I want to better configure or install
 - [X] copilot-lualine
 - [ ] nvim-notify
 - [ ] noice.nvim
-- [ ] Mini.icon
+- [X] Mini.icon
 - [ ] dashboard-nvim
 
 ### Test

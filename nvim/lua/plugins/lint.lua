@@ -64,7 +64,7 @@ return {
 					vim.health.warn("Linter not found: " .. name, { title = "nvim-lint" })
 				end
 				return linter and
-				    not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
+					not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
 			end, names)
 
 			-- Run linters.

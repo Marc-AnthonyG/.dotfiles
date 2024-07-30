@@ -6,7 +6,7 @@ return {
 		'williamboman/mason.nvim',
 		'williamboman/mason-lspconfig.nvim',
 		{ 'j-hui/fidget.nvim', opts = {} }, -- Useful status updates for LSP
-		'folke/neodev.nvim',  -- completion for nvim api
+		'folke/neodev.nvim',          -- completion for nvim api
 	},
 	config = function()
 		local on_attach = function(_, bufnr)

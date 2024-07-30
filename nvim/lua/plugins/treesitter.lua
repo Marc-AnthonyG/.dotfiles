@@ -1,6 +1,6 @@
 return {
 	'nvim-treesitter/nvim-treesitter',
-	event="VeryLazy",
+	event = "VeryLazy",
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-textobjects',
 	},
