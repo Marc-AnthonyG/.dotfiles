@@ -28,7 +28,7 @@ Here is a list of plugins I want to better configure or install
 
 ### Navigation
 - [ ] Neo-tree.nvim
-- [ ] grug-far.nvim
+- [X] grug-far.nvim
 - [X] Trouble
 - [X] harpoon
 - [ ] telescope.nvim
