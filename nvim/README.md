@@ -30,7 +30,7 @@ Here is a list of plugins I want to better configure or install
 - [X] grug-far.nvim
 - [X] Trouble
 - [X] harpoon
-- [ ] telescope.nvim
+- [X] telescope.nvim
 
 ### Git
 - [X] Gitsigns
@@ -38,7 +38,7 @@ Here is a list of plugins I want to better configure or install
 
 ### Tool
 - [X] ts-comments.nvim
-- [ ] conform.nvim
+- [X] conform.nvim
 - [X] nvim-lint
 - [X] nvim-ts-autotag
 - [X] indent-blankline.nvim

@@ -1,5 +1,3 @@
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
 return {
 	'nvim-telescope/telescope.nvim',
 	branch = '0.1.x',
@@ -27,7 +25,6 @@ return {
 				},
 			},
 		}
-		-- Enable telescope fzf native, if installed
 		pcall(require('telescope').load_extension, 'fzf')
 
 		-- Telescope live_grep in git root
