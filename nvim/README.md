@@ -14,14 +14,17 @@ Here is a list of plugins I want to better configure or install
   - [ ] Check for formating with icon
 - [X] Friendly snippet 
 - [X] Lua-snip
+- [X] cmp-buffer
+- [X] cmp-nvim-lsp
 
 ### LSP
-- [ ] Mason
-- [ ] cmp-buffer
-- [ ] cmp-nvim-lsp
+- [X] Mason
 - [ ] nvim-lspconfig
-- [ ] mason-lspconfig.nvim
+  - TODO: A shit ton to get to LazyVim level
+
+### Treesitter
 - [ ] nvim-treesitter-textobjects
+- [ ] treesitter
 
 ### Navigation
 - [ ] Neo-tree.nvim
