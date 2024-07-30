@@ -51,8 +51,8 @@ Here is a list of plugins I want to better configure or install
 ### UI
 - [X] lualine.nvim
 - [X] copilot-lualine
-- [ ] nvim-notify
-- [ ] noice.nvim
+- [X] nvim-notify
+- [X] noice.nvim
 - [X] Mini.icon
 - [ ] dashboard-nvim
 
