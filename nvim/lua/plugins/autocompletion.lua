@@ -4,11 +4,17 @@ return {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
-        'L3MON4D3/LuaSnip',
+        {
+            'L3MON4D3/LuaSnip',
+            build = "make install_jsregexp"
+        },
         'saadparwaiz1/cmp_luasnip',
-        'hrsh7th/cmp-nvim-lsp',
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
         'rafamadriz/friendly-snippets'
     },
+
     config = function()
         local cmp = require 'cmp'
 
@@ -23,8 +29,9 @@ return {
                 end,
             },
             completion = {
-                completeopt = 'menu,menuone,noinsert'
+                completeopt = "menu,menuone,noinsert" .. (true and "" or ",noselect"),
             },
+            preselect = true and cmp.PreselectMode.Item or cmp.PreselectMode.None,
             mapping = cmp.mapping.preset.insert {
                 ['<C-n>'] = cmp.mapping.select_next_item(),
                 ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -48,6 +55,9 @@ return {
             sources = {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
+                { name = "nvim_lsp" },
+                { name = "path" },
+                { name = "buffer" },
             },
         }
     end

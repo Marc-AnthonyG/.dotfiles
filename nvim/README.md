@@ -12,9 +12,8 @@ Here is a list of plugins I want to better configure or install
 ### Snippet
 - [x] nvim-cmp 
   - [ ] Check for formating with icon
-
 - [X] Friendly snippet 
-- [X] nvim-snippets
+- [X] Lua-snip
 
 ### LSP
 - [ ] Mason
