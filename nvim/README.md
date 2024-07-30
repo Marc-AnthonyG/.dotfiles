@@ -34,26 +34,26 @@ Here is a list of plugins I want to better configure or install
 - [ ] telescope.nvim
 
 ### Git
-- [ ] Gitsigns (check keymaps)
-- [ ] Fugitive
+- [X] Gitsigns
+- [X] Fugitive
 
 ### Tool
 - [ ] ts-comments.nvim
 - [ ] conform.nvim
 - [ ] nvim-lint
 - [ ] nvim-ts-autotag
-- [ ] indent-blankline.nvim
-- [ ] vim-visual-multi 
-- [ ] vim-sleuth
+- [X] indent-blankline.nvim
+- [X] vim-visual-multi 
+- [X] which-key
 
 
 ### UI
-- [ ] lualine.nvim
+- [X] lualine.nvim
+- [X] copilot-lualine
 - [ ] nvim-notify
 - [ ] noice.nvim
 - [ ] Mini.icon
 - [ ] dashboard-nvim
-- [ ] copilot-lualine
 
 ### Test
 - [ ] neotest

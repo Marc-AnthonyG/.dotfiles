@@ -4,8 +4,6 @@ return {
   -- Git related plugins
   'tpope/vim-fugitive', -- Integration with git
 
-  'tpope/vim-sleuth',   -- Basicly copy indentation method of the current working directory
-
   {
     'folke/which-key.nvim',
     event = "VeryLazy",
@@ -22,7 +20,7 @@ return {
     'nvim-lualine/lualine.nvim', -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'catppuccin',
         component_separators = '|',
         section_separators = '',
