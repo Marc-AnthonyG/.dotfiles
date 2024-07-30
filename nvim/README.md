@@ -45,6 +45,7 @@ Here is a list of plugins I want to better configure or install
 - [X] indent-blankline.nvim
 - [X] vim-visual-multi 
 - [X] which-key
+   - [ ] Check for better input
 
 
 ### UI
