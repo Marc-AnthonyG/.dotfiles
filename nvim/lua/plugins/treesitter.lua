@@ -1,8 +1,6 @@
--- [[ Configure Treesitter ]]
--- See `:help nvim-treesitter`
 return {
-	-- Highlight, edit, and navigate code
 	'nvim-treesitter/nvim-treesitter',
+	event="VeryLazy",
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-textobjects',
 	},

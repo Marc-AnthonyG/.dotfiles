@@ -1,8 +1,13 @@
 return {
-	'ThePrimeagen/vim-be-good',
+	{
+		'ThePrimeagen/vim-be-good',
+		event = "VeryLazy",
+	},
 
-	-- Git related plugins
-	'tpope/vim-fugitive', -- Integration with git
+	{
+		'tpope/vim-fugitive',
+		event = "VeryLazy",
+	},
 
 	{
 		'folke/which-key.nvim',
@@ -14,10 +19,13 @@ return {
 		opts = {}
 	},
 
-	{ 'AndreM222/copilot-lualine' },
-	-- the line you can see at the bottom with the indication of the mode
 	{
-		'nvim-lualine/lualine.nvim', -- See `:help lualine.txt`
+		'AndreM222/copilot-lualine',
+		event = "VeryLazy",
+	},
+	{
+		'nvim-lualine/lualine.nvim',
+		event = "VeryLazy",
 		opts = {
 			options = {
 				icons_enabled = true,
@@ -32,21 +40,27 @@ return {
 	},
 
 
-	--Add indentation to blank line See `:help ibl`
-	{ 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
+	{
+		'lukas-reineke/indent-blankline.nvim',
+		main = 'ibl',
+		opts = {},
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+	},
 
-	--Muti cursor multi See `:help visual-multi`
-	'mg979/vim-visual-multi',
+	{
+		'mg979/vim-visual-multi',
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+	},
 
 	{
 		"folke/ts-comments.nvim",
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		opts = {},
 	},
 
 	{
 		"windwp/nvim-ts-autotag",
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		opts = {},
 	},
 
