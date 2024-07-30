@@ -10,7 +10,7 @@ My project is to still used my Kickstart configuration and to find inspiration i
 Here is a list of plugins I want to better configure or install
 
 ### Snippet
--[ ] Friendly snippet 
+- [ ] Friendly snippet 
 -[ ] nvim-snippets
 -[ ] nvim-cmp LuaSnip
 
