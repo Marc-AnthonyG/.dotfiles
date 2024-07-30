@@ -1,12 +1,10 @@
 return {
     "Marc-AnthonyG/obsidian.nvim",
-    version = "follow_new_note_in_current_folder",
+    version = "*",
     lazy = true,
     ft = "markdown",
     dependencies = {
-        -- Required.
         "nvim-lua/plenary.nvim",
-        -- Optionnal
         "nvim-telescope/telescope.nvim",
         "nvim-treesitter",
     },
