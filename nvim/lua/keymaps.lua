@@ -2,7 +2,7 @@
 
 
 -- old but gold
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "[e]xplorer" })
+vim.keymap.set("n", "<leader>E", vim.cmd.Ex, { desc = "[e]xplorer" })
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- Keymaps for better default experience

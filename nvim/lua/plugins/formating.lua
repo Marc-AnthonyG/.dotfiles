@@ -38,7 +38,7 @@ return {
 				vim.health.error(
 					"Don't set `plugin.config` for `conform.nvim`.\n",
 					"This will break **LazyVim** formatting.\n",
-					"Please refer to the docs at https://www.lazyvim.org/plugins/formatting",
+					"Please refer to the docs at https://www.lazyvim.org/plugins/formatting"
 				)
 			end
 			local opts = {
