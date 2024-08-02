@@ -37,7 +37,7 @@ function gitDeleteMergeBranch() {
   git branch --format="%(refname:short)" | while read -r local_branch; do
     if ! echo "$remote_branches" | grep -q "^$local_branch$"; then
       echo "Deleting local branch $local_branch"
-      git branch -d "$local_branch"
+      git branch -d "$local_branch" &> /dev/null
     fi
   done
 }

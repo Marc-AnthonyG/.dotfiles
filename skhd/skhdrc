@@ -5,8 +5,8 @@ alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
 # (alt) change focus (using arrow keys)
-alt - down    : ~/.config/yabai/script/padding_rule.sh no
-alt - up    : ~/.config/yabai/script/padding_rule.sh yes
+#alt - down    : ~/.config/yabai/script/padding_rule.sh no
+#alt - up    : ~/.config/yabai/script/padding_rule.sh yes
 
 # shift window in current workspace
 alt + shift - h : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)

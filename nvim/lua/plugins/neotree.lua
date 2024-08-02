@@ -55,9 +55,10 @@ return {
 			follow_current_file = { enabled = true },
 			use_libuv_file_watcher = true,
 			filtered_items = {
-				visible = true, -- This is what you want: If you set this to `true`, all "hide" just mean "dimmed out"
+				visible = true,
 				hide_dotfiles = false,
-				hide_gitignored = true,
+				hide_gitignored = false,
+				hide_hidden = false,
 			},
 		},
 		window = {
@@ -85,7 +86,7 @@ return {
 				["%"] = {
 					"add",
 					config = {
-						show_path = "none" -- "none", "relative", "absolute"
+						show_path = "none"
 					}
 				},
 			},
@@ -117,14 +118,5 @@ return {
 		-- 	{ event = events.FILE_MOVED,   handler = on_move },
 		-- 	{ event = events.FILE_RENAMED, handler = on_move },
 		-- })
-		require("neo-tree").setup(opts)
-		vim.api.nvim_create_autocmd("TermClose", {
-			pattern = "*lazygit",
-			callback = function()
-				if package.loaded["neo-tree.sources.git_status"] then
-					require("neo-tree.sources.git_status").refresh()
-				end
-			end,
-		})
 	end,
 }
