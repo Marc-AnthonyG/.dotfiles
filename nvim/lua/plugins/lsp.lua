@@ -9,6 +9,8 @@ return {
 		'folke/neodev.nvim',          -- completion for nvim api
 	},
 	config = function()
+		require('neodev').setup()
+
 		local on_attach = function(_, bufnr)
 			local nmap = function(keys, func, desc)
 				if desc then
@@ -29,18 +31,14 @@ return {
 			nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
 				'[W]orkspace [S]ymbols')
 
-			-- See `:help K` for why this keymap
 			nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
 			nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-			-- Create a command `:Format` local to the LSP buffer
 			vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
 				vim.lsp.buf.format()
 			end, { desc = 'Format current buffer with LSP' })
 		end
 
-		-- mason-lspconfig requires that these setup functions are called in this order
-		-- before setting up the servers.
 		require('mason').setup()
 		require('mason-lspconfig').setup()
 
@@ -53,8 +51,6 @@ return {
 			},
 		}
 
-		-- Setup neovim lua configuration
-		require('neodev').setup()
 		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
