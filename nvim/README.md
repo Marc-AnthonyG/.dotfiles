@@ -26,7 +26,7 @@ Here is a list of plugins I want to better configure or install
 - [X] treesitter
 
 ### Navigation
-- [ ] Neo-tree.nvim
+- [X] Neo-tree.nvim
 - [X] grug-far.nvim
 - [X] Trouble
 - [X] harpoon

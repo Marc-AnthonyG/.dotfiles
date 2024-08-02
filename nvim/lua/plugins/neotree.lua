@@ -4,13 +4,17 @@ return {
 	cmd = "Neotree",
 	keys = {
 		{
-			"<leader>fe",
+			"<leader>e",
 			function()
 				require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
 			end,
-			desc = "Explorer NeoTree (cwd)",
+			desc = "[e]xplorer NeoTree (cwd)",
 		},
-		{ "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
+		{
+			"<leader>ce",
+			":Neotree toggle reveal_force_cwd<CR>",
+			desc = "[c]urrent [e]xplorer",
+		},
 		{
 			"<leader>ge",
 			function()
@@ -107,16 +111,37 @@ return {
 		},
 	},
 	config = function(_, opts)
-		-- TODO
-		-- local function on_move(data)
-		-- 	LazyVim.lsp.on_rename(data.source, data.destination)
-		-- end
+		local function on_move(data)
+			local changes = {
+				files = { {
+					oldUri = vim.uri_from_fname(data.from),
+					newUri = vim.uri_from_fname(data.to),
+				} }
+			}
 
-		-- local events = require("neo-tree.events")
-		-- opts.event_handlers = opts.event_handlers or {}
-		-- vim.list_extend(opts.event_handlers, {
-		-- 	{ event = events.FILE_MOVED,   handler = on_move },
-		-- 	{ event = events.FILE_RENAMED, handler = on_move },
-		-- })
+			local clients = vim.lsp.get_clients()
+			for _, client in ipairs(clients) do
+				if client.supports_method("workspace/willRenameFiles") then
+					local resp = client.request_sync("workspace/willRenameFiles", changes, 1000, 0)
+					if resp and resp.result ~= nil then
+						vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
+					end
+				end
+			end
+
+			for _, client in ipairs(clients) do
+				if client.supports_method("workspace/didRenameFiles") then
+					client.notify("workspace/didRenameFiles", changes)
+				end
+			end
+		end
+
+		local events = require("neo-tree.events")
+		opts.event_handlers = opts.event_handlers or {}
+		vim.list_extend(opts.event_handlers, {
+			{ event = events.FILE_MOVED,   handler = on_move },
+			{ event = events.FILE_RENAMED, handler = on_move },
+		})
+		require("neo-tree").setup(opts)
 	end,
 }
