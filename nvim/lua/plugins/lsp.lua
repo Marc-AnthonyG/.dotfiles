@@ -108,21 +108,15 @@ return {
 		Util.lsp.words.setup(opts.document_highlight)
 
 		-- inlay hints
-		-- if opts.inlay_hints.enabled then
-		-- 	Util.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
-		-- 		if
-		-- 		    vim.api.nvim_buf_is_valid(buffer)
-		-- 		    and vim.bo[buffer].buftype == ""
-		-- 		    and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
-		-- 		then
-		-- 			vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-		-- 		end
-		-- 	end)
-		-- end
+		if opts.inlay_hints.enabled then
+			Util.lsp.on_supports_method("textDocument/inlayHint", function(_, buffer)
+				vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+			end)
+		end
 
 		-- code lens
 		if opts.codelens.enabled and vim.lsp.codelens then
-			Util.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+			Util.lsp.on_supports_method("textDocument/codeLens", function(_, buffer)
 				vim.lsp.codelens.refresh()
 				vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
 					buffer = buffer,
@@ -133,18 +127,18 @@ return {
 
 		if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
 			opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-			    or function(diagnostic)
-				    for d, icon in pairs({
-					    Error = " ",
-					    Warn  = " ",
-					    Hint  = " ",
-					    Info  = " ",
-				    }) do
-					    if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-						    return icon
-					    end
-				    end
-			    end
+				or function(diagnostic)
+					for d, icon in pairs({
+						Error = " ",
+						Warn  = " ",
+						Hint  = " ",
+						Info  = " ",
+					}) do
+						if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+							return icon
+						end
+					end
+				end
 		end
 
 		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))

@@ -9,6 +9,11 @@ My project is to still used my Kickstart configuration and to find inspiration i
 
 Here is a list of plugins I want to better configure or install
 
+### Small project TODO
+- [ ] Implement auto-formating
+- [ ] Declared all Icon in util and choose them (which-key)
+- [ ] Neo-tree mapping won't work
+
 ### Snippet
 - [x] nvim-cmp 
 - [X] Friendly snippet 
@@ -56,3 +61,4 @@ Here is a list of plugins I want to better configure or install
 ### Test
 - [X] neotest
 - [X] Dap
+
