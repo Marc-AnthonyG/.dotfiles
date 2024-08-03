@@ -26,6 +26,8 @@ vim.opt.rtp:prepend(lazypath)
 
 _G.Util = require("util")
 
+Util.format.setup()
+
 -- [[ Configure plugins ]]
 require('lazy').setup({
 	spec = {
