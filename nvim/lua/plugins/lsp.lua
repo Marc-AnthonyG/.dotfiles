@@ -1,76 +1,206 @@
--- [[ Configure LSP ]]
 return {
-	'neovim/nvim-lspconfig',
-	event = "VeryLazy",
+	-- lspconfig
+	"neovim/nvim-lspconfig",
+	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 	dependencies = {
-		'williamboman/mason.nvim',
-		'williamboman/mason-lspconfig.nvim',
-		{ 'j-hui/fidget.nvim', opts = {} }, -- Useful status updates for LSP
-		'folke/neodev.nvim',          -- completion for nvim api
+		"mason.nvim",
+		{ "williamboman/mason-lspconfig.nvim", config = function() end },
 	},
-	config = function()
-		require('neodev').setup()
-
-		local on_attach = function(_, bufnr)
-			local nmap = function(keys, func, desc)
-				if desc then
-					desc = 'LSP: ' .. desc
-				end
-
-				vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-			end
-
-			nmap('<leader>r', vim.lsp.buf.rename, '[R]ename')
-			nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-			nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-			nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-			nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-			nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-			nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-			nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-				'[W]orkspace [S]ymbols')
-
-			nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-			nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-			vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-				vim.lsp.buf.format()
-			end, { desc = 'Format current buffer with LSP' })
-		end
-
-		require('mason').setup()
-		require('mason-lspconfig').setup()
-
-		local servers = {
-			lua_ls = {
-				Lua = {
-					workspace = { checkThirdParty = false },
-					telemetry = { enable = false },
+	opts = function()
+		local ret = {
+			diagnostics = {
+				underline = true,
+				update_in_insert = false,
+				virtual_text = {
+					spacing = 4,
+					source = "if_many",
+					prefix = "icons",
+				},
+				severity_sort = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.WARN] = " ",
+						[vim.diagnostic.severity.HINT] = "",
+						[vim.diagnostic.severity.INFO] = "",
+					},
 				},
 			},
+			inlay_hints = {
+				enabled = true,
+			},
+			codelens = {
+				enabled = false,
+			},
+			document_highlight = {
+				enabled = true,
+			},
+			capabilities = {
+				workspace = {
+					fileOperations = {
+						didRename = true,
+						willRename = true,
+					},
+				},
+			},
+			format = {
+				formatting_options = nil,
+				timeout_ms = nil,
+			},
+			-- LSP Server Settings
+			-- add servers and special configuration here
+			servers = {
+				lua_ls = {
+					-- ---@type LazyKeysSpec[]
+					-- keys = {},
+					settings = {
+						Lua = {
+							workspace = {
+								checkThirdParty = false,
+							},
+							codeLens = {
+								enable = true,
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+							doc = {
+								privateName = { "^_" },
+							},
+							hint = {
+								enable = true,
+								setType = false,
+								paramType = true,
+								paramName = "Disable",
+								semicolon = "Disable",
+								arrayIndex = "Disable",
+							},
+						},
+					},
+				},
+			},
+			-- you can do any additional lsp server setup here
+			-- return true if you don't want this server to be setup with lspconfig
+			setup = {
+				-- example to setup with typescript.nvim
+				-- tsserver = function(_, opts)
+				--   require("typescript").setup({ server = opts })
+				--   return true
+				-- end,
+				-- Specify * to use this function as a fallback for any server
+				-- ["*"] = function(server, opts) end,
+			},
 		}
+		return ret
+	end,
+	config = function(_, opts)
+		-- setup autoformat
+		-- LazyVim.format.register(LazyVim.lsp.formatter())
 
-		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+		-- setup keymaps
+		Util.lsp.on_attach(function(client, buffer)
+			require("plugins.lsp.keymaps").on_attach(client, buffer)
+		end)
 
-		-- Ensure the servers above are installed
-		local mason_lspconfig = require 'mason-lspconfig'
+		Util.lsp.setup()
+		Util.lsp.on_dynamic_capability(require("plugins.lsp.keymaps").on_attach)
 
-		mason_lspconfig.setup {
-			ensure_installed = vim.tbl_keys(servers),
-		}
+		Util.lsp.words.setup(opts.document_highlight)
 
-		mason_lspconfig.setup_handlers {
-			function(server_name)
-				require('lspconfig')[server_name].setup {
-					capabilities = capabilities,
-					on_attach = on_attach, -- is calling on attach define in lsp config
-					settings = servers[server_name],
-					filetypes = (servers[server_name] or {}).filetypes,
-				}
-			end,
-		}
-	end
+		-- inlay hints
+		-- if opts.inlay_hints.enabled then
+		-- 	Util.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
+		-- 		if
+		-- 		    vim.api.nvim_buf_is_valid(buffer)
+		-- 		    and vim.bo[buffer].buftype == ""
+		-- 		    and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+		-- 		then
+		-- 			vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+		-- 		end
+		-- 	end)
+		-- end
+
+		-- code lens
+		if opts.codelens.enabled and vim.lsp.codelens then
+			Util.lsp.on_supports_method("textDocument/codeLens", function(client, buffer)
+				vim.lsp.codelens.refresh()
+				vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+					buffer = buffer,
+					callback = vim.lsp.codelens.refresh,
+				})
+			end)
+		end
+
+		if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
+			opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
+			    or function(diagnostic)
+				    for d, icon in pairs({
+					    Error = " ",
+					    Warn  = " ",
+					    Hint  = " ",
+					    Info  = " ",
+				    }) do
+					    if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+						    return icon
+					    end
+				    end
+			    end
+		end
+
+		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+
+		local servers = opts.servers
+		local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			{},
+			vim.lsp.protocol.make_client_capabilities(),
+			has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+			opts.capabilities or {}
+		)
+
+		local function setup(server)
+			local server_opts = vim.tbl_deep_extend("force", {
+				capabilities = vim.deepcopy(capabilities),
+			}, servers[server] or {})
+			if server_opts.enabled == false then
+				return
+			end
+
+			if opts.setup[server] then
+				if opts.setup[server](server, server_opts) then
+					return
+				end
+			elseif opts.setup["*"] then
+				if opts.setup["*"](server, server_opts) then
+					return
+				end
+			end
+			require("lspconfig")[server].setup(server_opts)
+		end
+
+		-- get all the servers that are available through mason-lspconfig
+		local have_mason, mlsp = pcall(require, "mason-lspconfig")
+
+		local ensure_installed = {} ---@type string[]
+		for server, server_opts in pairs(servers) do
+			if server_opts then
+				server_opts = server_opts == true and {} or server_opts
+				if server_opts.enabled ~= false then
+					ensure_installed[#ensure_installed + 1] = server
+				end
+			end
+		end
+
+		if have_mason then
+			mlsp.setup({
+				ensure_installed = vim.tbl_deep_extend(
+					"force",
+					ensure_installed,
+					Util.opts("mason-lspconfig.nvim").ensure_installed or {}
+				),
+				handlers = { setup },
+			})
+		end
+	end,
 }

@@ -24,6 +24,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+_G.Util = require("util")
+
 -- [[ Configure plugins ]]
 require('lazy').setup({
 	spec = {

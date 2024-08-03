@@ -18,8 +18,7 @@ Here is a list of plugins I want to better configure or install
 
 ### LSP
 - [X] Mason
-- [ ] nvim-lspconfig
-  - TODO: A shit ton to get to LazyVim level
+- [X] nvim-lspconfig
 
 ### Treesitter
 - [X] nvim-treesitter-textobjects
@@ -44,7 +43,6 @@ Here is a list of plugins I want to better configure or install
 - [X] indent-blankline.nvim
 - [X] vim-visual-multi 
 - [X] which-key
-   - [ ] Check for better icon
 
 
 ### UI
