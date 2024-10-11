@@ -1,14 +1,8 @@
 return {
 	{
-		'ThePrimeagen/vim-be-good',
-		event = "VeryLazy",
-	},
-
-	{
 		'tpope/vim-fugitive',
 		event = "VeryLazy",
 	},
-
 	{
 		'folke/which-key.nvim',
 		event = "VeryLazy",
@@ -18,7 +12,6 @@ return {
 		end,
 		opts = {}
 	},
-
 	{
 		'AndreM222/copilot-lualine',
 		event = "VeryLazy",
@@ -38,26 +31,21 @@ return {
 			},
 		},
 	},
-
-
 	{
 		'lukas-reineke/indent-blankline.nvim',
 		main = 'ibl',
 		opts = {},
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 	},
-
 	{
 		'mg979/vim-visual-multi',
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 	},
-
 	{
 		"folke/ts-comments.nvim",
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		opts = {},
 	},
-
 	{
 		"windwp/nvim-ts-autotag",
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
@@ -85,7 +73,9 @@ return {
 				desc = "Search and Replace",
 			},
 		},
+	},
+	{
+		'github/copilot.vim',
+		event = "VeryLazy",
 	}
-
-
 }

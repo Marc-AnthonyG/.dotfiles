@@ -22,7 +22,6 @@ function Local.get()
 		{ "<leader>cc", vim.lsp.codelens.run,                                                                   desc = "Run Codelens",               mode = { "n", "v" },     has = "codeLens" },
 		{ "<leader>cC", vim.lsp.codelens.refresh,                                                               desc = "Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },
 		{ "<leader>cR", Util.lsp.rename_file,                                                                   desc = "Rename File",                mode = { "n" },          has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-		-- { "<leader>cA", LazyVim.lsp.action.source,   desc = "Source Action",              has = "codeAction" },
 	}
 
 	return Local._keys
