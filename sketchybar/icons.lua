@@ -34,6 +34,7 @@ return function(icon)
 		["Notes"] = "󱞎",
 		["Stickies"] = "󱞎",
 		["Postman"] = "󱂛",
+		["Bruno"] = "󱂛",
 		["Preview"] = "",
 		["Photo"] = "",
 		["Slack"] = "",
