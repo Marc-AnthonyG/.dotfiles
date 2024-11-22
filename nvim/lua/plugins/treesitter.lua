@@ -8,7 +8,7 @@ return {
 	config = function()
 		vim.defer_fn(function()
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'markdown' },
+				ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'markdown', 'latex' },
 				auto_install = true,
 				highlight = { enable = true },
 				indent = { enable = true },
