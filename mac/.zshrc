@@ -54,6 +54,7 @@ esac
 
 # export
 export ARCHFLAGS="-arch arm64"
+export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH="/Users/marc-anthonygirard/.local/bin:$PATH"
 export PATH=$(asdf where lua)/bin:$PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
