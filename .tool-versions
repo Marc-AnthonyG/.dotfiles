@@ -5,3 +5,4 @@ yarn 1.22.19
 java openjdk-21.0.2
 golang 1.21.4
 maven 3.5.0
+deno 2.1.4

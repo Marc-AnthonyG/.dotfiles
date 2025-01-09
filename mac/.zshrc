@@ -31,6 +31,7 @@ alias canoeF="~/repository/canoe/frontend"
 alias canoeB="~/repository/canoe/backend"
 alias i3config="~/.dotfiles/i3/config"
 alias connectLinux="ssh marc@10.0.0.74"
+alias updateYabai= 'echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai'
 
 function gitDeleteMergeBranch() {
   remote_branches=$(git ls-remote --heads origin | awk '{print $2}' | sed 's/refs\/heads\///')
