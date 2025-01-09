@@ -12,10 +12,7 @@ return {
 		end,
 		opts = {}
 	},
-	{
-		'AndreM222/copilot-lualine',
-		event = "VeryLazy",
-	},
+	{ 'AndreM222/copilot-lualine' },
 	{
 		'nvim-lualine/lualine.nvim',
 		event = "VeryLazy",
@@ -73,10 +70,6 @@ return {
 				desc = "Search and Replace",
 			},
 		},
-	},
-	{
-		'github/copilot.vim',
-		event = "VeryLazy",
 	},
 	{
 		'ThePrimeagen/vim-be-good',
