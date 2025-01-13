@@ -42,19 +42,16 @@ return {
 		copilot_node_command = 'node',
 		server_opts_overrides = {},
 	},
-	config = function(_, opts)
-		local copilot = require("copilot")
-		copilot.setup(opts)
-
-		vim.api.nvim_create_user_command('Copilot toggle', function()
-			require("copilot.suggestion").toggle_auto_trigger()
-		end, {})
-	end,
 	keys = {
 		{
-			"<leader>ct",
-			"<cmd>Copilot toggle<cr>",
-			desc = "Toggle Copilot",
+			"<leader>cd",
+			"<cmd>Copilot disable<cr>",
+			desc = "Disable Copilot",
+		},
+		{
+			"<leader>ce",
+			"<cmd>Copilot enable<cr>",
+			desc = "Enable Copilot",
 		},
 	},
 }

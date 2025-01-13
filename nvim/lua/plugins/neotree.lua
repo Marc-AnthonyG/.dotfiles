@@ -11,9 +11,9 @@ return {
 			desc = "[e]xplorer NeoTree (cwd)",
 		},
 		{
-			"<leader>ce",
+			"<leader>cE",
 			":Neotree toggle reveal_force_cwd<CR>",
-			desc = "[c]urrent [e]xplorer",
+			desc = "[c]urrent [E]xplorer",
 		},
 		{
 			"<leader>ge",
