@@ -44,10 +44,8 @@ return {
 			-- * this differs from conform.nvim which only uses the first filetype that has a formatter
 			local names = lint._resolve_linter_by_ft(vim.bo.filetype)
 
-			-- Create a copy of the names table to avoid modifying the original.
 			names = vim.list_extend({}, names)
 
-			-- Add fallback linters.
 			if #names == 0 then
 				vim.list_extend(names, lint.linters_by_ft["_"] or {})
 			end
