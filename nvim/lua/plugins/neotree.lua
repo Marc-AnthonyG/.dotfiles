@@ -22,12 +22,13 @@ return {
 			end,
 			desc = "Git Explorer",
 		},
+		{ "<leader>b", "", desc = "buffer", mode = { "n", "v" } },
 		{
 			"<leader>be",
 			function()
 				require("neo-tree.command").execute({ source = "buffers", toggle = true })
 			end,
-			desc = "Buffer Explorer",
+			desc = "[b]uffer [e]xplorer",
 		},
 	},
 	deactivate = function()

@@ -80,7 +80,7 @@ return {
 			-- see mason-nvim-dap README for more information
 			handlers = {},
 
-			ensure_installed = {},
+			ensure_installed = { "python" },
 		},
 		config = function() end,
 	},
