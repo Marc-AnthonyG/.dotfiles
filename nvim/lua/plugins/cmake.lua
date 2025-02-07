@@ -1,28 +1,21 @@
 return {
-	"Civitasv/cmake-tools.nvim",
-	lazy = true,
-	opt = {
-		cmake_build_directory = function()
-			return "build/${variant:buildType}"
-		end
-	},
+	"Shatur/neovim-tasks",
 	init = function()
-		local loaded = false
-		local function check()
-			local cwd = vim.uv.cwd()
-			if vim.fn.filereadable(cwd .. "/CMakeLists.txt") == 1 then
-				require("lazy").load({ plugins = { "cmake-tools.nvim" } })
-				loaded = true
-			end
-		end
-		check()
-		vim.api.nvim_create_autocmd("DirChanged", {
-			callback = function()
-				if not loaded then
-					check()
-				end
-			end,
+		local Path = require('plenary.path')
+		require('tasks').setup({
+			default_params = {
+				cmake = {
+					cmd = 'cmake',
+					build_dir = tostring(Path:new('{cwd}', 'build')),
+					build_type = 'Debug',
+					dap_name = 'lldb',
+					args = {
+						configure = { '-G', 'Ninja', '-DCMAKE_MAKE_PROGRAM=/opt/homebrew/bin/ninja' },
+					},
+				},
+			},
+			save_before_run = true,
+			dap_open_command = function() return require('dap').repl.open() end
 		})
 	end,
-	opts = {},
 }
