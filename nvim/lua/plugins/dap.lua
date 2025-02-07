@@ -1,5 +1,18 @@
 return {
 	{
+		"jay-babu/mason-nvim-dap.nvim",
+		event = 'VeryLazy',
+		dependencies = {
+			"williamboman/mason.nvim",
+			"mfussenegger/nvim-dap",
+		},
+		opts = {
+			-- You can provide additional configuration to the handlers,
+			-- see mason-nvim-dap README for more information
+			handlers = {},
+		},
+	},
+	{
 		"mfussenegger/nvim-dap",
 		recommended = true,
 		dependencies = {
@@ -45,7 +58,6 @@ return {
 			end
 		end,
 	},
-
 	{
 		"rcarriga/nvim-dap-ui", -- fancy UI for the debugger
 		dependencies = { "nvim-neotest/nvim-nio" },
@@ -70,18 +82,4 @@ return {
 		end,
 	},
 
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		dependencies = "mason.nvim",
-		cmd = { "DapInstall", "DapUninstall" },
-		opts = {
-			automatic_installation = true,
-			-- You can provide additional configuration to the handlers,
-			-- see mason-nvim-dap README for more information
-			handlers = {},
-
-			ensure_installed = { "python" },
-		},
-		config = function() end,
-	},
 }

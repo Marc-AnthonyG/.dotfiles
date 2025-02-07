@@ -7,6 +7,21 @@ return {
 		ensure_installed = {
 			"stylua",
 			"shfmt",
+			"clang-format",
+			"clangd",
+			"cmake-language-server",
+			"eslint-lsp",
+			"json-lsp",
+			"lua-language-server",
+			"markdownlint",
+			"mypy",
+			"ruff",
+			"rust-analyzer",
+			"tailwindcss-language-server",
+			"terraform-ls",
+			"typescript-language-server",
+			"yamllint",
+			"codelldb"
 		},
 	},
 	config = function(_, opts)

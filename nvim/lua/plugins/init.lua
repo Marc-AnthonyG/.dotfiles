@@ -74,5 +74,9 @@ return {
 	{
 		'ThePrimeagen/vim-be-good',
 		event = "VeryLazy",
+	},
+	{
+		'tpope/vim-sleuth',
+		event = "VeryLazy",
 	}
 }
