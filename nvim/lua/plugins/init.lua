@@ -72,11 +72,8 @@ return {
 		},
 	},
 	{
-		'ThePrimeagen/vim-be-good',
-		event = "VeryLazy",
-	},
-	{
 		'tpope/vim-sleuth',
 		event = "VeryLazy",
-	}
+	},
+	{ dir = "/Users/marc-anthonygirard/repository/myself/VimMaster1/vim-master", event = "VeryLazy" },
 }
