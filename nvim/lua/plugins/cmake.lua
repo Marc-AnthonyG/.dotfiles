@@ -9,9 +9,6 @@ return {
 					build_dir = tostring(Path:new('{cwd}', 'build')),
 					build_type = 'Debug',
 					dap_name = 'codelldb',
-					args = {
-						configure = { '-G', 'Ninja', '-DCMAKE_MAKE_PROGRAM=/opt/homebrew/bin/ninja' },
-					},
 				},
 			},
 			save_before_run = true,
