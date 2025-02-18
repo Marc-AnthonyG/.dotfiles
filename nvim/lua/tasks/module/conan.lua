@@ -22,13 +22,11 @@ local function install(module_config, _)
 	local build_dir = parse_dir(module_config.build_dir, module_config.build_type)
 	build_dir:mkdir({ parents = true })
 
-	-- conan install . --build=missing --output-folder=build -pr default -s build_type=Debug
-
-
-
 	return {
-		cmd = 'conan install .',
-		args = { '--build', 'missing', '--output-folder', build_dir.filename, '-pr', module_config.profile, '-s', 'build_type', module_config.build_type },
+		cmd = 'conan',
+		args = { 'install', '.', '--build', 'missing', '--output-folder', build_dir.filename, '-pr', module_config.profile, '-s', 'build_type', module_config.build_type },
+		ignore_stdout = false,
+		ignore_stderr = false,
 	}
 end
 

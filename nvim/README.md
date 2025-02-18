@@ -1,64 +1,123 @@
-# Marc.nvim
-## Introduction
-This configuration is my take on T-J Kickstart.nvim. I will add my plugins and what I need in the future, but feel free to fork this config. It has a light weight init.lua and plugins are all define in their file. 
+# .dotfiles/nvim
 
-## Chapter 2 
-After creating a small config with minimal configuration, I really want to transform my neovim experience into a full flag IDE.
-
-My project is to still used my Kickstart configuration and to find inspiration into the LazyVim distro of folke!
-
-Here is a list of plugins I want to better configure or install
-
-### Small project TODO
-- [X] Implement auto-formating
-- [ ] Declared all Icon in util and choose them (which-key)
-- [ ] Neo-tree mapping won't work
-
-### Snippet
-- [x] nvim-cmp 
-- [X] Friendly snippet 
-- [X] Lua-snip
-- [X] cmp-buffer
-- [X] cmp-nvim-lsp
-
-### LSP
-- [X] Mason
-- [X] nvim-lspconfig
-
-### Treesitter
-- [X] nvim-treesitter-textobjects
-- [X] treesitter
-
-### Navigation
-- [X] Neo-tree.nvim
-- [X] grug-far.nvim
-- [X] Trouble
-- [X] harpoon
-- [X] telescope.nvim
-
-### Git
-- [X] Gitsigns
-- [X] Fugitive
-
-### Tool
-- [X] ts-comments.nvim
-- [X] conform.nvim
-- [X] nvim-lint
-- [X] nvim-ts-autotag
-- [X] indent-blankline.nvim
-- [X] vim-visual-multi 
-- [X] which-key
+<a href="https://dotfyle.com/Marc-AnthonyG/dotfiles-nvim"><img src="https://dotfyle.com/Marc-AnthonyG/dotfiles-nvim/badges/plugins?style=flat" /></a>
+<a href="https://dotfyle.com/Marc-AnthonyG/dotfiles-nvim"><img src="https://dotfyle.com/Marc-AnthonyG/dotfiles-nvim/badges/leaderkey?style=flat" /></a>
+<a href="https://dotfyle.com/Marc-AnthonyG/dotfiles-nvim"><img src="https://dotfyle.com/Marc-AnthonyG/dotfiles-nvim/badges/plugin-manager?style=flat" /></a>
 
 
-### UI
-- [X] lualine.nvim
-- [X] copilot-lualine
-- [X] nvim-notify
-- [X] noice.nvim
-- [X] Mini.icon
-- [X] dashboard-nvim
+## Install Instructions
 
-### Test
-- [X] neotest
-- [X] Dap
+ > Install requires Neovim 0.9+. Always review the code before installing a configuration.
 
+Clone the repository and install the plugins:
+
+```sh
+git clone git@github.com:Marc-AnthonyG/.dotfiles ~/.config/Marc-AnthonyG/.dotfiles
+```
+
+Open Neovim with this config:
+
+```sh
+NVIM_APPNAME=Marc-AnthonyG/.dotfiles/nvim nvim
+```
+
+## Plugins
+
+### code-runner
+
++ [Shatur/neovim-tasks](https://dotfyle.com/plugins/Shatur/neovim-tasks)
+### colorscheme
+
++ [catppuccin/nvim](https://dotfyle.com/plugins/catppuccin/nvim)
+### comment
+
++ [folke/ts-comments.nvim](https://dotfyle.com/plugins/folke/ts-comments.nvim)
+### completion
+
++ [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
++ [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
+### debugging
+
++ [theHamsta/nvim-dap-virtual-text](https://dotfyle.com/plugins/theHamsta/nvim-dap-virtual-text)
++ [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
++ [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
+### diagnostics
+
++ [folke/trouble.nvim](https://dotfyle.com/plugins/folke/trouble.nvim)
+### editing-support
+
++ [windwp/nvim-ts-autotag](https://dotfyle.com/plugins/windwp/nvim-ts-autotag)
+### file-explorer
+
++ [nvim-neo-tree/neo-tree.nvim](https://dotfyle.com/plugins/nvim-neo-tree/neo-tree.nvim)
+### fuzzy-finder
+
++ [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
+### git
+
++ [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
+### icon
+
++ [nvim-tree/nvim-web-devicons](https://dotfyle.com/plugins/nvim-tree/nvim-web-devicons)
++ [echasnovski/mini.icons](https://dotfyle.com/plugins/echasnovski/mini.icons)
+### indent
+
++ [lukas-reineke/indent-blankline.nvim](https://dotfyle.com/plugins/lukas-reineke/indent-blankline.nvim)
+### keybinding
+
++ [folke/which-key.nvim](https://dotfyle.com/plugins/folke/which-key.nvim)
+### lsp
+
++ [mfussenegger/nvim-lint](https://dotfyle.com/plugins/mfussenegger/nvim-lint)
++ [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
+### lsp-installer
+
++ [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
+### markdown-and-latex
+
++ [MeanderingProgrammer/render-markdown.nvim](https://dotfyle.com/plugins/MeanderingProgrammer/render-markdown.nvim)
+### marks
+
++ [ThePrimeagen/harpoon](https://dotfyle.com/plugins/ThePrimeagen/harpoon)
+### note-taking
+
++ [epwalsh/obsidian.nvim](https://dotfyle.com/plugins/epwalsh/obsidian.nvim)
+### nvim-dev
+
++ [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
++ [folke/lazydev.nvim](https://dotfyle.com/plugins/folke/lazydev.nvim)
++ [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
+### plugin-manager
+
++ [folke/lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)
+### search
+
++ [MagicDuck/grug-far.nvim](https://dotfyle.com/plugins/MagicDuck/grug-far.nvim)
+### snippet
+
++ [L3MON4D3/LuaSnip](https://dotfyle.com/plugins/L3MON4D3/LuaSnip)
++ [rafamadriz/friendly-snippets](https://dotfyle.com/plugins/rafamadriz/friendly-snippets)
+### statusline
+
++ [nvim-lualine/lualine.nvim](https://dotfyle.com/plugins/nvim-lualine/lualine.nvim)
++ [AndreM222/copilot-lualine](https://dotfyle.com/plugins/AndreM222/copilot-lualine)
+### syntax
+
++ [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
++ [nvim-treesitter/nvim-treesitter-textobjects](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-textobjects)
+### test
+
++ [nvim-neotest/neotest](https://dotfyle.com/plugins/nvim-neotest/neotest)
+### utility
+
++ [stevearc/dressing.nvim](https://dotfyle.com/plugins/stevearc/dressing.nvim)
++ [folke/noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)
++ [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
+## Language Servers
+
++ clangd
++ cmake
++ html
+
+
+ This readme was generated by [Dotfyle](https://dotfyle.com)
