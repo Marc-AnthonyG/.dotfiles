@@ -7,7 +7,7 @@ ZSH_THEME="muse"
 source ~/.fzf.zsh
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-plugins=(git asdf fzf-tab zsh-autosuggestions)
+plugins=(git fzf-tab zsh-autosuggestions)
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
 
