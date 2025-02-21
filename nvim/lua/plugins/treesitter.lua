@@ -1,14 +1,28 @@
 return {
 	'nvim-treesitter/nvim-treesitter',
-	event = "VeryLazy",
+	event = 'VeryLazy',
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-textobjects',
 	},
 	build = ':TSUpdate',
 	config = function()
 		vim.defer_fn(function()
-			require('nvim-treesitter.configs').setup {
-				ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'markdown', 'latex', 'markdown_inline' },
+			require('nvim-treesitter.configs').setup({
+				ensure_installed = {
+					'go',
+					'lua',
+					'python',
+					'rust',
+					'tsx',
+					'javascript',
+					'typescript',
+					'vimdoc',
+					'vim',
+					'bash',
+					'markdown',
+					'latex',
+					'markdown_inline',
+				},
 				auto_install = true,
 				highlight = { enable = true },
 				indent = { enable = true },
@@ -65,7 +79,7 @@ return {
 						},
 					},
 				},
-			}
+			})
 		end, 0)
-	end
+	end,
 }

@@ -1,11 +1,11 @@
 local M = {}
 
-M.lsp = require("util.lsp")
+M.lsp = require('util.lsp')
 
-M.format = require("util.format")
+M.format = require('util.format')
 
 function M.get_plugin(name)
-	return require("lazy.core.config").spec.plugins[name]
+	return require('lazy.core.config').spec.plugins[name]
 end
 
 function M.opts(name)
@@ -13,8 +13,8 @@ function M.opts(name)
 	if not plugin then
 		return {}
 	end
-	local Plugin = require("lazy.core.plugin")
-	return Plugin.values(plugin, "opts", false)
+	local Plugin = require('lazy.core.plugin')
+	return Plugin.values(plugin, 'opts', false)
 end
 
 return M

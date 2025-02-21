@@ -1,12 +1,12 @@
 local M = {}
 
 local function get_opts(name)
-	local plugin = require("lazy.core.config").spec.plugins[name]
+	local plugin = require('lazy.core.config').spec.plugins[name]
 	if not plugin then
 		return {}
 	end
-	local Plugin = require("lazy.core.plugin")
-	return Plugin.values(plugin, "opts", false)
+	local Plugin = require('lazy.core.plugin')
+	return Plugin.values(plugin, 'opts', false)
 end
 
 local function merge_tables(...)
@@ -36,7 +36,7 @@ function M.get_clients(opts)
 end
 
 function M.on_attach(on_attach, name)
-	return vim.api.nvim_create_autocmd("LspAttach", {
+	return vim.api.nvim_create_autocmd('LspAttach', {
 		callback = function(args)
 			local buffer = args.buf ---@type number
 			local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -50,15 +50,15 @@ end
 M._supports_method = {}
 
 function M.setup()
-	local register_capability = vim.lsp.handlers["client/registerCapability"]
-	vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
+	local register_capability = vim.lsp.handlers['client/registerCapability']
+	vim.lsp.handlers['client/registerCapability'] = function(err, res, ctx)
 		---@diagnostic disable-next-line: no-unknown
 		local ret = register_capability(err, res, ctx)
 		local client = vim.lsp.get_client_by_id(ctx.client_id)
 		if client then
 			for buffer in pairs(client.attached_buffers) do
-				vim.api.nvim_exec_autocmds("User", {
-					pattern = "LspDynamicCapability",
+				vim.api.nvim_exec_autocmds('User', {
+					pattern = 'LspDynamicCapability',
 					data = { client_id = client.id, buffer = buffer },
 				})
 			end
@@ -79,7 +79,7 @@ function M._check_methods(client, buffer)
 		return
 	end
 	-- don't trigger on nofile buffers
-	if vim.bo[buffer].buftype == "nofile" then
+	if vim.bo[buffer].buftype == 'nofile' then
 		return
 	end
 	for method, clients in pairs(M._supports_method) do
@@ -87,8 +87,8 @@ function M._check_methods(client, buffer)
 		if not clients[client][buffer] then
 			if client.supports_method and client.supports_method(method, { bufnr = buffer }) then
 				clients[client][buffer] = true
-				vim.api.nvim_exec_autocmds("User", {
-					pattern = "LspSupportsMethod",
+				vim.api.nvim_exec_autocmds('User', {
+					pattern = 'LspSupportsMethod',
 					data = { client_id = client.id, buffer = buffer, method = method },
 				})
 			end
@@ -97,8 +97,8 @@ function M._check_methods(client, buffer)
 end
 
 function M.on_dynamic_capability(fn, opts)
-	return vim.api.nvim_create_autocmd("User", {
-		pattern = "LspDynamicCapability",
+	return vim.api.nvim_create_autocmd('User', {
+		pattern = 'LspDynamicCapability',
 		group = opts and opts.group or nil,
 		callback = function(args)
 			local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -111,9 +111,9 @@ function M.on_dynamic_capability(fn, opts)
 end
 
 function M.on_supports_method(method, fn)
-	M._supports_method[method] = M._supports_method[method] or setmetatable({}, { __mode = "k" })
-	return vim.api.nvim_create_autocmd("User", {
-		pattern = "LspSupportsMethod",
+	M._supports_method[method] = M._supports_method[method] or setmetatable({}, { __mode = 'k' })
+	return vim.api.nvim_create_autocmd('User', {
+		pattern = 'LspSupportsMethod',
 		callback = function(args)
 			local client = vim.lsp.get_client_by_id(args.data.client_id)
 			local buffer = args.data.buffer ---@type number
@@ -125,7 +125,7 @@ function M.on_supports_method(method, fn)
 end
 
 local function realpath(path)
-	if path == "" or path == nil then
+	if path == '' or path == nil then
 		return nil
 	end
 	path = vim.uv.fs_realpath(path) or path
@@ -136,20 +136,20 @@ function M.rename_file()
 	local buf = vim.api.nvim_get_current_buf()
 	local old = assert(realpath(vim.api.nvim_buf_get_name(buf)))
 	local root = assert(realpath(vim.uv.cwd()))
-	assert(old:find(root, 1, true) == 1, "File not in project root")
+	assert(old:find(root, 1, true) == 1, 'File not in project root')
 
 	local extra = old:sub(#root + 2)
 
 	vim.ui.input({
-		prompt = "New File Name: ",
+		prompt = 'New File Name: ',
 		default = extra,
-		completion = "file",
+		completion = 'file',
 	}, function(new)
-		if not new or new == "" or new == extra then
+		if not new or new == '' or new == extra then
 			return
 		end
-		new = root .. "/" .. new
-		vim.fn.mkdir(vim.fs.dirname(new), "p")
+		new = root .. '/' .. new
+		vim.fn.mkdir(vim.fs.dirname(new), 'p')
 		M.on_rename(old, new, function()
 			vim.fn.rename(old, new)
 			vim.cmd.edit(new)
@@ -167,13 +167,13 @@ function M.on_rename(from, to, rename)
 		files = { {
 			oldUri = vim.uri_from_fname(from),
 			newUri = vim.uri_from_fname(to),
-		} }
+		} },
 	}
 
 	local clients = M.get_clients()
 	for _, client in ipairs(clients) do
-		if client.supports_method("workspace/willRenameFiles") then
-			local resp = client.request_sync("workspace/willRenameFiles", changes, 1000, 0)
+		if client.supports_method('workspace/willRenameFiles') then
+			local resp = client.request_sync('workspace/willRenameFiles', changes, 1000, 0)
 			if resp and resp.result ~= nil then
 				vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
 			end
@@ -185,14 +185,14 @@ function M.on_rename(from, to, rename)
 	end
 
 	for _, client in ipairs(clients) do
-		if client.supports_method("workspace/didRenameFiles") then
-			client.notify("workspace/didRenameFiles", changes)
+		if client.supports_method('workspace/didRenameFiles') then
+			client.notify('workspace/didRenameFiles', changes)
 		end
 	end
 end
 
 function M.get_config(server)
-	local configs = require("lspconfig.configs")
+	local configs = require('lspconfig.configs')
 	return rawget(configs, server)
 end
 
@@ -204,23 +204,25 @@ end
 ---@param server string
 ---@param cond fun( root_dir, config): boolean
 function M.disable(server, cond)
-	local util = require("lspconfig.util")
+	local util = require('lspconfig.util')
 	local def = M.get_config(server)
 	---@diagnostic disable-next-line: undefined-field
-	def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config,
+	def.document_config.on_new_config = util.add_hook_before(
+		def.document_config.on_new_config,
 		function(config, root_dir)
 			if cond(root_dir, config) then
 				config.enabled = false
 			end
-		end)
+		end
+	)
 end
 
 function M.formatter(opts)
 	opts = opts or {}
 	local filter = opts.filter or {}
-	filter = type(filter) == "string" and { name = filter } or filter
+	filter = type(filter) == 'string' and { name = filter } or filter
 	local ret = {
-		name = "LSP",
+		name = 'LSP',
 		primary = true,
 		priority = 1,
 		format = function(buf)
@@ -229,8 +231,8 @@ function M.formatter(opts)
 		sources = function(buf)
 			local clients = M.get_clients(merge_tables({}, filter, { bufnr = buf }))
 			local ret = vim.tbl_filter(function(client)
-				return client.supports_method("textDocument/formatting")
-					or client.supports_method("textDocument/rangeFormatting")
+				return client.supports_method('textDocument/formatting')
+					or client.supports_method('textDocument/rangeFormatting')
 			end, clients)
 			return vim.tbl_map(function(client)
 				return client.name
@@ -242,13 +244,13 @@ end
 
 function M.format(opts)
 	opts = vim.tbl_deep_extend(
-		"force",
+		'force',
 		{},
 		opts or {},
-		get_opts("nvim-lspconfig").format or {},
-		get_opts("conform.nvim").format or {}
+		get_opts('nvim-lspconfig').format or {},
+		get_opts('conform.nvim').format or {}
 	)
-	local ok, conform = pcall(require, "conform")
+	local ok, conform = pcall(require, 'conform')
 	-- use conform for formatting with LSP when available,
 	-- since it has better format diffing
 	if ok then
@@ -262,10 +264,10 @@ end
 ---@alias LspWord {from:{[1]:number, [2]:number}, to:{[1]:number, [2]:number}} 1-0 indexed
 M.words = {}
 M.words.enabled = false
-M.words.ns = vim.api.nvim_create_namespace("vim_lsp_references")
+M.words.ns = vim.api.nvim_create_namespace('vim_lsp_references')
 
 local function cmp_visible()
-	local cmp = package.loaded["cmp"]
+	local cmp = package.loaded['cmp']
 	return cmp and cmp.core.view:visible()
 end
 
@@ -276,8 +278,8 @@ function M.words.setup(opts)
 		return
 	end
 	M.words.enabled = true
-	local handler = vim.lsp.handlers["textDocument/documentHighlight"]
-	vim.lsp.handlers["textDocument/documentHighlight"] = function(err, result, ctx, config)
+	local handler = vim.lsp.handlers['textDocument/documentHighlight']
+	vim.lsp.handlers['textDocument/documentHighlight'] = function(err, result, ctx, config)
 		if not vim.api.nvim_buf_is_loaded(ctx.bufnr) then
 			return
 		end
@@ -285,17 +287,17 @@ function M.words.setup(opts)
 		return handler(err, result, ctx, config)
 	end
 
-	M.on_supports_method("textDocument/documentHighlight", function(_, buf)
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "CursorMoved", "CursorMovedI" }, {
-			group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true }),
+	M.on_supports_method('textDocument/documentHighlight', function(_, buf)
+		vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI', 'CursorMoved', 'CursorMovedI' }, {
+			group = vim.api.nvim_create_augroup('lsp_word_' .. buf, { clear = true }),
 			buffer = buf,
 			callback = function(ev)
-				if not require("plugins.lsp.keymaps").has(buf, "documentHighlight") then
+				if not require('plugins.lsp.keymaps').has(buf, 'documentHighlight') then
 					return false
 				end
 
 				if not ({ M.words.get() })[2] then
-					if ev.event:find("CursorMoved") then
+					if ev.event:find('CursorMoved') then
 						vim.lsp.buf.clear_references()
 					elseif not cmp_visible() then
 						vim.lsp.buf.document_highlight()

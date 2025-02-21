@@ -5,17 +5,14 @@
 -- For Obsidiant https://github.com/epwalsh/obsidian.nvim/issues/286#issuecomment-1877391540
 vim.opt.conceallevel = 2
 
-
 vim.o.hlsearch = false -- Set highlight on search
 
 vim.o.nu = true
 vim.wo.relativenumber = true
 
+vim.o.colorcolumn = '80'
 
-vim.o.colorcolumn = "80"
-
-
-vim.o.mouse = 'a'               -- Enable mouse mode
+vim.o.mouse = 'a' -- Enable mouse mode
 
 vim.o.clipboard = 'unnamedplus' -- sync clipboard to OS See `:help 'clipboard'`
 
@@ -46,16 +43,16 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.softtabstop = 4
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd('FileType', {
 	pattern = {
-		"javascript",
-		"typescript",
-		"javascriptreact",
-		"typescriptreact",
-		"json",
-		"html",
-		"css",
-		"lua"
+		'javascript',
+		'typescript',
+		'javascriptreact',
+		'typescriptreact',
+		'json',
+		'html',
+		'css',
+		'lua',
 	},
 	callback = function()
 		vim.bo.tabstop = 2

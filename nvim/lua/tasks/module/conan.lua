@@ -13,8 +13,6 @@ local function parse_dir(dir, build_type)
 	return Path:new(parsed_dir)
 end
 
-
-
 ---@param module_config table
 ---@return table?
 local function install(module_config, _)
@@ -23,7 +21,18 @@ local function install(module_config, _)
 
 	return {
 		cmd = 'conan',
-		args = { 'install', '.', '--build', 'missing', '--output-folder', build_dir.filename, '-pr', module_config.profile, '-s', 'build_type=' .. module_config.build_type },
+		args = {
+			'install',
+			'.',
+			'--build',
+			'missing',
+			'--output-folder',
+			build_dir.filename,
+			'-pr',
+			module_config.profile,
+			'-s',
+			'build_type=' .. module_config.build_type,
+		},
 		ignore_stdout = false,
 		ignore_stderr = false,
 	}
@@ -36,10 +45,12 @@ conan.params = {
 	profile = { 'default' },
 }
 -- A function that returns `true` if this module could be applied to this directory. Used when `auto` is used as module name.
-conan.condition = function() return true end
+conan.condition = function()
+	return true
+end
 
 conan.tasks = {
-	install = install
+	install = install,
 }
 
 return conan

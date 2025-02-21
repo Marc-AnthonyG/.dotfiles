@@ -1,10 +1,10 @@
 return {
 	{
-		"jay-babu/mason-nvim-dap.nvim",
+		'jay-babu/mason-nvim-dap.nvim',
 		event = 'VeryLazy',
 		dependencies = {
-			"williamboman/mason.nvim",
-			"mfussenegger/nvim-dap",
+			'williamboman/mason.nvim',
+			'mfussenegger/nvim-dap',
 		},
 		opts = {
 			-- You can provide additional configuration to the handlers,
@@ -13,12 +13,12 @@ return {
 		},
 	},
 	{
-		"mfussenegger/nvim-dap",
+		'mfussenegger/nvim-dap',
 		recommended = true,
 		dependencies = {
-			"rcarriga/nvim-dap-ui",
+			'rcarriga/nvim-dap-ui',
 			{
-				"theHamsta/nvim-dap-virtual-text", -- virtual text for the debugger
+				'theHamsta/nvim-dap-virtual-text', -- virtual text for the debugger
 				opts = {},
 			},
 		},
@@ -45,41 +45,53 @@ return {
 		},
 
 		config = function()
-			vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+			vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
 
-			local vscode = require("dap.ext.vscode")
-			local json = require("plenary.json")
+			local vscode = require('dap.ext.vscode')
+			local json = require('plenary.json')
 			vscode.json_decode = function(str)
 				return vim.json.decode(json.json_strip_comments(str))
 			end
 
-			if vim.fn.filereadable(".vscode/launch.json") then
+			if vim.fn.filereadable('.vscode/launch.json') then
 				vscode.load_launchjs()
 			end
 		end,
 	},
 	{
-		"rcarriga/nvim-dap-ui", -- fancy UI for the debugger
-		dependencies = { "nvim-neotest/nvim-nio" },
+		'rcarriga/nvim-dap-ui', -- fancy UI for the debugger
+		dependencies = { 'nvim-neotest/nvim-nio' },
 		keys = {
-			{ "<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI" },
-			{ "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "v" } },
+			{
+				'<leader>du',
+				function()
+					require('dapui').toggle({})
+				end,
+				desc = 'Dap UI',
+			},
+			{
+				'<leader>de',
+				function()
+					require('dapui').eval()
+				end,
+				desc = 'Eval',
+				mode = { 'n', 'v' },
+			},
 		},
 		opts = {},
 		config = function(_, opts)
-			local dap = require("dap")
-			local dapui = require("dapui")
+			local dap = require('dap')
+			local dapui = require('dapui')
 			dapui.setup(opts)
-			dap.listeners.after.event_initialized["dapui_config"] = function()
+			dap.listeners.after.event_initialized['dapui_config'] = function()
 				dapui.open({})
 			end
-			dap.listeners.before.event_terminated["dapui_config"] = function()
+			dap.listeners.before.event_terminated['dapui_config'] = function()
 				dapui.close({})
 			end
-			dap.listeners.before.event_exited["dapui_config"] = function()
+			dap.listeners.before.event_exited['dapui_config'] = function()
 				dapui.close({})
 			end
 		end,
 	},
-
 }

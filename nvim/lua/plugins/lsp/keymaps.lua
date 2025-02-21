@@ -29,7 +29,7 @@ end
 
 ---@param method string|string[]
 function Local.has(buffer, method)
-	if type(method) == "table" then
+	if type(method) == 'table' then
 		for _, m in ipairs(method) do
 			if Local.has(buffer, m) then
 				return true
@@ -37,7 +37,7 @@ function Local.has(buffer, method)
 		end
 		return false
 	end
-	method = method:find("/") and method or "textDocument/" .. method
+	method = method:find('/') and method or 'textDocument/' .. method
 	local clients = Util.lsp.get_clients({ bufnr = buffer })
 	for _, client in ipairs(clients) do
 		if client.supports_method(method) then
@@ -48,12 +48,12 @@ function Local.has(buffer, method)
 end
 
 function Local.resolve(buffer)
-	local Keys = require("lazy.core.handler.keys")
+	local Keys = require('lazy.core.handler.keys')
 	if not Keys.resolve then
 		return {}
 	end
 	local spec = Local.get()
-	local opts = Util.opts("nvim-lspconfig")
+	local opts = Util.opts('nvim-lspconfig')
 	local clients = Util.lsp.get_clients({ bufnr = buffer })
 	for _, client in ipairs(clients) do
 		local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
@@ -63,12 +63,12 @@ function Local.resolve(buffer)
 end
 
 function Local.on_attach(_, buffer)
-	local Keys = require("lazy.core.handler.keys")
+	local Keys = require('lazy.core.handler.keys')
 	local keymaps = Local.resolve(buffer)
 
 	for _, keys in pairs(keymaps) do
 		local has = not keys.has or Local.has(buffer, keys.has)
-		local cond = not (keys.cond == false or ((type(keys.cond) == "function") and not keys.cond()))
+		local cond = not (keys.cond == false or ((type(keys.cond) == 'function') and not keys.cond()))
 
 		if has and cond then
 			local opts = Keys.opts(keys)
@@ -76,7 +76,7 @@ function Local.on_attach(_, buffer)
 			opts.has = nil
 			opts.silent = opts.silent ~= false
 			opts.buffer = buffer
-			vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
+			vim.keymap.set(keys.mode or 'n', keys.lhs, keys.rhs, opts)
 		end
 	end
 end

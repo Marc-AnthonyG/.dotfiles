@@ -2,10 +2,10 @@ local M = {}
 
 ---@param opts conform.setupOpts
 function M.setup(_, opts)
-	for _, key in ipairs({ "format_on_save", "format_after_save" }) do
+	for _, key in ipairs({ 'format_on_save', 'format_after_save' }) do
 		if opts[key] then
 			local msg =
-			"Don't set `opts.%s` for `conform.nvim`.\n**LazyVim** will use the conform formatter automatically"
+				"Don't set `opts.%s` for `conform.nvim`.\n**LazyVim** will use the conform formatter automatically"
 			vim.warn(msg:format(key))
 			---@diagnostic disable-next-line: no-unknown
 			opts[key] = nil
@@ -13,40 +13,40 @@ function M.setup(_, opts)
 	end
 	---@diagnostic disable-next-line: undefined-field
 	if opts.format then
-		vim.warn("**conform.nvim** `opts.format` is deprecated. Please use `opts.default_format_opts` instead.")
+		vim.warn('**conform.nvim** `opts.format` is deprecated. Please use `opts.default_format_opts` instead.')
 	end
-	require("conform").setup(opts)
+	require('conform').setup(opts)
 end
 
 return {
 	{
-		"stevearc/conform.nvim",
-		dependencies = { "mason.nvim" },
+		'stevearc/conform.nvim',
+		dependencies = { 'mason.nvim' },
 		lazy = true,
-		cmd = "ConformInfo",
+		cmd = 'ConformInfo',
 		keys = {
 			{
-				"<leader>cF",
+				'<leader>cF',
 				function()
-					require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
+					require('conform').format({ formatters = { 'injected' }, timeout_ms = 3000 })
 				end,
-				mode = { "n", "v" },
-				desc = "Format Injected Langs",
+				mode = { 'n', 'v' },
+				desc = 'Format Injected Langs',
 			},
 		},
 		init = function()
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "VeryLazy",
+			vim.api.nvim_create_autocmd('User', {
+				pattern = 'VeryLazy',
 				callback = function()
 					Util.format.register({
-						name = "conform.nvim",
+						name = 'conform.nvim',
 						priority = 100,
 						primary = true,
 						format = function(buf)
-							require("conform").format({ bufnr = buf })
+							require('conform').format({ bufnr = buf })
 						end,
 						sources = function(buf)
-							local ret = require("conform").list_formatters(buf)
+							local ret = require('conform').list_formatters(buf)
 							---@param v conform.FormatterInfo
 							return vim.tbl_map(function(v)
 								return v.name
@@ -57,13 +57,13 @@ return {
 			})
 		end,
 		opts = function()
-			local plugin = require("lazy.core.config").plugins["conform.nvim"]
+			local plugin = require('lazy.core.config').plugins['conform.nvim']
 			if plugin.config ~= M.setup then
 				vim.error({
 					"Don't set `plugin.config` for `conform.nvim`.\n",
-					"This will break **LazyVim** formatting.\n",
-					"Please refer to the docs at https://www.lazyvim.org/plugins/formatting",
-				}, { title = "LazyVim" })
+					'This will break **LazyVim** formatting.\n',
+					'Please refer to the docs at https://www.lazyvim.org/plugins/formatting',
+				}, { title = 'LazyVim' })
 			end
 			---@type conform.setupOpts
 			local opts = {
@@ -71,12 +71,12 @@ return {
 					timeout_ms = 3000,
 					async = false,
 					quiet = false,
-					lsp_format = "fallback",
+					lsp_format = 'fallback',
 				},
 				formatters_by_ft = {
-					lua = { "stylua" },
-					fish = { "fish_indent" },
-					sh = { "shfmt" },
+					lua = { 'stylua' },
+					fish = { 'fish_indent' },
+					sh = { 'shfmt' },
 				},
 				-- The options you set here will be merged with the builtin formatters.
 				-- You can also define any custom formatters here.

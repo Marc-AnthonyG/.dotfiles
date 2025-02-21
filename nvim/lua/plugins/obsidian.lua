@@ -1,31 +1,31 @@
 return {
 	{
-		"epwalsh/obsidian.nvim",
-		version = "*",
+		'epwalsh/obsidian.nvim',
+		version = '*',
 		lazy = true,
-		ft = "markdown",
+		ft = 'markdown',
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"nvim-treesitter",
+			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope.nvim',
+			'nvim-treesitter',
 		},
 		opts = {
 			ui = { enable = false },
 			workspaces = {
 				{
-					name = "personal",
-					path = "~/repository/knowledgeBase/programming",
+					name = 'personal',
+					path = '~/repository/knowledgeBase/programming',
 				},
 			},
 			completion = {
 				nvim_cmp = true,
 				min_chars = 2,
 			},
-			new_notes_location = "current_dir",
+			new_notes_location = 'current_dir',
 			note_id_func = function(title)
 				return tostring(title)
 			end,
-		}
+		},
 	},
 	{ 'ryleelyman/latex.nvim', opts = {} },
 	{
@@ -40,5 +40,5 @@ return {
 			latex = { enabled = false },
 			win_options = { conceallevel = { rendered = 2 } },
 		},
-	}
+	},
 }

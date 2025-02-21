@@ -4,7 +4,6 @@ local M = setmetatable({}, {
 	end,
 })
 
-
 M.formatters = {}
 
 function M.register(formatter)
@@ -15,8 +14,8 @@ function M.register(formatter)
 end
 
 function M.formatexpr()
-	if Util.get_plugin("conform.nvim") ~= nil then
-		return require("conform").formatexpr()
+	if Util.get_plugin('conform.nvim') ~= nil then
+		return require('conform').formatexpr()
 	end
 	return vim.lsp.formatexpr({ timeout_ms = 3000 })
 end
@@ -41,29 +40,29 @@ function M.info(buf)
 	local baf = vim.b[buf].autoformat
 	local enabled = M.enabled(buf)
 	local lines = {
-		"# Status",
-		("- [%s] global **%s**"):format(gaf and "x" or " ", gaf and "enabled" or "disabled"),
-		("- [%s] buffer **%s**"):format(
-			enabled and "x" or " ",
-			baf == nil and "inherit" or baf and "enabled" or "disabled"
+		'# Status',
+		('- [%s] global **%s**'):format(gaf and 'x' or ' ', gaf and 'enabled' or 'disabled'),
+		('- [%s] buffer **%s**'):format(
+			enabled and 'x' or ' ',
+			baf == nil and 'inherit' or baf and 'enabled' or 'disabled'
 		),
 	}
 	local have = false
 	for _, formatter in ipairs(M.resolve(buf)) do
 		if #formatter.resolved > 0 then
 			have = true
-			lines[#lines + 1] = "\n# " .. formatter.name .. (formatter.active and " ***(active)***" or "")
+			lines[#lines + 1] = '\n# ' .. formatter.name .. (formatter.active and ' ***(active)***' or '')
 			for _, line in ipairs(formatter.resolved) do
-				lines[#lines + 1] = ("- [%s] **%s**"):format(formatter.active and "x" or " ", line)
+				lines[#lines + 1] = ('- [%s] **%s**'):format(formatter.active and 'x' or ' ', line)
 			end
 		end
 	end
 	if not have then
-		lines[#lines + 1] = "\n***No formatters available for this buffer.***"
+		lines[#lines + 1] = '\n***No formatters available for this buffer.***'
 	end
 	vim.health.info(
-		table.concat(lines, "\n"),
-		{ title = "LazyFormat (" .. (enabled and "enabled" or "disabled") .. ")" }
+		table.concat(lines, '\n'),
+		{ title = 'LazyFormat (' .. (enabled and 'enabled' or 'disabled') .. ')' }
 	)
 end
 
@@ -111,28 +110,28 @@ function M.format(opts)
 	end
 
 	if not done and opts and opts.force then
-		vim.health.warn("No formatter available", { title = "Format" })
+		vim.health.warn('No formatter available', { title = 'Format' })
 	end
 end
 
 function M.setup()
 	-- Autoformat autocmd
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		group = vim.api.nvim_create_augroup("LazyFormat", {}),
+	vim.api.nvim_create_autocmd('BufWritePre', {
+		group = vim.api.nvim_create_augroup('LazyFormat', {}),
 		callback = function(event)
 			M.format({ buf = event.buf })
 		end,
 	})
 
 	-- Manual format
-	vim.api.nvim_create_user_command("LazyFormat", function()
+	vim.api.nvim_create_user_command('LazyFormat', function()
 		M.format({ force = true })
-	end, { desc = "Format selection or buffer" })
+	end, { desc = 'Format selection or buffer' })
 
 	-- Format info
-	vim.api.nvim_create_user_command("LazyFormatInfo", function()
+	vim.api.nvim_create_user_command('LazyFormatInfo', function()
 		M.info()
-	end, { desc = "Show info about the formatters for the current buffer" })
+	end, { desc = 'Show info about the formatters for the current buffer' })
 end
 
 return M

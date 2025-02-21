@@ -1,5 +1,5 @@
 return {
-	"Shatur/neovim-tasks",
+	'Shatur/neovim-tasks',
 	init = function()
 		local Path = require('plenary.path')
 		require('tasks').setup({
@@ -12,7 +12,9 @@ return {
 				},
 			},
 			save_before_run = true,
-			dap_open_command = function() return require('dap').repl.open() end
+			dap_open_command = function()
+				return require('dap').repl.open()
+			end,
 		})
 	end,
 }

@@ -1,21 +1,21 @@
 return {
 	{
 		'tpope/vim-fugitive',
-		event = "VeryLazy",
+		event = 'VeryLazy',
 	},
 	{
 		'folke/which-key.nvim',
-		event = "VeryLazy",
+		event = 'VeryLazy',
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 500
 		end,
-		opts = {}
+		opts = {},
 	},
 	{ 'AndreM222/copilot-lualine' },
 	{
 		'nvim-lualine/lualine.nvim',
-		event = "VeryLazy",
+		event = 'VeryLazy',
 		opts = {
 			options = {
 				icons_enabled = true,
@@ -32,48 +32,48 @@ return {
 		'lukas-reineke/indent-blankline.nvim',
 		main = 'ibl',
 		opts = {},
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 	},
 	{
 		'mg979/vim-visual-multi',
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 	},
 	{
-		"folke/ts-comments.nvim",
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+		'folke/ts-comments.nvim',
+		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 		opts = {},
 	},
 	{
-		"windwp/nvim-ts-autotag",
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+		'windwp/nvim-ts-autotag',
+		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 		opts = {},
 	},
 	{
-		"MagicDuck/grug-far.nvim",
-		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+		'MagicDuck/grug-far.nvim',
+		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 		opts = { headerMaxWidth = 80 },
-		cmd = "GrugFar",
+		cmd = 'GrugFar',
 		keys = {
 			{
-				"<leader>sr",
+				'<leader>sr',
 				function()
-					local grug = require("grug-far")
-					local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+					local grug = require('grug-far')
+					local ext = vim.bo.buftype == '' and vim.fn.expand('%:e')
 					grug.grug_far({
 						transient = true,
 						prefills = {
-							filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+							filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
 						},
 					})
 				end,
-				mode = { "n", "v" },
-				desc = "Search and Replace",
+				mode = { 'n', 'v' },
+				desc = 'Search and Replace',
 			},
 		},
 	},
 	{
 		'tpope/vim-sleuth',
-		event = "VeryLazy",
+		event = 'VeryLazy',
 	},
-	{ dir = "/Users/marc-anthonygirard/repository/myself/VimMaster1/vim-master", event = "VeryLazy" },
+	{ dir = '/Users/marc-anthonygirard/repository/myself/VimMaster1/vim-master', event = 'VeryLazy' },
 }

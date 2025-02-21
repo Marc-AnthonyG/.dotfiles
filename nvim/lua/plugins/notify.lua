@@ -1,21 +1,21 @@
 return {
-	"rcarriga/nvim-notify",
+	'rcarriga/nvim-notify',
 	keys = {
 		{
-			"<leader>u",
-			"",
-			desc = "Notifications",
+			'<leader>u',
+			'',
+			desc = 'Notifications',
 		},
 		{
-			"<leader>un",
+			'<leader>un',
 			function()
-				require("notify").dismiss({ silent = true, pending = true })
+				require('notify').dismiss({ silent = true, pending = true })
 			end,
-			desc = "Dismiss All Notifications",
+			desc = 'Dismiss All Notifications',
 		},
 	},
 	opts = {
-		stages = "static",
+		stages = 'static',
 		timeout = 3000,
 		max_height = function()
 			return math.floor(vim.o.lines * 0.75)
@@ -28,6 +28,6 @@ return {
 		end,
 	},
 	init = function()
-		vim.notify = require("notify")
+		vim.notify = require('notify')
 	end,
 }
