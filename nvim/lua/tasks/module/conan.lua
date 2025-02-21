@@ -1,5 +1,4 @@
 local Path = require('plenary.path')
-local ProjectConfig = require('tasks.project_config')
 
 local conan = {}
 
@@ -24,7 +23,7 @@ local function install(module_config, _)
 
 	return {
 		cmd = 'conan',
-		args = { 'install', '.', '--build', 'missing', '--output-folder', build_dir.filename, '-pr', module_config.profile, '-s', 'build_type', module_config.build_type },
+		args = { 'install', '.', '--build', 'missing', '--output-folder', build_dir.filename, '-pr', module_config.profile, '-s', 'build_type=' .. module_config.build_type },
 		ignore_stdout = false,
 		ignore_stderr = false,
 	}
