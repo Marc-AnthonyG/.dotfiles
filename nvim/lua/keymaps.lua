@@ -4,6 +4,9 @@
 vim.keymap.set('n', '<leader>E', vim.cmd.Ex, { desc = '[e]xplorer' })
 vim.keymap.set('n', '<leader>f', '<cmd>LazyFormat<CR>', { desc = '[f]ormat' })
 
+-- Go back a buffer
+vim.keymap.set('n', 'gb', '<cmd>BufferLineCyclePrev<CR>', { desc = '[g]o [b]ack a buffer' })
+
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
