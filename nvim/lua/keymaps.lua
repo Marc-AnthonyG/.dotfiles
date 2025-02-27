@@ -35,6 +35,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	pattern = '*',
 })
 
-vim.keymap.set('n', 'L', function()
+vim.keymap.set('n', '<leader>xl', function()
 	vim.diagnostic.open_float({ scope = 'line' })
-end, { desc = 'Show [L]ine Diagnostics' })
+end, { desc = 'Show [l]ine Diagnostics' })
