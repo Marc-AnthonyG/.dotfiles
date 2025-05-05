@@ -20,7 +20,6 @@ return {
 					'vim',
 					'bash',
 					'markdown',
-					'latex',
 					'markdown_inline',
 				},
 				auto_install = true,
