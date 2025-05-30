@@ -29,6 +29,9 @@ return {
 		},
 	},
 	{
+		'folke/snacks.nvim',
+	},
+	{
 		'lukas-reineke/indent-blankline.nvim',
 		main = 'ibl',
 		opts = {},
@@ -57,14 +60,7 @@ return {
 			{
 				'<leader>sr',
 				function()
-					local grug = require('grug-far')
-					local ext = vim.bo.buftype == '' and vim.fn.expand('%:e')
-					grug.grug_far({
-						transient = true,
-						prefills = {
-							filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
-						},
-					})
+					require('grug-far').open({ prefills = { search = vim.fn.expand('<cword>') } })
 				end,
 				mode = { 'n', 'v' },
 				desc = 'Search and Replace',
@@ -74,5 +70,17 @@ return {
 	{
 		'tpope/vim-sleuth',
 		event = 'VeryLazy',
+	},
+	{
+		'nvim-tree/nvim-web-devicons',
+		opts = {
+			override_by_extension = {
+				['astro'] = {
+					icon = '',
+					color = '#81e043',
+					name = 'Log',
+				},
+			},
+		},
 	},
 }
