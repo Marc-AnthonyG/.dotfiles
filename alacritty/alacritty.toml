@@ -107,6 +107,6 @@ instance = "Alacritty"
 
 [window.padding]
 x = 10
-y = 10
+y = 5
 
 [keyboard]

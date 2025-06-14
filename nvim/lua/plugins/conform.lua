@@ -75,8 +75,11 @@ return {
 				},
 				formatters_by_ft = {
 					lua = { 'stylua' },
-					fish = { 'fish_indent' },
 					sh = { 'shfmt' },
+					typescript = { 'prettierd' },
+					javascript = { 'prettierd' },
+					typescriptreact = { 'prettierd' },
+					javascriptreact = { 'prettierd' },
 				},
 				-- The options you set here will be merged with the builtin formatters.
 				-- You can also define any custom formatters here.
