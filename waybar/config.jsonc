@@ -1,0 +1,68 @@
+{
+    "position": "top",
+    "margin": "4 8",
+    "mod": "dock",
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "network",
+        "pulseaudio",
+        "clock"
+    ],
+    "hyprland/window": {
+        "format": "{}"
+    },
+    "hyprland/workspaces": {
+        "persistent-workspaces": {
+            "*": [
+                1,
+                2,
+                3,
+                4
+            ]
+        }
+    },
+    "network": {
+        "format-icons": [
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+        ],
+        "format-wifi": "{icon}",
+        "format-ethernet": "",
+        "format-linked": "󰄡",
+        "format-disconnected": "",
+        "tooltip-format": "{essid} ({signalStrength}%) - {gwaddr}",
+        "tooltip-format-ethernet": "{ifname} - {gwaddr}",
+        "tooltip-format-disconnected": "Disconnected"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 0%",
+        "on-click-right": "pavucontrol",
+        "format-icons": {
+            "headphone": "󱡏",
+            "hands-free": "󱡏",
+            "headset": "󱡏",
+            "default": [
+                "",
+                ""
+            ]
+        }
+    },
+    "clock": {
+        "format": "{:%R %a %m/%d}",
+        "tooltip-format": "{calendar}",
+        "calendar": {
+            "format": {
+                "months": "<span color='#D3D04F'><b>{}</b></span>",
+                "days": "<span color='#93B1A6'><b>{}</b></span>",
+                "weekdays": "<span color='#8EAC50'><b>{}</b></span>",
+                "today": "<span color='#8EAC50'><b><u>{}</u></b></span>"
+            }
+        }
+    }
+}
