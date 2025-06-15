@@ -12,7 +12,7 @@ return {
 		end,
 		opts = {},
 	},
-	{ 'AndreM222/copilot-lualine' },
+	-- { 'AndreM222/copilot-lualine' },
 	{
 		'nvim-lualine/lualine.nvim',
 		event = 'VeryLazy',

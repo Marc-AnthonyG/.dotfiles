@@ -138,7 +138,6 @@ return {
 		'stevearc/dressing.nvim',
 		'folke/snacks.nvim',
 		'nvim-tree/nvim-web-devicons',
-		'zbirenbaum/copilot.lua',
 		{
 			'HakonHarnes/img-clip.nvim',
 			event = 'VeryLazy',
