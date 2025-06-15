@@ -1,16 +1,23 @@
 return {
 	'yetone/avante.nvim',
 	event = 'VeryLazy',
-	lazy = false,
-	version = '*',
+	version = false,
+	build = 'make',
 	opts = {
+		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
 		provider = 'claude',
+		---@alias Mode "agentic" | "legacy"
+		mode = 'agentic',
 		auto_suggestions_provider = 'claude',
-		claude = {
-			endpoint = 'https://api.anthropic.com',
-			model = 'claude-3-5-sonnet-20241022',
-			temperature = 0,
-			max_tokens = 4096,
+		providers = {
+			claude = {
+				endpoint = 'https://api.anthropic.com',
+				model = 'claude-3-5-sonnet-20241022',
+				extra_request_body = {
+					temperature = 0.75,
+					max_tokens = 4096,
+				},
+			},
 		},
 		dual_boost = {
 			enabled = false,
@@ -20,13 +27,14 @@ return {
 			timeout = 60000, -- Timeout in milliseconds
 		},
 		behaviour = {
-			auto_suggestions = false, -- Experimental stage
+			auto_suggestions = false,
 			auto_set_highlight_group = true,
 			auto_set_keymaps = true,
 			auto_apply_diff_after_generation = false,
 			support_paste_from_clipboard = false,
-			minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
-			enable_token_counting = true, -- Whether to enable token counting. Default to true.
+			minimize_diff = true,
+			enable_token_counting = true,
+			auto_approve_tool_permissions = false,
 		},
 		mappings = {
 			--- @class AvanteConflictMappings
@@ -53,37 +61,48 @@ return {
 				normal = '<CR>',
 				insert = '<C-s>',
 			},
+			cancel = {
+				normal = { '<C-c>', '<Esc>', 'q' },
+				insert = { '<C-c>' },
+			},
 			sidebar = {
-				--apply_all = "A",
+				apply_all = 'A',
 				apply_cursor = 'a',
+				retry_user_request = 'r',
+				edit_user_request = 'e',
 				switch_windows = '<Tab>',
 				reverse_switch_windows = '<S-Tab>',
+				remove_file = 'd',
+				add_file = '@',
+				close = { '<Esc>', 'q' },
+				close_from_input = nil, -- e.g., { normal = "<Esc>", insert = "<C-d>" }
 			},
 		},
 		hints = { enabled = true },
 		windows = {
 			---@type "right" | "left" | "top" | "bottom"
-			position = 'right',
-			wrap = true,
-			width = 30,
+			position = 'right', -- the position of the sidebar
+			wrap = true, -- similar to vim.o.wrap
+			width = 30, -- default % based on available width
 			sidebar_header = {
-				enabled = true,
-				align = 'center',
+				enabled = true, -- true, false to enable/disable the header
+				align = 'center', -- left, center, right for title
 				rounded = true,
 			},
 			input = {
 				prefix = '> ',
-				height = 10,
+				height = 8, -- Height of the input window in vertical layout
 			},
 			edit = {
 				border = 'rounded',
-				start_insert = true,
+				start_insert = true, -- Start insert mode when opening the edit window
 			},
 			ask = {
-				floating = false,
-				start_insert = true,
+				floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+				start_insert = true, -- Start insert mode when opening the ask window
 				border = 'rounded',
-				focus_on_apply = 'ours',
+				---@type "ours" | "theirs"
+				focus_on_apply = 'ours', -- which diff to focus after applying
 			},
 		},
 		highlights = {
@@ -98,6 +117,9 @@ return {
 			autojump = true,
 			---@type string | fun(): any
 			list_opener = 'copen',
+			--- Override the 'timeoutlen' setting while hovering over a diff (see :help timeoutlen).
+			--- Helps to avoid entering operator-pending mode with diff mappings starting with `c`.
+			--- Disable by setting to -1.
 			override_timeoutlen = 500,
 		},
 		suggestion = {
@@ -105,15 +127,16 @@ return {
 			throttle = 600,
 		},
 	},
-	build = 'make',
 	dependencies = {
-		'stevearc/dressing.nvim',
+		'nvim-treesitter/nvim-treesitter',
 		'nvim-lua/plenary.nvim',
 		'MunifTanjim/nui.nvim',
 		'echasnovski/mini.pick',
 		'nvim-telescope/telescope.nvim',
 		'hrsh7th/nvim-cmp',
 		'ibhagwan/fzf-lua',
+		'stevearc/dressing.nvim',
+		'folke/snacks.nvim',
 		'nvim-tree/nvim-web-devicons',
 		'zbirenbaum/copilot.lua',
 		{
@@ -126,7 +149,6 @@ return {
 					drag_and_drop = {
 						insert_mode = true,
 					},
-					use_absolute_path = true,
 				},
 			},
 		},
