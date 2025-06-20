@@ -30,6 +30,7 @@ return {
 	},
 	{
 		'folke/snacks.nvim',
+		priority=1000
 	},
 	{
 		'lukas-reineke/indent-blankline.nvim',

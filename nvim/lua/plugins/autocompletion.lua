@@ -56,7 +56,7 @@ return {
 				{ name = 'nvim_lsp' },
 				{ name = 'path' },
 				{ name = 'buffer' },
-				{ name = 'supermaven' },
+				-- { name = 'supermaven' },
 			},
 		})
 	end,

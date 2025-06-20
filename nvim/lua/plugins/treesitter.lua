@@ -21,6 +21,7 @@ return {
 					'bash',
 					'markdown',
 					'markdown_inline',
+					'regex',
 				},
 				auto_install = true,
 				highlight = { enable = true },
