@@ -1,10 +1,12 @@
 return {
 	{
 		'tpope/vim-fugitive',
+		version = '*',
 		event = 'VeryLazy',
 	},
 	{
 		'folke/which-key.nvim',
+		version = '*',
 		event = 'VeryLazy',
 		init = function()
 			vim.o.timeout = true
@@ -15,6 +17,7 @@ return {
 	-- { 'AndreM222/copilot-lualine' },
 	{
 		'nvim-lualine/lualine.nvim',
+		version = '*',
 		event = 'VeryLazy',
 		opts = {
 			options = {
@@ -30,30 +33,36 @@ return {
 	},
 	{
 		'folke/snacks.nvim',
-		priority=1000
+		version = '*',
+		priority = 1000,
 	},
 	{
 		'lukas-reineke/indent-blankline.nvim',
+		version = '*',
 		main = 'ibl',
 		opts = {},
 		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 	},
 	{
 		'mg979/vim-visual-multi',
+		version = '*',
 		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 	},
 	{
 		'folke/ts-comments.nvim',
+		version = '*',
 		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 		opts = {},
 	},
 	{
 		'windwp/nvim-ts-autotag',
+		version = '*',
 		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 		opts = {},
 	},
 	{
 		'MagicDuck/grug-far.nvim',
+		version = '*',
 		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 		opts = { headerMaxWidth = 80 },
 		cmd = 'GrugFar',
@@ -70,6 +79,7 @@ return {
 	},
 	{
 		'tpope/vim-sleuth',
+		version = '*',
 		event = 'VeryLazy',
 	},
 	{

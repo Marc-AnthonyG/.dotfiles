@@ -1,5 +1,6 @@
 return {
 	'nvim-treesitter/nvim-treesitter',
+	version = '*',
 	event = 'VeryLazy',
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-textobjects',

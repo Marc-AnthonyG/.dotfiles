@@ -1,6 +1,7 @@
 return {
 	-- lspconfig
 	'neovim/nvim-lspconfig',
+	version = '*',
 	event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 	dependencies = {
 		'mason.nvim',

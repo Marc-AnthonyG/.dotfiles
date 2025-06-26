@@ -1,6 +1,7 @@
 return {
 	'hrsh7th/nvim-cmp',
 	event = 'VeryLazy',
+	version = '*',
 	dependencies = {
 		{
 			'L3MON4D3/LuaSnip',

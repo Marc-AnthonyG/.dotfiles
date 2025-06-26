@@ -1,7 +1,7 @@
 return {
 	'yetone/avante.nvim',
 	event = 'VeryLazy',
-	version = false,
+	version = '*',
 	build = 'make',
 	opts = {
 		---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string

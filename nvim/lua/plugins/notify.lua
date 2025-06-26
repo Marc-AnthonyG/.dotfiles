@@ -1,5 +1,6 @@
 return {
 	'rcarriga/nvim-notify',
+	version = '*',
 	keys = {
 		{
 			'<leader>u',

@@ -1,5 +1,6 @@
 return {
 	'Shatur/neovim-tasks',
+	version = '*',
 	init = function()
 		local Path = require('plenary.path')
 		require('tasks').setup({

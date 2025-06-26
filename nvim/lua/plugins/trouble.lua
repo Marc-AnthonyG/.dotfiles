@@ -1,5 +1,6 @@
 return {
 	'folke/trouble.nvim',
+	version = '*',
 	opts = {
 		modes = {
 			lsp = {

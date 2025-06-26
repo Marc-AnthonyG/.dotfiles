@@ -2,6 +2,7 @@ return {
 	{
 		'jay-babu/mason-nvim-dap.nvim',
 		event = 'VeryLazy',
+		version = '*',
 		dependencies = {
 			'williamboman/mason.nvim',
 			'mfussenegger/nvim-dap',
@@ -14,6 +15,7 @@ return {
 	},
 	{
 		'mfussenegger/nvim-dap',
+		version = '*',
 		recommended = true,
 		dependencies = {
 			'rcarriga/nvim-dap-ui',
@@ -60,6 +62,7 @@ return {
 	},
 	{
 		'rcarriga/nvim-dap-ui', -- fancy UI for the debugger
+		version = '*',
 		dependencies = { 'nvim-neotest/nvim-nio' },
 		keys = {
 			{
