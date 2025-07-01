@@ -28,7 +28,6 @@ return {
 			end,
 			desc = 'Git Explorer',
 		},
-		{ '<leader>b', '', desc = 'buffer', mode = { 'n', 'v' } },
 		{
 			'<leader>be',
 			function()
@@ -36,6 +35,7 @@ return {
 			end,
 			desc = '[b]uffer [e]xplorer',
 		},
+		{ '<leader>sc', ':Neotre filesystem reveal<CR>', desc = '[sc]ope on current file' },
 	},
 	deactivate = function()
 		vim.cmd([[Neotree close]])
@@ -59,11 +59,11 @@ return {
 	end,
 	opts = {
 		enable_git_status = false,
-		sources = { 'filesystem', 'buffers', 'git_status' },
+		close_if_last_window = true,
 		open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
 		filesystem = {
 			bind_to_cwd = false,
-			follow_current_file = { enabled = true },
+			follow_current_file = { enabled = false },
 			use_libuv_file_watcher = true,
 			filtered_items = {
 				visible = true,

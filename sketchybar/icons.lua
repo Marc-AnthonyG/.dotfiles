@@ -42,6 +42,7 @@ return function(icon)
 		["System Settings"] = "󰒓",
 		["Code"] = "",
 		["Finder"] = "󰉋",
+		["DataGrip"] = "󱤟",
 	}
 
 	return icons[icon] or ""
