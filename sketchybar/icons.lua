@@ -43,6 +43,7 @@ return function(icon)
 		["Code"] = "",
 		["Finder"] = "󰉋",
 		["DataGrip"] = "󱤟",
+        ["Claude"] = "󱜙",
 	}
 
 	return icons[icon] or ""
