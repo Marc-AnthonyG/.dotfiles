@@ -101,7 +101,7 @@ return {
 			desc = 'Buffer Lines',
 		},
 		{
-			'<leader>sc',
+			'<leader>sH',
 			function()
 				Snacks.picker.command_history()
 			end,
@@ -134,20 +134,6 @@ return {
 				Snacks.picker.help()
 			end,
 			desc = 'Help Pages',
-		},
-		{
-			'<leader>sH',
-			function()
-				Snacks.picker.highlights()
-			end,
-			desc = 'Highlights',
-		},
-		{
-			'<leader>sj',
-			function()
-				Snacks.picker.jumps()
-			end,
-			desc = 'Jumps',
 		},
 		{
 			'<leader>sk',
@@ -224,6 +210,12 @@ return {
 			'<leader>r',
 			vim.lsp.buf.rename,
 			desc = 'Rename',
+		},
+		{
+			'<leader>ca',
+			vim.lsp.buf.code_action,
+			desc = 'Code Action',
+			mode = { 'n', 'v' },
 		},
 		{
 			'gD',
