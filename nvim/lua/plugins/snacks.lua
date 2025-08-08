@@ -221,6 +221,11 @@ return {
 			desc = 'Goto Definition',
 		},
 		{
+			'<leader>r',
+			vim.lsp.buf.rename,
+			desc = 'Rename',
+		},
+		{
 			'gD',
 			function()
 				Snacks.picker.lsp_declarations()
