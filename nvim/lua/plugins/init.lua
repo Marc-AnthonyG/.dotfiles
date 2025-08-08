@@ -13,7 +13,6 @@ return {
 		end,
 		opts = {},
 	},
-	-- { 'AndreM222/copilot-lualine' },
 	{
 		'nvim-lualine/lualine.nvim',
 		version = '*',
@@ -29,11 +28,6 @@ return {
 				lualine_x = { 'copilot' },
 			},
 		},
-	},
-	{
-		'folke/snacks.nvim',
-		version = '*',
-		priority = 1000,
 	},
 	{
 		'lukas-reineke/indent-blankline.nvim',
@@ -93,4 +87,5 @@ return {
 			},
 		},
 	},
+	{ 'dmmulroy/ts-error-translator.nvim' },
 }
