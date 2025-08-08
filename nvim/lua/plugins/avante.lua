@@ -128,14 +128,9 @@ return {
 	},
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter',
-		'nvim-lua/plenary.nvim',
-		'MunifTanjim/nui.nvim',
-		'echasnovski/mini.pick',
-		'nvim-telescope/telescope.nvim',
+		'folke/snacks.nvim',
 		'hrsh7th/nvim-cmp',
 		'ibhagwan/fzf-lua',
-		'stevearc/dressing.nvim',
-		'folke/snacks.nvim',
 		'nvim-tree/nvim-web-devicons',
 		{
 			'MeanderingProgrammer/render-markdown.nvim',

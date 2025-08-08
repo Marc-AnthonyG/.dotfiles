@@ -96,16 +96,6 @@ return {
 		-- setup autoformat
 		Util.format.register(Util.lsp.formatter())
 
-		-- setup keymaps
-		Util.lsp.on_attach(function(client, buffer)
-			require('plugins.lsp.keymaps').on_attach(client, buffer)
-		end)
-
-		Util.lsp.setup()
-		Util.lsp.on_dynamic_capability(require('plugins.lsp.keymaps').on_attach)
-
-		Util.lsp.words.setup(opts.document_highlight)
-
 		-- inlay hints
 		if opts.inlay_hints.enabled then
 			Util.lsp.on_supports_method('textDocument/inlayHint', function(_, buffer)

@@ -36,7 +36,7 @@ return {
 			cmp = true,
 			gitsigns = true,
 			treesitter = true,
-			telescope = true,
+			snacks = true,
 			mason = true,
 			harpoon = true,
 			mini = {

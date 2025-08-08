@@ -6,7 +6,8 @@ return {
 		ft = 'markdown',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope.nvim',
+			'folke/snacks.nvim',
+			'hrsh7th/nvim-cmp',
 			'nvim-treesitter',
 		},
 		opts = {

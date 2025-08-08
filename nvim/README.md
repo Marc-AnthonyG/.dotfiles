@@ -52,7 +52,6 @@ NVIM_APPNAME=Marc-AnthonyG/.dotfiles/nvim nvim
 + [nvim-neo-tree/neo-tree.nvim](https://dotfyle.com/plugins/nvim-neo-tree/neo-tree.nvim)
 ### fuzzy-finder
 
-+ [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
 ### git
 
 + [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
@@ -110,7 +109,6 @@ NVIM_APPNAME=Marc-AnthonyG/.dotfiles/nvim nvim
 + [nvim-neotest/neotest](https://dotfyle.com/plugins/nvim-neotest/neotest)
 ### utility
 
-+ [stevearc/dressing.nvim](https://dotfyle.com/plugins/stevearc/dressing.nvim)
 + [folke/noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)
 + [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
 ## Language Servers
