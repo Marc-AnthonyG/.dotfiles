@@ -37,11 +37,6 @@ return {
 		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 	},
 	{
-		'mg979/vim-visual-multi',
-		version = '*',
-		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
-	},
-	{
 		'folke/ts-comments.nvim',
 		version = '*',
 		event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
@@ -70,11 +65,11 @@ return {
 			},
 		},
 	},
-	{
-		'tpope/vim-sleuth',
-		version = '*',
-		event = 'VeryLazy',
-	},
+	-- {
+	-- 	'tpope/vim-sleuth',
+	-- 	version = '*',
+	-- 	event = 'VeryLazy',
+	-- },
 	{
 		'nvim-tree/nvim-web-devicons',
 		opts = {
