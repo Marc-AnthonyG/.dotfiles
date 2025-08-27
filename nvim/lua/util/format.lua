@@ -105,11 +105,8 @@ function M.format(opts)
 	end
 
 	local has_formated_once = false
-	local test = M.resolve(buf)
-	vim.notify('test ' .. vim.inspect(test), vim.log.levels.INFO)
-	for _, formatter in ipairs(test) do
+	for _, formatter in ipairs(M.resolve(buf)) do
 		if formatter.active then
-			vim.notify('Formatting with ' .. formatter.name, vim.log.levels.INFO)
 			local ok, result = pcall(formatter.format, buf)
 			if not ok then
 				vim.notify(('Formatter failed: %s'):format(result), vim.log.levels.ERROR, { title = formatter.name })
