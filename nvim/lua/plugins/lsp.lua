@@ -168,7 +168,6 @@ return {
 				end
 
 				if opts.setup[client] then
-					vim.notify('setup server with function')
 					if opts.setup[client](client, server_opts) then
 						return
 					end
