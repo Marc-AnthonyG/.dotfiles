@@ -1,3 +1,4 @@
+local Snacks = require('plugins.snacks')
 -- file explorer
 return {
 	'nvim-neo-tree/neo-tree.nvim',

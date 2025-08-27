@@ -2,8 +2,10 @@ return {
 	'dmtrKovalenko/fff.nvim',
 	build = 'cargo build --release',
 	opts = {
-		width = 0.75,
-		height = 0.75,
+		layout = {
+			width = 0.75,
+			height = 0.75,
+		},
 		prompt = '> ',
 	},
 	keys = {

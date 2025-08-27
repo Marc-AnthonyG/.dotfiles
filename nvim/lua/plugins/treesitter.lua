@@ -36,6 +36,9 @@ return {
 						node_decremental = '<M-space>',
 					},
 				},
+				sync_install = false,
+				ignore_install = {},
+				modules = {},
 				textobjects = {
 					select = {
 						enable = true,
