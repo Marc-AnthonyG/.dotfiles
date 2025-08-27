@@ -41,7 +41,7 @@ return {
 				callback = function()
 					Util.format.register({
 						name = 'conform.nvim',
-						priority = 100,
+						priority = Util.format.CONFORM_PRIORITY,
 						primary = true,
 						format = function(buf)
 							require('conform').format({ bufnr = buf })

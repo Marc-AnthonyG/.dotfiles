@@ -224,7 +224,7 @@ function M.formatter(opts)
 	local ret = {
 		name = 'LSP',
 		primary = true,
-		priority = 1,
+		priority = Util.format.LSP_PRIORITY,
 		format = function(buf)
 			M.format(merge_tables({}, filter, { bufnr = buf }))
 		end,

@@ -6,6 +6,10 @@ local M = setmetatable({}, {
 
 M.formatters = {}
 
+M.LSP_PRIORITY = 5
+M.CONFORM_PRIORITY = 10
+M.LSP_PRIORITY_FORMATTERS = 15
+
 function M.register(formatter)
 	M.formatters[#M.formatters + 1] = formatter
 	table.sort(M.formatters, function(a, b)
@@ -100,10 +104,12 @@ function M.format(opts)
 		return
 	end
 
-	local done = false
-	for _, formatter in ipairs(M.resolve(buf)) do
+	local has_formated_once = false
+	local test = M.resolve(buf)
+	vim.notify('test ' .. vim.inspect(test), vim.log.levels.INFO)
+	for _, formatter in ipairs(test) do
 		if formatter.active then
-			done = true
+			vim.notify('Formatting with ' .. formatter.name, vim.log.levels.INFO)
 			local ok, result = pcall(formatter.format, buf)
 			if not ok then
 				vim.notify(('Formatter failed: %s'):format(result), vim.log.levels.ERROR, { title = formatter.name })
@@ -113,7 +119,7 @@ function M.format(opts)
 		end
 	end
 
-	if not done and opts and opts.force then
+	if not has_formated_once and opts and opts.force then
 		vim.health.warn('No formatter available', { title = 'Format' })
 	end
 end

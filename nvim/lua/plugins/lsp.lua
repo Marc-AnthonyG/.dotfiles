@@ -94,7 +94,7 @@ return {
 					local formatter = Util.lsp.formatter({
 						name = 'eslint: lsp',
 						primary = false,
-						priority = 200,
+						priority = Util.format.LSP_PRIORITY_FORMATTERS,
 						filter = 'eslint',
 					})
 
