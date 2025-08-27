@@ -250,15 +250,8 @@ function M.format(opts)
 		get_opts('nvim-lspconfig').format or {},
 		get_opts('conform.nvim').format or {}
 	)
-	local ok, conform = pcall(require, 'conform')
-	-- use conform for formatting with LSP when available,
-	-- since it has better format diffing
-	if ok then
-		opts.formatters = {}
-		conform.format(opts)
-	else
-		vim.lsp.buf.format(opts)
-	end
+	opts.formatters = {}
+	require('conform').format(opts)
 end
 
 ---@alias LspWord {from:{[1]:number, [2]:number}, to:{[1]:number, [2]:number}} 1-0 indexed

@@ -104,8 +104,12 @@ function M.format(opts)
 	for _, formatter in ipairs(M.resolve(buf)) do
 		if formatter.active then
 			done = true
-			-- TODO: Add try catch
-			return formatter.format(buf)
+			local ok, result = pcall(formatter.format, buf)
+			if not ok then
+				vim.notify(('Formatter failed: %s'):format(result), vim.log.levels.ERROR, { title = formatter.name })
+				return
+			end
+			return result
 		end
 	end
 

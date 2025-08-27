@@ -5,7 +5,10 @@ return {
 	event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 	dependencies = {
 		'mason.nvim',
-		{ 'williamboman/mason-lspconfig.nvim', config = function() end },
+		{
+			'williamboman/mason-lspconfig.nvim',
+			config = function() end,
+		},
 	},
 	opts = function()
 		local ret = {
@@ -79,15 +82,25 @@ return {
 						},
 					},
 				},
+				eslint = {
+					settings = {
+						workingDirectories = { mode = 'auto' },
+						format = true,
+					},
+				},
 			},
 			setup = {
-				-- example to setup with typescript.nvim
-				-- tsserver = function(_, opts)
-				--   require("typescript").setup({ server = opts })
-				--   return true
-				-- end,
-				-- Specify * to use this function as a fallback for any server
-				-- ["*"] = function(server, opts) end,
+				eslint = function()
+					local formatter = Util.lsp.formatter({
+						name = 'eslint: lsp',
+						primary = false,
+						priority = 200,
+						filter = 'eslint',
+					})
+
+					-- Use EslintFixAll on Neovim < 0.10.0
+					Util.format.register(formatter)
+				end,
 			},
 		}
 		return ret
@@ -142,25 +155,31 @@ return {
 			opts.capabilities or {}
 		)
 
-		local function setup(server)
-			local server_opts = vim.tbl_deep_extend('force', {
-				capabilities = vim.deepcopy(capabilities),
-			}, servers[server] or {})
-			if server_opts.enabled == false then
-				return
-			end
+		vim.api.nvim_create_autocmd('LspAttach', {
+			group = vim.api.nvim_create_augroup('my.lsp', {}),
+			callback = function(args)
+				local client = assert(vim.lsp.get_client_by_id(args.data.client_id)).name
 
-			if opts.setup[server] then
-				if opts.setup[server](server, server_opts) then
+				local server_opts = vim.tbl_deep_extend('force', {
+					capabilities = vim.deepcopy(capabilities),
+				}, servers[client] or {})
+				if server_opts.enabled == false then
 					return
 				end
-			elseif opts.setup['*'] then
-				if opts.setup['*'](server, server_opts) then
-					return
+
+				if opts.setup[client] then
+					vim.notify('setup server with function')
+					if opts.setup[client](client, server_opts) then
+						return
+					end
+				elseif opts.setup['*'] then
+					if opts.setup['*'](client, server_opts) then
+						return
+					end
 				end
-			end
-			require('lspconfig')[server].setup(server_opts)
-		end
+				require('lspconfig')[client].setup(server_opts)
+			end,
+		})
 
 		-- get all the servers that are available through mason-lspconfig
 		local have_mason, mlsp = pcall(require, 'mason-lspconfig')
@@ -182,7 +201,6 @@ return {
 					ensure_installed,
 					Util.opts('mason-lspconfig.nvim').ensure_installed or {}
 				),
-				handlers = { setup },
 			})
 		end
 	end,
