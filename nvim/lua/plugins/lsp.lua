@@ -158,6 +158,7 @@ return {
 		vim.api.nvim_create_autocmd('LspAttach', {
 			group = vim.api.nvim_create_augroup('my.lsp', {}),
 			callback = function(args)
+				vim.notify('Lsp attach with client: ' .. args.data.client_id)
 				local client = assert(vim.lsp.get_client_by_id(args.data.client_id)).name
 
 				local server_opts = vim.tbl_deep_extend('force', {
