@@ -64,8 +64,9 @@ function M.info(buf)
 	if not have then
 		lines[#lines + 1] = '\n***No formatters available for this buffer.***'
 	end
-	vim.health.info(
+	vim.notify(
 		table.concat(lines, '\n'),
+		vim.log.levels.INFO,
 		{ title = 'LazyFormat (' .. (enabled and 'enabled' or 'disabled') .. ')' }
 	)
 end

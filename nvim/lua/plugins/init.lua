@@ -65,11 +65,6 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	'tpope/vim-sleuth',
-	-- 	version = '*',
-	-- 	event = 'VeryLazy',
-	-- },
 	{
 		'nvim-tree/nvim-web-devicons',
 		opts = {
@@ -82,5 +77,4 @@ return {
 			},
 		},
 	},
-	{ 'dmmulroy/ts-error-translator.nvim' },
 }
