@@ -1,12 +1,11 @@
 local M = {}
 
 local function get_opts(name)
-	local plugin = require('plugins').spec.plugins[name]
+	local plugin = require('plugins')[name]
 	if not plugin then
 		return {}
 	end
-	local Plugin = require(plugin)
-	return Plugin.values(plugin, 'opts', false)
+	return plugin.values(plugin, 'opts', false)
 end
 
 local function merge_tables(...)
