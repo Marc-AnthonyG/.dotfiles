@@ -1,6 +1,7 @@
 return {
 	'dmtrKovalenko/fff.nvim',
 	build = 'cargo build --release',
+	lazy = false,
 	opts = {
 		layout = {
 			width = 0.75,

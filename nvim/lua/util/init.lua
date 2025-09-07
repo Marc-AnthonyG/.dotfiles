@@ -8,7 +8,7 @@ function M.get_plugin(name)
 	return require('lazy.core.config').spec.plugins[name]
 end
 
-function M.opts(name)
+function M.get_plugin_opts(name)
 	local plugin = M.get_plugin(name)
 	if not plugin then
 		return {}

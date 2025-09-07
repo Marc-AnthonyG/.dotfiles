@@ -14,22 +14,6 @@ return {
 		opts = {},
 	},
 	{
-		'nvim-lualine/lualine.nvim',
-		version = '*',
-		event = 'VeryLazy',
-		opts = {
-			options = {
-				icons_enabled = true,
-				theme = 'catppuccin',
-				component_separators = '|',
-				section_separators = '',
-			},
-			sections = {
-				lualine_x = { 'copilot' },
-			},
-		},
-	},
-	{
 		'lukas-reineke/indent-blankline.nvim',
 		version = '*',
 		main = 'ibl',
