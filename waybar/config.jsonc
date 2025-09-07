@@ -1,9 +1,13 @@
 {
     "position": "top",
-    "margin": "4 8",
+    "margin-top": 4,
+    "margin-right": 8,
+    "margin-left": 8,
+    "reload_style_on_change": true,
+    "height": 32,
     "mod": "dock",
     "modules-left": [
-        "hyprland/workspaces"
+        "custom/workspaces"
     ],
     "modules-center": [],
     "modules-right": [
@@ -11,18 +15,11 @@
         "pulseaudio",
         "clock"
     ],
-    "hyprland/window": {
-        "format": "{}"
-    },
-    "hyprland/workspaces": {
-        "persistent-workspaces": {
-            "*": [
-                1,
-                2,
-                3,
-                4
-            ]
-        }
+    "custom/workspaces": {
+        "exec": "~/.dotfiles/waybar/scripts/workspace-icons.sh",
+        "format": "{}",
+        "return-type": "json",
+        "interval": 1
     },
     "network": {
         "format-icons": [
@@ -32,7 +29,7 @@
             "󰤨"
         ],
         "format-wifi": "{icon}",
-        "format-ethernet": "",
+        "format-ethernet": "",
         "format-linked": "󰄡",
         "format-disconnected": "",
         "tooltip-format": "{essid} ({signalStrength}%) - {gwaddr}",
@@ -48,21 +45,12 @@
             "hands-free": "󱡏",
             "headset": "󱡏",
             "default": [
-                "",
-                ""
+                "",
+                ""
             ]
         }
     },
     "clock": {
-        "format": "{:%R %a %m/%d}",
-        "tooltip-format": "{calendar}",
-        "calendar": {
-            "format": {
-                "months": "<span color='#D3D04F'><b>{}</b></span>",
-                "days": "<span color='#93B1A6'><b>{}</b></span>",
-                "weekdays": "<span color='#8EAC50'><b>{}</b></span>",
-                "today": "<span color='#8EAC50'><b><u>{}</u></b></span>"
-            }
-        }
+        "format": "{:%m/%d - %R}"
     }
 }

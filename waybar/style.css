@@ -19,34 +19,28 @@ tooltip label {
     color: #93B1A6;
 }
 
-#workspaces {
-    border-radius: 16px 24px 24px 16px;
-    margin: 0;
+#custom-workspaces {
+    border-radius: 16px;
+    margin: 4px 0;
+    padding: 0 12px;
     font-size: 16px;
 }
 
-#workspaces button {
-    min-width: 20px;
-    min-height: 0px;
-    border-radius: 20px;
-    margin: 4px 0;
+#custom-workspaces .workspace {
+    padding: 2px 6px;
+    margin: 0 2px;
+    border-radius: 6px;
     color: white;
 }
 
-#workspaces button.active {
+#custom-workspaces .active {
+    background-color: rgba(125, 207, 255, 1);
     color: #7dcfff;
-    background-color: white;
-}
-
-#workspaces button:hover {
-    color: #7dcfff;
-    background-color: rgba(255, 255, 255, 0.1);
 }
 
 #clock,
 #pulseaudio,
-#network,
-#workspaces {
+#network {
     padding: 0px 12px;
 }
 
