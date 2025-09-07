@@ -1,13 +1,11 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
 
--- For Obsidiant https://github.com/epwalsh/obsidian.nvim/issues/286#issuecomment-1877391540
+-- Change thing that get doesn't get displayed
 vim.opt.conceallevel = 2
 
-vim.o.hlsearch = false -- Set highlight on search
+vim.o.hlsearch = false -- Set highlight after search
 
-vim.o.nu = true
 vim.wo.relativenumber = true
 
 vim.o.colorcolumn = '80'

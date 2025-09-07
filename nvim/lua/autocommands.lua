@@ -19,3 +19,5 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 		vim.opt_local.conceallevel = 0
 	end,
 })
+
+Util.format.create_auto_cmd()
