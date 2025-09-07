@@ -35,3 +35,5 @@ require('options')
 require('keymaps')
 
 require('autocommands')
+
+Util.log.debug('Starting neovim in debug mode', { title = 'My Config' })
