@@ -18,11 +18,11 @@ return {
 			desc = 'Open file picker',
 		},
 		{
-			'<leader>g',
+			'<leader>gr',
 			function()
 				require('fff').find_in_git_root()
 			end,
-			desc = 'Find in [G]it root',
+			desc = 'Find in [g]it [r]oot',
 		},
 	},
 }
