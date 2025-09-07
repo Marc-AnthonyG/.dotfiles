@@ -23,50 +23,40 @@ return {
 			topdelete = { text = '' },
 			changedelete = { text = '▎' },
 		},
-		on_attach = function(buffer)
-			local gs = require('gitsigns')
-
-			local function map(mode, l, r, desc)
-				vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-			end
-
-			map('n', ']h', function()
-				if vim.wo.diff then
-					vim.cmd.normal({ ']c', bang = true })
-				else
-					gs.nav_hunk('next')
-				end
-			end, 'Next Hunk')
-			map('n', '[h', function()
-				if vim.wo.diff then
-					vim.cmd.normal({ '[c', bang = true })
-				else
-					gs.nav_hunk('prev')
-				end
-			end, 'Prev Hunk')
-			map('n', ']H', function()
-				gs.nav_hunk('last')
-			end, 'Last Hunk')
-			map('n', '[H', function()
-				gs.nav_hunk('first')
-			end, 'First Hunk')
-			map({ 'n', 'v' }, '<leader>gbs', ':Gitsigns stage_hunk<CR>', 'Stage Hunk')
-			map({ 'n', 'v' }, '<leader>gbr', ':Gitsigns reset_hunk<CR>', 'Reset Hunk')
-			map('n', '<leader>gbS', gs.stage_buffer, 'Stage Buffer')
-			map('n', '<leader>gbu', gs.stage_hunk, 'Undo Stage Hunk')
-			map('n', '<leader>gbR', gs.reset_buffer, 'Reset Buffer')
-			map('n', '<leader>gbp', gs.preview_hunk_inline, 'Preview Hunk Inline')
-			map('n', '<leader>gbb', function()
-				gs.blame_line({ full = true })
-			end, 'Blame Line')
-			map('n', '<leader>gbB', function()
-				gs.blame()
-			end, 'Blame Buffer')
-			map('n', '<leader>gbd', gs.diffthis, 'Diff This')
-			map('n', '<leader>gbD', function()
-				gs.diffthis('~')
-			end, 'Diff This ~')
-			vim.keymap.set('n', '<leader>gb', '', { desc = '+[g]it [b]lame' })
-		end,
+	},
+	keys = {
+		{
+			'<leader>gbb',
+			function()
+				require('gitsigns').blame_line({ full = true })
+			end,
+			desc = 'Stage Hunk',
+		},
+		{
+			'<leader>gbB',
+			function()
+				require('gitsigns').blame()
+			end,
+			desc = 'Blame',
+		},
+		{
+			'<leader>gbd',
+			function()
+				require('gitsigns').diffthis()
+			end,
+			desc = 'Diff This',
+		},
+		{
+			'<leader>gbD',
+			function()
+				require('gitsigns').diffthis('~')
+			end,
+			desc = 'Diff This ~',
+		},
+		{
+			'<leader>gb',
+			'',
+			desc = '+[g]it [b]lame',
+		},
 	},
 }
