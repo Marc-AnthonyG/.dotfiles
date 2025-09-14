@@ -4,26 +4,31 @@ local M = setmetatable({}, {
 	end,
 })
 
+--- @type FormatterProvider[]
 M.formatters = {}
 
 M.LSP_PRIORITY = 5
 M.CONFORM_PRIORITY = 10
 M.LSP_PRIORITY_FORMATTERS = 15
 
+--- Register a formatter and sort them based on priority where higher = more priority
+--- @param formatter FormatterProvider The formatter to register, must have a priority field
 function M.register(formatter)
+	Util.log.debug(vim.inspect(formatter))
 	M.formatters[#M.formatters + 1] = formatter
 	table.sort(M.formatters, function(a, b)
 		return a.priority > b.priority
 	end)
 end
 
-function M.formatexpr()
-	if Util.get_plugin('conform.nvim') ~= nil then
-		return require('conform').formatexpr()
-	end
-	return vim.lsp.formatexpr({ timeout_ms = 3000 })
-end
-
+--- Resolve the active formatters for the current buffer or the given buffer
+--- This function will return only the highest priority "primary" formatters.
+--- Multiple non-primary formatters will be returned if they are available.
+---
+--- Combine with the priority system when registering formatters this will give the primary formatters with the highest priority
+---
+---@param buf? number
+---@return Formatter[]
 function M.resolve(buf)
 	buf = buf or vim.api.nvim_get_current_buf()
 	local have_primary = false
@@ -38,6 +43,8 @@ function M.resolve(buf)
 	end, M.formatters)
 end
 
+--- Print the current status of the formatters for the current buffer
+--- @param buf? number
 function M.info(buf)
 	buf = buf or vim.api.nvim_get_current_buf()
 	local gaf = vim.g.autoformat == nil or vim.g.autoformat
@@ -67,11 +74,23 @@ function M.info(buf)
 	vim.notify(
 		table.concat(lines, '\n'),
 		vim.log.levels.INFO,
-		{ title = 'LazyFormat (' .. (enabled and 'enabled' or 'disabled') .. ')' }
+		{ title = 'Format Info! (' .. (enabled and 'enabled' or 'disabled') .. ')' }
 	)
 end
 
+--- Check if formatting is enabled for a buffer.
+--- Uses a hierarchical configuration system where buffer-local settings
+--- take precedence over global settings, with a default of enabled.
+---
+--- Configuration precedence (highest to lowest):
+--- 1. Buffer-local: vim.b[buf].autoformat
+--- 2. Global: vim.g.autoformat
+--- 3. Default: true (enabled)
+---
+--- @param buf? number Buffer handle, defaults to current buffer if nil or 0
+--- @return boolean enabled True if formatting is enabled for the buffer
 function M.enabled(buf)
+	-- Use given buffer or default to current buffer
 	buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
 	local gaf = vim.g.autoformat
 	local baf = vim.b[buf].autoformat
@@ -85,19 +104,14 @@ function M.enabled(buf)
 	return gaf == nil or gaf
 end
 
-function M.enable(enable, buf)
-	if enable == nil then
-		enable = true
-	end
-	if buf then
-		vim.b.autoformat = enable
-	else
-		vim.g.autoformat = enable
-		vim.b.autoformat = nil
-	end
-	M.info()
-end
-
+--- Format the current buffer or specified buffer using the first active formatter
+---
+--- This function finds the highest priority active formatter and applies it to the buffer.
+--- Formatting only occurs if enabled for the buffer or if forced via options.
+--- Only the first active formatter is used (single formatter execution).
+---
+--- @param opts? FormatOpt
+--- @return any|nil result The result from the formatter, or nil if no formatting occurred
 function M.format(opts)
 	opts = opts or {}
 	local buf = opts.buf or vim.api.nvim_get_current_buf()
@@ -108,38 +122,20 @@ function M.format(opts)
 	local has_formated_once = false
 	for _, formatter in ipairs(M.resolve(buf)) do
 		if formatter.active then
+			Util.log.debug('Formatting with ' .. formatter.name)
 			local ok, result = pcall(formatter.format, buf)
-			if not ok then
+			if ok then
+				Util.log.debug('Format was successful')
+			else
 				vim.notify(('Formatter failed: %s'):format(result), vim.log.levels.ERROR, { title = formatter.name })
 				return
 			end
-			return result
 		end
 	end
 
 	if not has_formated_once and opts and opts.force then
 		vim.health.warn('No formatter available', { title = 'Format' })
 	end
-end
-
-function M.create_auto_cmd()
-	-- Autoformat autocmd
-	vim.api.nvim_create_autocmd('BufWritePre', {
-		group = vim.api.nvim_create_augroup('LazyFormat', {}),
-		callback = function(event)
-			M.format({ buf = event.buf })
-		end,
-	})
-
-	-- Manual format
-	vim.api.nvim_create_user_command('LazyFormat', function()
-		M.format({ force = true })
-	end, { desc = 'Format selection or buffer' })
-
-	-- Format info
-	vim.api.nvim_create_user_command('LazyFormatInfo', function()
-		M.info()
-	end, { desc = 'Show info about the formatters for the current buffer' })
 end
 
 return M

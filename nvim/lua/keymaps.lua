@@ -1,5 +1,5 @@
 -- [[ Basic Keymaps ]]
-vim.keymap.set('n', '<leader>f', '<cmd>LazyFormat<CR>', { desc = '[f]ormat' })
+vim.keymap.set('n', '<leader>f', '<cmd>Format<CR>', { desc = '[f]ormat' })
 
 -- Go back a buffer
 vim.keymap.set('n', 'gb', '<cmd>BufferLineCyclePrev<CR>', { desc = '[g]o [b]ack a buffer' })

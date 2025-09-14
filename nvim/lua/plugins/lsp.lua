@@ -82,14 +82,25 @@ return {
 			},
 			setup = {
 				eslint = function()
-					local formatter = Util.lsp.formatter({
+					Util.format.register({
 						name = 'eslint: lsp',
 						primary = false,
 						priority = Util.format.LSP_PRIORITY + 1,
-						filter = 'eslint',
+						format = function()
+							vim.cmd.EslintFixAll()
+						end,
+						sources = function(buf)
+							local clients = Util.lsp.get_clients({ bufnr = buf, name = 'eslint' })
+							return vim.tbl_map(
+								function(client)
+									return client.name
+								end,
+								vim.tbl_filter(function(client)
+									return client.supports_method('textDocument/formatting')
+								end, clients)
+							)
+						end,
 					})
-
-					Util.format.register(formatter)
 				end,
 			},
 		}

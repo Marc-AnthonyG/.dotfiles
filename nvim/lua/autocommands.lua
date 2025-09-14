@@ -20,4 +20,9 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 	end,
 })
 
-Util.format.create_auto_cmd()
+vim.api.nvim_create_autocmd('BufWritePre', {
+	group = vim.api.nvim_create_augroup('Format', {}),
+	callback = function(event)
+		Util.format.format({ buf = event.buf })
+	end,
+})

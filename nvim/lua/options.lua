@@ -6,6 +6,7 @@ vim.opt.conceallevel = 2
 
 vim.o.hlsearch = false -- Set highlight after search
 
+vim.o.nu = true -- Get the absolute line number at the cursor level instead of the relative line number
 vim.wo.relativenumber = true
 
 vim.o.colorcolumn = '80'

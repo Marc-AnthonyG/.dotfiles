@@ -1,41 +1,22 @@
 local M = {}
 
-local function get_opts(name)
-	local plugin = require('plugins')[name]
-	if not plugin then
-		return {}
-	end
-	return plugin.values(plugin, 'opts', false)
-end
-
-local function merge_tables(...)
-	local result = {}
-	for _, tbl in ipairs({ ... }) do
-		for k, v in pairs(tbl) do
-			result[k] = v
-		end
-	end
-	return result
-end
-
+--- Get LSP clients with optional filtering
+--- Provides compatibility between vim.lsp.get_clients (newer) and vim.lsp.get_active_clients (deprecated)
+--- Supports method-based filtering for older Neovim versions
+---@param opts? GetClientsOpt Options for filtering clients
+---@return table[] clients List of LSP clients matching the criteria
 function M.get_clients(opts)
-	local ret = {}
-	if vim.lsp.get_clients then
-		ret = vim.lsp.get_clients(opts)
-	else
-		---@diagnostic disable-next-line: deprecated
-		ret = vim.lsp.get_active_clients(opts)
-		if opts and opts.method then
-			ret = vim.tbl_filter(function(client)
-				return client.supports_method(opts.method, { bufnr = opts.bufnr })
-			end, ret)
-		end
-	end
-	return opts and opts.filter and vim.tbl_filter(opts.filter, ret) or ret
+	local clients = vim.lsp.get_clients(opts)
+	return opts and opts.filter and vim.tbl_filter(opts.filter, clients) or clients
 end
 
 M._supports_method = {}
 
+--- Register a callback for when an LSP client supports a specific method
+--- Uses weak references to avoid memory leaks and listens for 'LspSupportsMethod' User events
+---@param method string The LSP method to watch for (e.g., 'textDocument/formatting')
+---@param fn function Callback function called with (client, buffer) when method is supported
+---@return number autocmd_id The autocmd ID for cleanup if needed
 function M.on_supports_method(method, fn)
 	M._supports_method[method] = M._supports_method[method] or setmetatable({}, { __mode = 'k' })
 	return vim.api.nvim_create_autocmd('User', {
@@ -50,14 +31,20 @@ function M.on_supports_method(method, fn)
 	})
 end
 
+---Get the real path of a file, handling symlinks and empty paths
+---@param path string|nil The file path to resolve
+---@return string|nil realpath The resolved real path, or nil if path is empty/nil
 local function realpath(path)
 	if path == '' or path == nil then
 		return nil
 	end
-	path = vim.uv.fs_realpath(path) or path
-	return path
+	return vim.uv.fs_realpath(path) or path
 end
 
+--- Rename the current file with LSP workspace awareness
+--- Prompts user for new filename and handles LSP willRename/didRename notifications
+--- Ensures the file is within the project root before renaming
+--- @usage M.rename_file() -- Opens input prompt to rename current buffer's file
 function M.rename_file()
 	local buf = vim.api.nvim_get_current_buf()
 	local old = assert(realpath(vim.api.nvim_buf_get_name(buf)))
@@ -85,9 +72,11 @@ function M.rename_file()
 	end)
 end
 
----@param from string
----@param to string
----@param rename? fun()
+--- Handle file rename with LSP workspace notifications
+--- Sends willRenameFiles request, applies workspace edits, executes rename, then sends didRenameFiles
+---@param from string The original file path
+---@param to string The new file path
+---@param rename? function Optional callback to perform the actual file rename operation
 function M.on_rename(from, to, rename)
 	local changes = {
 		files = { {
@@ -117,19 +106,17 @@ function M.on_rename(from, to, rename)
 	end
 end
 
-function M.formatter(opts)
-	opts = opts or {}
-	local filter = opts.filter or {}
-	filter = type(filter) == 'string' and { name = filter } or filter
-	local ret = {
+--- This function create THE lsp formatter meaning it should only be called once
+--- This fonction create a primary formatter with lower priority then other primary formatters
+--- meaning it is a fallback formatter
+function M.formatter()
+	return {
 		name = 'LSP',
 		primary = true,
 		priority = Util.format.LSP_PRIORITY,
-		format = function(buf)
-			M.format(merge_tables({}, filter, { bufnr = buf }))
-		end,
+		format = M.lsp_format,
 		sources = function(buf)
-			local clients = M.get_clients(merge_tables({}, filter, { bufnr = buf }))
+			local clients = M.get_clients(vim.tbl_extend('force', {}, { bufnr = buf }))
 			local ret = vim.tbl_filter(function(client)
 				return client.supports_method('textDocument/formatting')
 					or client.supports_method('textDocument/rangeFormatting')
@@ -139,16 +126,15 @@ function M.formatter(opts)
 			end, ret)
 		end,
 	}
-	return merge_tables(ret, opts)
 end
 
-function M.format(opts)
-	opts = vim.tbl_deep_extend(
+M.lsp_format = function(buf)
+	local opts = vim.tbl_deep_extend(
 		'force',
 		{},
-		opts or {},
-		get_opts('nvim-lspconfig').format or {},
-		get_opts('conform.nvim').format or {}
+		vim.tbl_extend('force', {}, { bufnr = buf }),
+		Util.get_plugin_opts('nvim-lspconfig').format or {},
+		Util.get_plugin_opts('conform.nvim').format or {}
 	)
 	opts.formatters = {}
 	require('conform').format(opts)
