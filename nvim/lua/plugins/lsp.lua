@@ -1,11 +1,27 @@
 return {
 	-- lspconfig
 	'neovim/nvim-lspconfig',
-	version = '*',
 	event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 	dependencies = {
-		{ 'mason.nvim', version = '1.11.0' },
-		{ 'williamboman/mason-lspconfig.nvim', version = '1.x.x', config = function() end },
+		{ 'mason-org/mason.nvim', version = '1.11.0' },
+		{
+			'mason-org/mason-lspconfig.nvim',
+			version = '1.x.x',
+			opts = {},
+			config = function(_, opts)
+				require('mason').setup(opts)
+				local mr = require('mason-registry')
+				--- Trigger buffer reloading after installing a package (allow to load directly)
+				mr:on('package:install:success', function()
+					vim.defer_fn(function()
+						require('lazy.core.handler.event').trigger({
+							event = 'FileType',
+							buf = vim.api.nvim_get_current_buf(),
+						})
+					end, 100)
+				end)
+			end,
+		},
 	},
 	opts = function()
 		local ret = {
@@ -31,7 +47,7 @@ return {
 				enabled = true,
 			},
 			codelens = {
-				enabled = false,
+				enabled = true,
 			},
 			document_highlight = {
 				enabled = true,
@@ -48,12 +64,8 @@ return {
 				formatting_options = nil,
 				timeout_ms = nil,
 			},
-			-- LSP Server Settings
-			-- add servers and special configuration here
 			servers = {
 				lua_ls = {
-					-- ---@type LazyKeysSpec[]
-					-- keys = {},
 					settings = {
 						Lua = {
 							workspace = {
@@ -118,7 +130,7 @@ return {
 		end
 
 		-- code lens
-		if opts.codelens.enabled and vim.lsp.codelens then
+		if opts.codelens.enabled then
 			Util.lsp.on_supports_method('textDocument/codeLens', function(_, buffer)
 				vim.lsp.codelens.refresh()
 				vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
@@ -128,22 +140,21 @@ return {
 			end)
 		end
 
+		-- Setup diagnostics virtual text and icons
 		if type(opts.diagnostics.virtual_text) == 'table' and opts.diagnostics.virtual_text.prefix == 'icons' then
-			opts.diagnostics.virtual_text.prefix = vim.fn.has('nvim-0.10.0') == 0 and '●'
-				or function(diagnostic)
-					for d, icon in pairs({
-						Error = ' ',
-						Warn = ' ',
-						Hint = ' ',
-						Info = ' ',
-					}) do
-						if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-							return icon
-						end
+			opts.diagnostics.virtual_text.prefix = function(diagnostic)
+				for d, icon in pairs({
+					Error = ' ',
+					Warn = ' ',
+					Hint = ' ',
+					Info = ' ',
+				}) do
+					if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+						return icon
 					end
 				end
+			end
 		end
-
 		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 		local servers = opts.servers
@@ -164,40 +175,35 @@ return {
 				return
 			end
 
+			-- Setup with server specific setup function
 			if opts.setup[server] then
 				if opts.setup[server](server, server_opts) then
 					return
 				end
+			-- Or setup with a wildcard setup function
 			elseif opts.setup['*'] then
 				if opts.setup['*'](server, server_opts) then
 					return
 				end
 			end
+
+			-- Fallback to lspconfig setup (also if setup failed)
 			require('lspconfig')[server].setup(server_opts)
 		end
 
-		-- get all the servers that are available through mason-lspconfig
-		local have_mason, mlsp = pcall(require, 'mason-lspconfig')
-
-		local ensure_installed = {} ---@type string[]
-		for server, server_opts in pairs(servers) do
-			if server_opts then
-				server_opts = server_opts == true and {} or server_opts
-				if server_opts.enabled ~= false then
-					ensure_installed[#ensure_installed + 1] = server
-				end
-			end
-		end
-
-		if have_mason then
-			mlsp.setup({
-				ensure_installed = vim.tbl_deep_extend(
-					'force',
-					ensure_installed,
-					Util.get_plugin_opts('mason-lspconfig.nvim').ensure_installed or {}
-				),
-				handlers = { setup },
-			})
-		end
+		-- Setup handlers for lsp servers
+		require('mason-lspconfig').setup({ handlers = { setup } })
+		-- vim.api.nvim_create_autocmd('LspAttach', {
+		-- 	group = vim.api.nvim_create_augroup('custom_lsp_attach', { clear = true }),
+		-- 	callback = function(args)
+		-- 		Util.log.debug('LspAttach', args)
+		-- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- 		if not client then
+		-- 			return
+		-- 		end
+		-- 		Util.log.debug('LspAttach client', client)
+		-- 		setup(client.name)
+		-- 	end,
+		-- })
 	end,
 }

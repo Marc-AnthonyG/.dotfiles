@@ -33,8 +33,6 @@ alias i3config="~/.dotfiles/i3/config"
 alias connectLinux="ssh marc@10.0.0.74"
 alias updateYabai='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai'
 
-alias fuckSam='cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_C_COMPILER:FILEPATH=/opt/homebrew/bin/aarch64-apple-darwin23-gcc-14 -DCMAKE_CXX_COMPILER:FILEPATH=/opt/homebrew/bin/aarch64-apple-darwin23-g++-14 --no-warn-unused-cli -S/Users/marc-anthonygirard/repository/GLO-3002-H25 -B/Users/marc-anthonygirard/repository/GLO-3002-H25/build -G Ninja'
-
 function gitDeleteMergeBranch() {
   remote_branches=$(git ls-remote --heads origin | awk '{print $2}' | sed 's/refs\/heads\///')
   git branch --format="%(refname:short)" | while read -r local_branch; do
