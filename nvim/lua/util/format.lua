@@ -14,7 +14,6 @@ M.LSP_PRIORITY_FORMATTERS = 15
 --- Register a formatter and sort them based on priority where higher = more priority
 --- @param formatter FormatterProvider The formatter to register, must have a priority field
 function M.register(formatter)
-	Util.log.debug(vim.inspect(formatter))
 	M.formatters[#M.formatters + 1] = formatter
 	table.sort(M.formatters, function(a, b)
 		return a.priority > b.priority

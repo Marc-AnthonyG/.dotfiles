@@ -19,3 +19,5 @@
 
 --- @class CreateFormatterOps
 --- @field filter string|table Filter for LSP clients (string = name filter, table = complex filter)
+
+--- @class VimLspConfig : vim.lsp.Config

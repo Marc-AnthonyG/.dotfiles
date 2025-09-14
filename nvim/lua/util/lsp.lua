@@ -16,19 +16,21 @@ M._supports_method = {}
 --- Uses weak references to avoid memory leaks and listens for 'LspSupportsMethod' User events
 ---@param method string The LSP method to watch for (e.g., 'textDocument/formatting')
 ---@param fn function Callback function called with (client, buffer) when method is supported
----@return number autocmd_id The autocmd ID for cleanup if needed
 function M.on_supports_method(method, fn)
-	M._supports_method[method] = M._supports_method[method] or setmetatable({}, { __mode = 'k' })
-	return vim.api.nvim_create_autocmd('User', {
-		pattern = 'LspSupportsMethod',
-		callback = function(args)
-			local client = vim.lsp.get_client_by_id(args.data.client_id)
-			local buffer = args.data.buffer ---@type number
-			if client and method == args.data.method then
-				return fn(client, buffer)
-			end
-		end,
-	})
+	-- Store the callback for this method
+	M._supports_method[method] = fn
+end
+
+--- Call the callback for each supported method callback when lsp attaches
+---@param client table The LSP client
+---@param bufnr number The buffer number
+function M.on_attach_supports_method(client, bufnr)
+	for registered_method, callback_fn in pairs(M._supports_method) do
+		if client.supports_method(registered_method) then
+			Util.log.debug('Calling callback for ' .. client.name .. ' for method ' .. registered_method)
+			callback_fn(client, bufnr)
+		end
+	end
 end
 
 ---Get the real path of a file, handling symlinks and empty paths
@@ -138,6 +140,10 @@ M.lsp_format = function(buf)
 	)
 	opts.formatters = {}
 	require('conform').format(opts)
+end
+
+M.get_lsp_config = function(name)
+	return vim.lsp.config[name]
 end
 
 return M

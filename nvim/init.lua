@@ -38,4 +38,6 @@ require('autocommands')
 
 require('usercommands')
 
+require('config.lsp')
+
 Util.log.debug('Starting neovim in debug mode', { title = 'My Config' })
