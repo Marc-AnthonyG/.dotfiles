@@ -6,13 +6,13 @@ Util.lsp.on_supports_method('textDocument/inlayHint', function(_, buffer)
 end)
 
 -- code lens
--- Util.lsp.on_supports_method('textDocument/codeLens', function(_, buffer)
--- 	vim.lsp.codelens.refresh()
--- 	vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
--- 		buffer = buffer,
--- 		callback = vim.lsp.codelens.refresh,
--- 	})
--- end)
+Util.lsp.on_supports_method('textDocument/codeLens', function(_, buffer)
+	vim.lsp.codelens.refresh()
+	vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+		buffer = buffer,
+		callback = vim.lsp.codelens.refresh,
+	})
+end)
 
 -- Setup diagnostics virtual text and icons
 local prefix = function(diagnostic)
@@ -53,6 +53,9 @@ vim.lsp.config('*', {
 			fileOperations = {
 				didRename = true,
 				willRename = true,
+			},
+			codeLens = {
+				enable = false,
 			},
 		},
 	},
