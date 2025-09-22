@@ -6,7 +6,7 @@ return {
 			primary = false,
 			priority = Util.format.LSP_PRIORITY + 1,
 			format = function()
-				vim.cmd.EslintFixAll()
+				vim.cmd.LspEslintFixAll()
 			end,
 			sources = function(buf)
 				local clients = Util.lsp.get_clients({ bufnr = buf, name = 'eslint' })
