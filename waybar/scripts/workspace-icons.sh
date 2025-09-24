@@ -2,17 +2,14 @@
 
 get_icon() {
     case $1 in
-        "Cursor") echo "󰨞";;
-        "Google-chrome") echo "";;
-		"Alacritty") echo "";;
-        "Spotify") echo "󰓇";;
-        "Obsidian") echo "󱞎";;
-        "Notion") echo "󱞎";;
-        "Discord") echo "󰙯";;
-        "Docker") echo "󰡨";;
-        "Slack") echo "󰒓";;
-        "Postman") echo "󱂛";;
-        *) echo "App not fine";;
+    "google-chrome") echo "" ;;
+    "Alacritty") echo "" ;;
+    "Spotify") echo "󰓇" ;;
+    "Obsidian") echo "󱞎" ;;
+    "org.kde.dolphin") echo "" ;;
+    "org.pulseaudio.pavucontrol") echo "" ;;
+    "gimp") echo "" ;;
+    *) echo "*" ;;
     esac
 }
 
@@ -25,7 +22,7 @@ text=""
 max_workspace=$(echo "$workspace_windows" | jq -r '.[] | .id' | sort -n | tail -n1)
 for workspace in $(seq 1 ${max_workspace:-8}); do
     workspace_apps=$(echo "$windows" | jq -r ".[] | select(.workspace.id == $workspace) | .class" | sort -u)
-    
+
     icons=""
     if [ ! -z "$workspace_apps" ]; then
         while IFS= read -r app; do
@@ -33,11 +30,11 @@ for workspace in $(seq 1 ${max_workspace:-8}); do
                 icon=$(get_icon "$app")
                 icons="$icons$icon "
             fi
-        done <<< "$workspace_apps"
+        done <<<"$workspace_apps"
     fi
-    
+
     icons="${icons% }"
-    
+
     if [ "$workspace" = "$active_workspace" ]; then
         text="${text} <b>$workspace${icons:+:$icons}</b>"
     else
@@ -46,4 +43,4 @@ for workspace in $(seq 1 ${max_workspace:-8}); do
 done
 
 text="${text# }"
-echo "{\"text\": \"$text\"}" 
+echo "{\"text\": \"$text\"}"
