@@ -3,6 +3,7 @@
 return {
 	'folke/snacks.nvim',
 	version = '*',
+	lazy = false,
 	priority = 1000,
 	---@type snacks.Config
 	opts = {

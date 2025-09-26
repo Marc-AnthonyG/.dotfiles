@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Yaak
+Comment=Yaak
+Exec=~/.local/bin/yaak_2025.5.6_amd64.AppImage
+Terminal=false
+Type=Application
+Icon=~/.dotfiles/linux/webapp/icons/yaak.png
+StartupNotify=false
