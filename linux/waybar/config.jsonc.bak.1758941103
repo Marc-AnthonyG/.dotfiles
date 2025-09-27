@@ -12,7 +12,6 @@
         "custom/workspaces"
     ],
     "modules-center": [
-        "clock",
         "custom/update",
         "custom/screenrecording-indicator"
     ],
@@ -23,7 +22,8 @@
         "network",
         "pulseaudio",
         "cpu",
-        "battery"
+        "battery",
+        "clock"
     ],
     "custom/omarchy": {
         "format": "<span font='omarchy'>\ue900</span>",
@@ -31,7 +31,7 @@
         "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
     },
     "custom/workspaces": {
-        "exec": "~/.config/waybar/scripts/workspace-icons.sh",
+        "exec": "~/.dotfiles/waybar/scripts/workspace-icons.sh",
         "format": "{}",
         "return-type": "json",
         "interval": 1

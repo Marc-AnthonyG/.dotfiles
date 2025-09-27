@@ -19,8 +19,7 @@ windows=$(hyprctl clients -j)
 
 text=""
 
-max_workspace=$(echo "$workspace_windows" | jq -r '.[] | .id' | sort -n | tail -n1)
-for workspace in $(seq 1 ${max_workspace:-8}); do
+for workspace in $(seq 1 6); do
     workspace_apps=$(echo "$windows" | jq -r ".[] | select(.workspace.id == $workspace) | .class" | sort -u)
 
     icons=""
@@ -31,6 +30,8 @@ for workspace in $(seq 1 ${max_workspace:-8}); do
                 icons="$icons$icon "
             fi
         done <<<"$workspace_apps"
+    else
+        icons="•"
     fi
 
     icons="${icons% }"

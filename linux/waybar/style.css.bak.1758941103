@@ -7,7 +7,7 @@
   border: none;
   border-radius: 0;
   min-height: 0;
-  font-family: CaskaydiaMono Nerd Font;
+  font-family: 'JetBrainsMono Nerd Font';
   font-size: 12px;
 }
 
@@ -73,21 +73,7 @@ tooltip {
   color: #a55555;
 }
 
-#custom-workspaces {
-border-radius: 16px;
-margin: 4px 0;
-padding: 0 12px;
-font-size: 16px;
-}
-
-#custom-workspaces .workspace {
-padding: 2px 6px;
-margin: 0 2px;
-border-radius: 6px;
-color: white;
-}
-
-#custom-workspaces .active {
-background-color: rgba(125, 207, 255, 1);
-color: #7dcfff;
+#language {
+  min-width: 12px;
+  margin: 0 7.5px;
 }
