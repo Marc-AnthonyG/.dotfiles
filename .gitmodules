@@ -4,3 +4,6 @@
 [submodule "nvim/pack/github/start/copilot.vim"]
 	path = nvim/pack/github/start/copilot.vim
 	url = https://github.com/github/copilot.vim.git
+[submodule "common/tmux/plugins/tmux-sensibl"]
+	path = common/tmux/plugins/tmux-sensibl
+	url = git@github.com:tmux-plugins/tmux-sensible.git
