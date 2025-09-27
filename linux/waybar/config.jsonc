@@ -31,7 +31,7 @@
         "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
     },
     "custom/workspaces": {
-        "exec": "~/.config/waybar/scripts/workspace-icons.sh",
+        "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua",
         "format": "{}",
         "return-type": "json",
         "interval": 1
