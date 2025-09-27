@@ -9,7 +9,12 @@
     "mod": "dock",
     "modules-left": [
         "custom/omarchy",
-        "custom/workspaces"
+        "custom/workspace-1",
+        "custom/workspace-2",
+        "custom/workspace-3",
+        "custom/workspace-4",
+        "custom/workspace-5",
+        "custom/workspace-6"
     ],
     "modules-center": [
         "clock",
@@ -30,11 +35,41 @@
         "on-click": "omarchy-menu",
         "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
     },
-    "custom/workspaces": {
-        "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua",
-        "format": "{}",
+    "custom/workspace-1": {
+        "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 1",
         "return-type": "json",
-        "interval": 1
+        "interval": 1,
+        "on-click": "hyprctl dispatch workspace 1"
+    },
+    "custom/workspace-2": {
+        "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 2",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "hyprctl dispatch workspace 2"
+    },
+    "custom/workspace-3": {
+        "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 3",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "hyprctl dispatch workspace 3"
+    },
+    "custom/workspace-4": {
+        "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 4",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "hyprctl dispatch workspace 4"
+    },
+    "custom/workspace-5": {
+        "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 5",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "hyprctl dispatch workspace 5"
+    },
+    "custom/workspace-6": {
+        "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 6",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "hyprctl dispatch workspace 6"
     },
     "custom/update": {
         "format": "",
