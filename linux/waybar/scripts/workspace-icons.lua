@@ -20,6 +20,9 @@ end
 -- Execute command and return output
 local function execute_command(cmd)
 	local handle = io.popen(cmd)
+	if handle == nil then
+		return nil
+	end
 	local result = handle:read("*a")
 	handle:close()
 	return result:gsub("%s+$", "")
@@ -65,9 +68,9 @@ local function main()
 	end
 
 	-- Determine CSS class
-	local css_class = "workspace"
+	local css_class = ""
 	if target_workspace == active_workspace then
-		css_class = css_class .. " active"
+		css_class = "active"
 	end
 
 	-- Build display text
@@ -97,7 +100,7 @@ end
 local function safe_main()
 	local success, error_msg = pcall(main)
 	if not success then
-		print(string.format('{"text": "%d", "tooltip": "Error", "class": "workspace"}', target_workspace))
+		print(string.format('{"text": "%d", "tooltip": "Error", "class": ""}', target_workspace))
 	end
 end
 

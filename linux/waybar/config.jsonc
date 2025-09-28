@@ -38,38 +38,44 @@
     "custom/workspace-1": {
         "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 1",
         "return-type": "json",
-        "interval": 1,
-        "on-click": "hyprctl dispatch workspace 1"
+        "interval": "once",
+        "on-click": "hyprctl dispatch workspace 1",
+        "signal": 8
     },
     "custom/workspace-2": {
         "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 2",
         "return-type": "json",
-        "interval": 1,
-        "on-click": "hyprctl dispatch workspace 2"
+        "interval": "once",
+        "on-click": "hyprctl dispatch workspace 2",
+        "signal": 8
     },
     "custom/workspace-3": {
         "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 3",
         "return-type": "json",
-        "interval": 1,
-        "on-click": "hyprctl dispatch workspace 3"
+        "interval": "once",
+        "on-click": "hyprctl dispatch workspace 3",
+        "signal": 8
     },
     "custom/workspace-4": {
         "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 4",
         "return-type": "json",
-        "interval": 1,
-        "on-click": "hyprctl dispatch workspace 4"
+        "interval": "once",
+        "on-click": "hyprctl dispatch workspace 4",
+        "signal": 8
     },
     "custom/workspace-5": {
         "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 5",
         "return-type": "json",
-        "interval": 1,
-        "on-click": "hyprctl dispatch workspace 5"
+        "interval": "once",
+        "on-click": "hyprctl dispatch workspace 5",
+        "signal": 8
     },
     "custom/workspace-6": {
         "exec": "lua ~/.config/waybar/scripts/workspace-icons.lua 6",
         "return-type": "json",
-        "interval": 1,
-        "on-click": "hyprctl dispatch workspace 6"
+        "interval": "once",
+        "on-click": "hyprctl dispatch workspace 6",
+        "signal": 8
     },
     "custom/update": {
         "format": "",
