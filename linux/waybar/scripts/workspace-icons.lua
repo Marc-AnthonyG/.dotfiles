@@ -2,6 +2,8 @@
 
 -- Get workspace number from command line argument
 local target_workspace = tonumber(arg and arg[1]) or 1
+-- Get optional second argument (hide_future_workspaces)
+local is_default_hidden = arg and arg[2] and (arg[2] == "true" or arg[2] == "1")
 
 -- Icon mapping function
 local function get_icon(app_class)
@@ -30,7 +32,7 @@ end
 
 -- Get active workspace ID
 local function get_active_workspace()
-	local cmd = "hyprctl activewindow -j | jq -r '.workspace.id // 1'"
+	local cmd = "hyprctl activeworkspace -j | jq -r '.id // 1'"
 	local result = execute_command(cmd)
 	return tonumber(result) or 1
 end
@@ -55,6 +57,13 @@ end
 -- Main function
 local function main()
 	local active_workspace = get_active_workspace()
+
+	-- Check if we should hide future workspaces
+	if is_default_hidden and target_workspace > active_workspace then
+		print('{"text": "", "tooltip": "", "class": ""}')
+		return
+	end
+
 	local workspace_apps = get_workspace_apps(target_workspace)
 
 	local icons = {}
