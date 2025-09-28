@@ -3,7 +3,7 @@
 # Ensure bin are in the path 
 export PATH=$HOME/.local/bin/:$PATH
 
-export OMARCHY_PATH=$HOME/.local/bin
+export OMARCHY_PATH=$HOME/.local/share/omarchy
 export PATH=$OMARCHY_PATH/bin/:$PATH
 
 # Set default terminal and editor
