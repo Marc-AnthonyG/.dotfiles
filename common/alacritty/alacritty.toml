@@ -78,6 +78,9 @@ TERM = "xterm-256color"
 [general]
 import = ["~/.config/alacritty/catppuccin/catppuccin-mocha.yml", "~/.config/alacritty/mac.toml"]
 
+[font]
+size = 11
+
 [font.bold]
 family = "JetBrainsMono Nerd Font"
 style = "Bold"
