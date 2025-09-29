@@ -15,6 +15,8 @@ local function get_icon(app_class)
 		["org.kde.dolphin"] = "",
 		["org.pulseaudio.pavucontrol"] = "",
 		["gimp"] = "",
+		["chrome-discord.com__channels_@me-Profile_1"] = "",
+		["Yaak-app"] = "󱂛",
 	}
 	return icons[app_class] or "*"
 end

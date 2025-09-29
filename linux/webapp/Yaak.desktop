@@ -5,5 +5,5 @@ Comment=Yaak
 Exec=~/.local/bin/yaak_2025.5.6_amd64.AppImage
 Terminal=false
 Type=Application
-Icon=~/.dotfiles/linux/webapp/icons/yaak.png
+Icon=/home/marc/.local/share/applications/icons/yaak.png
 StartupNotify=false
