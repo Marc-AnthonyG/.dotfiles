@@ -17,6 +17,7 @@ local function get_icon(app_class)
 		["gimp"] = "",
 		["chrome-discord.com__channels_@me-Profile_1"] = "",
 		["Yaak-app"] = "󱂛",
+		["Docker"] = "",
 	}
 	return icons[app_class] or "*"
 end
