@@ -39,6 +39,39 @@ export PATH="$HOME/.local/bin:$PATH"
 
 source ~/.config/secrets.sh
 
+tmux_ses_comp() {
+    local cache_file="$HOME/.cache/git-repos-cache"
+    local cache_age=3600  # 1 hour in seconds
+    local -a repos
+    local cache_mtime
+    
+    # Regenerate cache if needed
+    if [[ ! -f "$cache_file" ]]; then
+        mkdir -p "$(dirname "$cache_file")"
+        find ~ -mindepth 1 -maxdepth 3 -type d -name '.git' -exec dirname {} \; 2>/dev/null > "$cache_file"
+    else
+        # Get cache file modification time (works on both macOS and Linux)
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            cache_mtime=$(stat -f %m "$cache_file" 2>/dev/null)
+        else
+            cache_mtime=$(stat -c %Y "$cache_file" 2>/dev/null)
+        fi
+        
+        # Regenerate if cache is older than cache_age
+        if [[ -n "$cache_mtime" ]] && [[ $(($(date +%s) - cache_mtime)) -gt $cache_age ]]; then
+            find ~ -mindepth 1 -maxdepth 3 -type d -name '.git' -exec dirname {} \; 2>/dev/null > "$cache_file"
+        fi
+    fi
+    
+    # Extract just the directory names (basenames) from full paths
+    repos=(${(f)"$(cat "$cache_file" | xargs -n1 basename)"})
+    
+    _describe 'repository' repos
+}
+
+# Register the completion
+compdef tmux_ses_comp tmux-ses
+
 #HISTORY
 HISTSIZE=5000
 HISTDUP=erase

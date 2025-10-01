@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
-
 if [[ $# -eq 1 ]]; then
-    selected=$1
+    # Find the full path for the given folder name
+    selected=$(find ~ -mindepth 1 -maxdepth 3 -type d -name '.git' -exec dirname {} \; 2>/dev/null | grep -E "/$1$")
+
+    # If multiple matches, let user choose with fzf
+    if [[ $(echo "$selected" | wc -l) -gt 1 ]]; then
+        selected=$(echo "$selected" | fzf)
+    fi
+
+    # If no match found, exit
+    if [[ -z $selected ]]; then
+        echo "No repository found with name: $1"
+        exit 1
+    fi
 else
-    selected=$(find ~/repository ~ -mindepth 1 -maxdepth 3 -type d -name '.git' -exec dirname {} \; | fzf)
+    selected=$(find ~ -mindepth 1 -maxdepth 3 -type d -name '.git' -exec dirname {} \; 2>/dev/null | fzf)
 fi
 
 if [[ -z $selected ]]; then
@@ -20,11 +31,11 @@ if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
 fi
 
 # check if the session exists
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
+if ! tmux has-session -t=$selected_name 2>/dev/null; then
     tmux new-session -ds $selected_name -c $selected
 fi
 
-# Check if in a session 
+# Check if in a session
 if [[ -n $TMUX ]]; then
     tmux switch-client -t $selected_name
 else

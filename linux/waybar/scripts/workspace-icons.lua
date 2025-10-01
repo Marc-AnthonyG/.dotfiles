@@ -18,6 +18,7 @@ local function get_icon(app_class)
 		["chrome-discord.com__channels_@me-Profile_1"] = "",
 		["Yaak-app"] = "󱂛",
 		["Docker"] = "",
+		["jetbrains-datagrip"] = "",
 	}
 	return icons[app_class] or "*"
 end
