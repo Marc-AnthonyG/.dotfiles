@@ -11,6 +11,7 @@ return {
 		input = { enabled = true },
 		words = { enabled = true },
 		picker = { enabled = true },
+		lazygit = { enable = false },
 	},
 	keys = {
 		-- Top Pickers & Explorer

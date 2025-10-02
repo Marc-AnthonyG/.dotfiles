@@ -6,6 +6,8 @@ M.format = require('util.format')
 
 M.log = require('util.log')
 
+M.cmp = require('util.cmp')
+
 function M.get_plugin(name)
 	return require('lazy.core.config').spec.plugins[name]
 end
