@@ -54,7 +54,7 @@ return {
 					auto_show_delay_ms = 200,
 				},
 				ghost_text = {
-					enabled = vim.g.ai_cmp,
+					enabled = true,
 				},
 			},
 			signature = { enabled = false },
@@ -71,9 +71,7 @@ return {
 				completion = {
 					list = { selection = { preselect = false } },
 					menu = {
-						auto_show = function(_)
-							return vim.fn.getcmdtype() == ':'
-						end,
+						auto_show = false,
 					},
 					ghost_text = { enabled = true },
 				},

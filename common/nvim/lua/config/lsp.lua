@@ -46,19 +46,23 @@ vim.diagnostic.config(vim.deepcopy({
 	},
 }))
 
--- Default lsp config
-vim.lsp.config('*', {
-	capabilities = {
-		workspace = {
-			fileOperations = {
-				didRename = true,
-				willRename = true,
-			},
-			codeLens = {
-				enable = false,
-			},
+local capabilities = {
+	workspace = {
+		fileOperations = {
+			didRename = true,
+			willRename = true,
+		},
+		codeLens = {
+			enable = false,
 		},
 	},
+}
+
+capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+
+-- Default lsp config
+vim.lsp.config('*', {
+	capabilities = capabilities,
 	format = {
 		formatting_options = nil,
 		timeout_ms = nil,
