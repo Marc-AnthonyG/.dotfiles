@@ -120,8 +120,7 @@ show_share_menu() {
 }
 
 show_toggle_menu() {
-    case $(menu "Toggle" "󱄄  Screensaver\n󰔎  Nightlight\n󱫖  Idle Lock\n󰍜  Top Bar") in
-    *Screensaver*) omarchy-toggle-screensaver ;;
+    case $(menu "Toggle" "󰔎  Nightlight\n󱫖  Idle Lock\n󰍜  Top Bar") in
     *Nightlight*) omarchy-toggle-nightlight ;;
     *Idle*) omarchy-toggle-idle ;;
     *Bar*) omarchy-toggle-waybar ;;
