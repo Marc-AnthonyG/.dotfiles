@@ -129,11 +129,10 @@ show_toggle_menu() {
 }
 
 show_style_menu() {
-    case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n󱄄  Screensaver\n  About") in
+    case $(menu "Style" "󰸌  Theme\n  Font\n  Background\n  About") in
     *Theme*) show_theme_menu ;;
     *Font*) show_font_menu ;;
     *Background*) omarchy-theme-bg-next ;;
-    *Screensaver*) open_in_editor ~/.config/omarchy/branding/screensaver.txt ;;
     *About*) open_in_editor ~/.config/omarchy/branding/about.txt ;;
     *) show_main_menu ;;
     esac
