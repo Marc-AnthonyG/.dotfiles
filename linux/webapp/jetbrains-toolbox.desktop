@@ -1,5 +1,5 @@
 [Desktop Entry]
-Icon=/home/marc/.local/share/JetBrains/Toolbox/bin/toolbox-tray-color.png
+Icon=/home/marc/.local/share/JetBrains/Toolbox/bin/toolbox.svg
 Exec=/home/marc/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox %u
 Version=1.0
 Type=Application
