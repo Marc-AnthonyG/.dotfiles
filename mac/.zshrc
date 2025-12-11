@@ -25,13 +25,14 @@ export ARCHFLAGS="-arch x86_64"
 
 # ALIAS
 alias aci-connect='eval "$(aws configure export-credentials --profile aci-dev --format env)" && yarn ba dev'
-alias termSource="~/.zshrc"
+alias zshSource="source ~/.zshrc"
 alias vim=nvim
-alias canoeF="~/repository/canoe/frontend"
-alias canoeB="~/repository/canoe/backend"
-alias i3config="~/.dotfiles/i3/config"
 alias connectLinux="ssh marc@10.0.0.74"
 alias updateYabai='echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai'
+alias cx="cargo xtask"
+alias cxp="cargo xtask -e prod"
+alias cxs="cargo xtask -e stag"
+alias bclii="cargo install --path ~/repository/burn-central/cli/crates/burn-central-cli --force"
 
 function gitDeleteMergeBranch() {
   remote_branches=$(git ls-remote --heads origin | awk '{print $2}' | sed 's/refs\/heads\///')
