@@ -19,11 +19,11 @@ projects=(admin backend frontend devstack infra) # Need to have unique first let
 for p in $projects; do
     local char=$p[1]
 
-    alias "x$char"="xtask $p"
+    alias "x$char"="xtask :$p"
 
-    alias "x${char}s"="xtask $p -e stag"
+    alias "x${char}s"="xtask :$p -e stag"
 
-    alias "x${char}p"="xtask $p -e prod"
+    alias "x${char}p"="xtask :$p -e prod"
 done
 
 alias x="xtask"
@@ -33,6 +33,7 @@ alias xp="xtask -e prod"
 alias cx="cargo xtask"
 alias cxp="cargo xtask -e prod"
 alias cxs="cargo xtask -e stag"
+
 
 alias bclii="cargo install --path ~/repository/burn-central/cli/crates/burn-central-cli --force"
 
